@@ -8,8 +8,9 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-class LogInForm extends Component {
+class AuthForm extends Component {
     constructor(props) {
+        super(props)
         this.state = {
             username: '',
             email:'',
@@ -21,23 +22,25 @@ class LogInForm extends Component {
         const { name, value } = event.target
         this.setState({[name]: value})
     }
-    handleInputFormSubmit = event => {
+    handleFormSubmit = event => {
+        const authMethod = this.props.location.pathname === "/signup" ? "signup" : "login"
         event.preventDefault();
-        this.authService
-            .login(this.state)
+        this.authService[authMethod](this.state)
             .then(response => {
+                console.log("User created",response.data)
                 this.props.setTheUser(response.data);
-                this.props.handleToast(true, 'Logged in');
-                this.props.history.push('/coasters')
+                // this.props.handleToast(true, 'Logged in');
+                this.props.history.push('/')
             })
         .catch(error => console.log(error.response.data.message))
     }
     render() {
+        const isSignup = this.props.location.pathname === "/signup"
         return (
             <Container as="main">
                 <Row>
                     <Col md={{ offset: 3, span: 6 }}>
-                        <h3>Logging in</h3>
+                        <h3>{isSignup ? "Sign up" : "Log in"}</h3>
 
                         <hr></hr>
 
@@ -56,10 +59,10 @@ class LogInForm extends Component {
                             <Form.Group>
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.password} name="password" type="password" />
-                                <Form.Text className="text-muted">At least 4 characters.</Form.Text>
+                                <Form.Text className="text-muted">At least four characters.</Form.Text>
                             </Form.Group>
 
-                            <Button variant="dark" type="submit">Log In</Button>
+                            <Button variant="dark" type="submit">{isSignup ? "Sign up" : "Log in"}</Button>
                         </Form>
 
                     </Col>
@@ -69,4 +72,4 @@ class LogInForm extends Component {
     }
 }
 
-export default LoginForm
+export default AuthForm
