@@ -1,11 +1,11 @@
 import React from 'react';
-
-const ProfilePage = ({ user }) => {
-    console.log(user)
+import PersonProfile from "./personProfile/";
+const ProfilePage = ({ loggedInUser }) => {
+    const personProfile = <PersonProfile loggedInUser={loggedInUser}/>
     return (
         <main >
-            <h1>Welcome, @{user.username}</h1>
-            <span>{user.personDetails}</span>
+            <h1>Welcome, @{loggedInUser.username}</h1>
+            <span>{personProfile}</span>
         </main>
     )
 }

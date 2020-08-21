@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import PersonService from '../services/PersonService';
+import PersonService from '../../../../services/PersonService';
 
 
 //import Bootstrap
@@ -25,7 +25,7 @@ class profilePerson extends Component {
     handleFormSubmit = event => {
         event.preventDefault()
         this.personService
-            .editPersonProfile(this.props.loggedUser._id, this.state)
+            .editPersonProfile(this.props.loggedInUser._id, this.state)
             .then(response => {
                 this.props.setTheUser(response.data);
                 this.props.history.push('/');
@@ -36,7 +36,7 @@ class profilePerson extends Component {
         console.log(this.props, "edit");
         return (
             <>
-                {!this.props.loggedUser ? <h2>Loading</h2> :
+                {!this.props.loggedInUser ? <h2>Loading</h2> :
                     <Container as='main'>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
