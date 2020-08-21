@@ -5,10 +5,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import AuthForm from "./auth-form";
 import NavBar from "./ui/NavBar";
-// import ProfilePage from "./profile";
+import ProfilePage from "./profile";
 import PersonEdit from "./editPersonProfile";
 import PersonProfile from "./personProfile";
-import PersonService from"../services/PersonService"
+
 class App extends Component {
     constructor() {
         super()
@@ -24,7 +24,7 @@ class App extends Component {
         this.AuthService
             .isLoggedIn()
             .then(response => {
-                this.state.loggedInUser === null && this.setState({loggedInUser: response.data})
+                this.state.loggedInUser === null && this.setState({ loggedInUser: response.data })
             })
             .catch(err => console.log({err}))
     }
@@ -41,8 +41,9 @@ class App extends Component {
                 <Switch>
                     <Route path="/signup" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route path="/login" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
-                    <Route exact path="/person/profile" render={props => <PersonProfile loggedUser={this.setState.loggedInUser} />}></Route>
-                    <Route exact path="/person/profile/edit" render={props => <PersonEdit loggedUser={this.setState.loggedInUser} />}></Route>
+                    <Route path="/profile" render={() => this.state.loggedInUser ? <ProfilePage user={this.state.loggedInUser} /> : <Redirect to='/signup' />} />
+                    <Route exact path="/person/profile" render={props => <PersonProfile loggedUser={this.state.loggedInUser} />}></Route>
+                    <Route path="/person/profile/edit" render={props => <PersonEdit loggedUser={this.state.loggedInUser} />}></Route>
                 </Switch>
 
             </>
