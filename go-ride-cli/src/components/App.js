@@ -5,9 +5,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import AuthForm from "./auth-form";
 import NavBar from "./ui/NavBar";
-import ProfilePage from "./profile";
+// import ProfilePage from "./profile";
 import PersonEdit from "./editPersonProfile";
 import PersonProfile from "./personProfile";
+import PersonService from"../services/PersonService"
 class App extends Component {
     constructor() {
         super()
@@ -26,6 +27,11 @@ class App extends Component {
                 this.state.loggedInUser === null && this.setState({loggedInUser: response.data})
             })
             .catch(err => console.log({err}))
+    }
+    personProfile = () => {
+        this.PersonService
+            .getPersonDetails(this.props.loggedInUser.personDetails)
+            .then()
     }
     render() {
         this.fetchUser()

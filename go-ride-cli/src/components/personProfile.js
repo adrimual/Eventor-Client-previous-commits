@@ -14,10 +14,8 @@ class Profile extends Component {
     }
 
     render () {
-        console.log('test',this.props)
         return (
             <>
-
         {!this.props.loggedUser ? <h2>Loading</h2>:
 
 
