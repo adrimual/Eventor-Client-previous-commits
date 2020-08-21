@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import PersonService from '../../../../services/PersonService';
+import UserService from '../../../../services/UserService';
 
 
 //import Bootstrap
@@ -16,7 +16,7 @@ class profilePerson extends Component {
             email: "",
             password: ""
         }
-        this.personService = new PersonService()
+        this.userService = new UserService()
     }
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -24,8 +24,8 @@ class profilePerson extends Component {
     }
     handleFormSubmit = event => {
         event.preventDefault()
-        this.personService
-            .editPersonProfile(this.props.loggedInUser._id, this.state)
+        this.userService
+            .editUserProfile(this.props.loggedInUser._id, this.state)
             .then(response => {
                 this.props.setTheUser(response.data);
                 this.props.history.push('/');
