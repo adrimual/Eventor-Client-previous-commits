@@ -24,15 +24,15 @@ class AuthForm extends Component {
     }
     handleFormSubmit = event => {
         const authMethod = this.props.location.pathname === "/signup" ? "signup" : "login"
-        event.preventDefault();
+        event.preventDefault()
         this.authService[authMethod](this.state)
             .then(response => {
-                console.log("User created",response.data)
-                this.props.setTheUser(response.data);
-                // this.props.handleToast(true, 'Logged in');
+                console.log("User created", response.data)
+                this.props.setTheUser(response.data)
+                //this.props.handleToast(true, 'Sesión inciada')
                 this.props.history.push('/')
             })
-        .catch(error => console.log(error.response.data.message))
+            .catch(err => console.log(err)) // Error handling yay!
     }
     render() {
         const isSignup = this.props.location.pathname === "/signup"

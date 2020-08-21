@@ -5,7 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import AuthForm from "./auth-form";
 import NavBar from "./ui/NavBar";
-
+import ProfilePage from "./profile"
 class App extends Component {
     constructor() {
         super()
@@ -32,6 +32,8 @@ class App extends Component {
                     <Switch>
                     <Route path="/signup" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route path="/login" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
+                    <Route path="/profile" render={() => this.state.loggedInUser ?
+                        <ProfilePage user={this.state.loggedInUser} /> : <Redirect to="/signup" />} />
                 </Switch>
 
             </>

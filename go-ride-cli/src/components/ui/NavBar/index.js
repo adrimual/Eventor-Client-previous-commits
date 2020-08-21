@@ -37,7 +37,6 @@ class Navigation extends Component {
                         <Nav.Link as="span">
                             <NavLink to="/" exact activeStyle={{ color: 'white' }}>Home</NavLink>
                         </Nav.Link>
-
                         {this.props.loggedInUser ?
                             (
                                 <Nav.Link as="span">
@@ -54,12 +53,10 @@ class Navigation extends Component {
                                 </>
                             )
                         }
-
                         <Nav.Link as="span">
                             <NavLink to="/profile" activeStyle={{ color: 'white' }}>Hi, {this.props.loggedInUser ? this.props.loggedInUser.username : 'friend'}</NavLink>
                         </Nav.Link>
                     </Nav>
-
                 </Navbar.Collapse>
             </Navbar>
         )
