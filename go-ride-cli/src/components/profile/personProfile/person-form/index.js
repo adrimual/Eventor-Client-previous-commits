@@ -15,7 +15,8 @@ class profilePerson extends Component {
             password: "",
             genre: undefined,
             age: undefined,
-            vehicle: []
+            vehicle: [],
+            previousLoggedUser: undefined
         }
         this.userService = new UserService()
     }
@@ -34,11 +35,12 @@ class profilePerson extends Component {
     }
     handleFormSubmit = event => {
         event.preventDefault()
+        this.setState({previousLoggedUser: this.props.loggedInUser})
         this.userService
             .editUserProfile(this.props.loggedInUser._id, this.state)
             .then(response => {
                 this.props.setTheUser(response.data);
-                this.props.history.push('/');
+                this.props.history.push('/profile');
             })
             .catch(err => console.log(err));
     }
