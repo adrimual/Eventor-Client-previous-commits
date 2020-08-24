@@ -1,11 +1,12 @@
 import React from 'react';
 import PersonProfile from "./personProfile/";
-const ProfilePage = ({ loggedInUser }) => {
-    const personProfile = <PersonProfile loggedInUser={loggedInUser}/>
+const ProfilePage = props => {
+    console.log("props passed to profile", props)
+    const personProfile = <PersonProfile loggedInUser={props.loggedInUser}/>
     return (
         <main >
-            <h1>Welcome, @{loggedInUser.username}</h1>
-            <span>{personProfile}</span>
+            <h1>Welcome, @{props.loggedInUser.username}</h1>
+            <span>{props.loggedInUser.personDetails}</span>
         </main>
     )
 }
