@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 
+//MultiSelector for Motorbike or Car
+import SelectVehicle from '../selectVehicle/index';
 import UserService from '../../../../services/UserService';
-
-
 //import Bootstrap
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Container, Form, Button } from 'react-bootstrap';
 
 class profilePerson extends Component {
     constructor(props) {
@@ -16,7 +14,8 @@ class profilePerson extends Component {
             email: "",
             password: "",
             genre: undefined,
-            age: undefined
+            age: undefined,
+            vehicle: []
         }
         this.userService = new UserService()
     }
@@ -25,7 +24,7 @@ class profilePerson extends Component {
         const id = this.props.loggedInUser._id;
         this.userService
             .getUserDetails(id)
-            .then((res)=> this.setState({age: res.data.personDetails.age, genre: res.data.personDetails.genre}))
+            .then((res)=> this.setState({age: res.data.personDetails.age, genre: res.data.personDetails.genre, vehicle: [res.data.personDetails.vehicle]}))
     }
     enterUsernameStateValue = user => this.setState({username: user.username})    
 
@@ -74,14 +73,17 @@ class profilePerson extends Component {
                                 <Form.Control onChange={this.handleInputChange} value={this.state.age} name="age" type="number" />
                             </Form.Group>
                             <Form.Group>
-                                <label>Male</label>
-                                <input onChange={this.handleInputChange} checked={this.state.genre === "Male"} value="Male" name="genre" type="radio" />
+                                <Form.label>Male</Form.label>
+                                <Form.Control onChange={this.handleInputChange} checked={this.state.genre === "Male"} value="Male" name="genre" type="radio" />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Female</Form.Label>
-                                <input onChange={this.handleInputChange} checked={this.state.genre === "Female"} value="Female" name="genre" type="radio" />
+                                <Form.Control onChange={this.handleInputChange} checked={this.state.genre === "Female"} value="Female" name="genre" type="radio" />
                             </Form.Group>
                             <Button variant="dark" type="submit">Submit</Button>
+                            <Form.Group>
+                                <SelectVehicle onChange={this.handleInputChange}></SelectVehicle>
+                            </Form.Group>
                         </Form>
                     </Container>
                 };
