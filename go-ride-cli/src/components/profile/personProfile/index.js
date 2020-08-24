@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 //Boostrap
-import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 class Profile extends Component {
@@ -9,21 +9,17 @@ class Profile extends Component {
         super (props)
         this.state = {}
     }
-    render () {
+    render() {
+        console.log("the details", this.props.userDetails.personDetails)
         return (
             <>
-        {!this.props.loggedInUser ? <h2>Loading</h2>:
+                {!this.props.loggedInUser ? <h2>Loading</h2> :
 
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>{this.props.loggedInUser.username}</Card.Title>
-                    <Card.Text>
-                    </Card.Text>
-                    <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>
-                </Card.Body>
-
-            </Card>}
+                    <Container>
+                        <h1>Username: this.props.loggedInUser.username</h1>
+                        <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>
+                    </Container>
+                }
             </>
         )
     }
