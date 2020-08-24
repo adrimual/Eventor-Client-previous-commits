@@ -27,6 +27,7 @@ class profilePerson extends Component {
         this.userService
             .editUserProfile(this.props.loggedInUser._id, this.state)
             .then(response => {
+                console.log("response from the api", response);
                 this.props.setTheUser(response.data);
                 this.props.history.push('/');
             })
@@ -66,8 +67,7 @@ class profilePerson extends Component {
                         </Form>
                     </Container>
                 };
-            </>
-                        
+            </>                   
         );
     };
 };
