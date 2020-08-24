@@ -23,7 +23,8 @@ class Profile extends Component {
                         <hr></hr>
                         <h5>Genre: </h5>
                         {this.props.loggedInUser.personDetails.genre}
-                        <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>
+                        <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>ç
+                        <Link to ={'/event/create'}><Button variant ="dark" type ="submit">Create a new event!</Button></Link>
                     </Container>
                 }
             </>

@@ -6,6 +6,7 @@ import AuthForm from "./auth-form";
 import NavBar from "./ui/NavBar";
 import ProfilePage from "./profile";
 import PersonEdit from "./profile/personProfile/person-form";
+import EventForm from "./event/event-form";
 
 
 class App extends Component {
@@ -35,8 +36,9 @@ class App extends Component {
                 <Switch>
                     <Route path="/signup" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route path="/login" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
+                    <Route exact path="/event/create" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
                     <Route path="/profile/edit/:userId" render={props => this.state.loggedInUser ? <PersonEdit setTheUser={this.state.loggedInUsert} {...props} />: <Redirect to='/signup' />}></Route>
-                    <Route path="/profile" render={() => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} /> : <Redirect to='/signup' />} />
+                    <Route path="/profile" render={() => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} /> : <Redirect to='/login' />} />
                 </Switch>
 
             </>
