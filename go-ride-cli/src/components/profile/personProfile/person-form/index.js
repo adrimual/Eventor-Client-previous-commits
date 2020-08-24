@@ -18,6 +18,9 @@ class profilePerson extends Component {
         }
         this.userService = new UserService()
     }
+    componentDidMount = () => this.enterUsernameStateValue(this.props.loggedInUser)
+    enterUsernameStateValue = user => this.setState({username: user.username})    
+
     handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({[name]:value})
@@ -41,11 +44,7 @@ class profilePerson extends Component {
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>
                                 <Form.Label>Username</Form.Label>
-                                <Form.Control onCharge={this.handleInputChange}
-                                    value={this.setState.state.username}
-                                    name="username"
-                                    type="text">
-                                </Form.Control>
+                                <Form.Control readOnly={true} onChange={this.handleInputChange} value={this.state.username} name="username" type="text" />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Email</Form.Label>
