@@ -13,9 +13,8 @@ class ProfilePage extends Component {
     componentDidMount = () => {
         const id = this.props.loggedInUser._id;
         this.UserService
-            .getUserDetails(id)
-            .then(response => {console.log("respuesta", response)
-                this.setState({userDetails: response.data})})
+        get.userDetails(id)
+            .then((response) => this.setState({ userDetails: response.data }))
             .catch(err=>console.log(err))
     }
     render() {

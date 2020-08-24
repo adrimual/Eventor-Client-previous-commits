@@ -19,7 +19,6 @@ class Profile extends Component {
                 <Card.Body>
                     <Card.Title>{this.props.loggedInUser.username}</Card.Title>
                     <Card.Text>
-                        Lorem ipsum
                     </Card.Text>
                     <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>
                 </Card.Body>
