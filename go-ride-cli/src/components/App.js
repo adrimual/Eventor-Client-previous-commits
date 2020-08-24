@@ -37,7 +37,8 @@ class App extends Component {
         this.fetchUser()
         return (
             <>
-                <NavBar loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser}/>
+                <NavBar loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser} />
+                <hr></hr>
                 <Switch>
                     <Route path="/signup" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route path="/login" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>

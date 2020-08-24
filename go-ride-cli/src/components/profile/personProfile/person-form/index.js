@@ -33,7 +33,6 @@ class profilePerson extends Component {
             .catch(err => console.log(err));
     }
     render() {
-        console.log(this.props, "edit");
         return (
             <>
                 {!this.props.loggedInUser ? <h2>Loading</h2> :
