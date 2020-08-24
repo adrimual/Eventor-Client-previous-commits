@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthService from "../services/AuthService";
-import UserService from "../services/UserService";
 import { Switch, Route, Redirect } from 'react-router-dom';
-
 import AuthForm from "./auth-form";
 import NavBar from "./ui/NavBar";
 import ProfilePage from "./profile";
 import PersonEdit from "./profile/personProfile/person-form";
-import PersonProfile from './profile/personProfile'
+
 
 class App extends Component {
     constructor() {
@@ -34,7 +32,6 @@ class App extends Component {
         return (
             <>
                 <NavBar loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser} />
-                <hr></hr>
                 <Switch>
                     <Route path="/signup" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route path="/login" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
