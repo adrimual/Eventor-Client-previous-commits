@@ -32,7 +32,7 @@ class EventForm extends Component {
         }
     }
     updateEventState = data => {
-        const date = new Date(data.date)
+        const date = new Date(data.startTime)
         let dd = String(date.getDate()).padStart(2, '0') //para rellenar con 0 la parte previa que esté vacia
         let mm = String(date.getMonth() + 1).padStart(2, '0')
         let yyyy = date.getFullYear()
@@ -94,20 +94,13 @@ class EventForm extends Component {
                                 <Form.Control onChange={this.handleInputChange} value={this.state.description} name="description" type="textarea" />
                                 <Form.Text className="text-muted">No more than 500 characters</Form.Text>
                             </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>Date</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.date} name="date" type="date" />
-                            </Form.Group>
                             <Form.Group>
                                 <Form.Label>Start time</Form.Label>
-                                <input onChange={this.handleInputChange} type="datetime-local" name="startDate" value={this.state.startDate}  />
-                                <Form.Control onChange={this.handleInputChange} value={this.state.startTime} name="startTime" type="time" />
+                                <Form.Control onChange={this.handleInputChange} type="datetime-local" name="startTime" value={this.state.startTime} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>End time</Form.Label>
-                                <input onChange={this.handleInputChange} type="datetime-local" name="enDate" value={this.state.endDate} min={this.state.startdDate} />
-                                <Form.Control onChange={this.handleInputChange} value={this.state.endTime} name="endTime" type="time" />
+                                <Form.Control onChange={this.handleInputChange} type="datetime-local" name="endTime" value={this.state.endTime} min={this.state.startTime} />
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>City</Form.Label>
