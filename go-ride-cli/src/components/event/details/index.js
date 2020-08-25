@@ -35,7 +35,7 @@ class EventDetails extends Component {
                             <p>Description: {this.state.eventDetails.name}</p>
                             <p>Date: {this.state.eventDetails.date}</p>
                             <p>City: {this.state.eventDetails.city}</p>
-                            <p>Number of participants:{this.state.eventDetails.participants.length} </p>
+                                    <p>Number of participants:{this.state.eventDetails.participants.length} </p>
                          </Col>              
                     </Row>
                 </Container>   

@@ -6,7 +6,7 @@ import EventService from '../../../services/EventService'
 //Bootstrap
 import {Container, Form, Button} from 'react-bootstrap/'
 
-class EditEvent extends Component {
+class EventForm extends Component {
     constructor (props){
         super (props)
         this.state = {
@@ -69,12 +69,14 @@ class EditEvent extends Component {
                 })
                .catch(err => this.setErrorMessage(err.response.data.message))
        }
-
        editEvent = (id, newEvent) => {
            this.eventService
-               .editEvent(id, newEvent)
-                .then(() => this.props.history.push(`/profile/${this.props.loggedInUser._id}`))
-               .catch(err => console.log(err))
+                .editEvent(id, newEvent)
+                    .then(response => {
+                        this.updateEventState(response.data)
+                        this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
+                    })
+                    .catch(err => console.log(err))
        }
     render () {
         return (
@@ -141,4 +143,4 @@ class EditEvent extends Component {
     }
 }
 
-export default EditEvent
+export default EventForm
