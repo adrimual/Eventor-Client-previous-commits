@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 //Import bootstrap
 import { Card, Button, Col } from 'react-bootstrap'
 
-import UserService from '../../services/UserService'
+import UserService from '../../../services/UserService'
 class EventCard extends Component {
     constructor (props){
         super (props)

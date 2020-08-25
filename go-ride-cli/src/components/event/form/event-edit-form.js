@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 
-import UserService from '../../services/UserService'
+import UserService from '../../../services/UserService'
 
 //Bootstrap
 import {Container, Form, Button} from 'react-bootstrap/'
@@ -23,10 +23,18 @@ class EditEvent extends Component {
         const id = this.props.match.params.eventId
         this.userService
             .getOneEvent(id)
-            .then(response => this.setState({name: response.data.name, description: response.data.description, date: response.data.date, city: response.data.city}))
+            .then(response => this.updateEventState(response.data))
             .catch(err => console.log(err))
     }
+    updateEventState = data => {
+        this.setState({
+            name: data.name || "",
+            description: data.description || "",
+            date: data.date || "",
+            city: data.city || "",
+        })
 
+    }
     enterUsernameStateValue = user => this.setState({ username: user.username })
 
     handleInputChange = event => event.target.type !== "checkbox" ? this.setState({ [event.target.name]: event.target.value })
@@ -39,20 +47,33 @@ class EditEvent extends Component {
         this.setState({ [target.name]: stateToChange })
     }
     handleFormSubmit = event => {
-        event.preventDefault()
-        this.setState({previousLoggedUser: this.props.loggedInUser})
-        this.userService
-            .editEvent(this.props.match.params.eventId, this.state)
-            .then(() => this.props.history.push("/profile"))
-            .catch(err => console.log(err)) 
-    }
+           event.preventDefault()
+           const id = this.props.match.params.eventId
+           this.props.location.pathname.includes("edit") ? this.editEvent(id, this.state) : this.createEvent()
+       }
+
+       createEvent = () => {
+           this.userService
+               .createEvent(this.state)
+               .then(() => this.props.history.push("/profile"))
+               .catch(err => console.log(err))
+       }
+
+       editEvent = (id, newEvent) => {
+           this.userService
+               .editEvent(id, newEvent)
+               .then(() => this.props.history.push("/profile"))
+               .catch(err => console.log(err))
+
+       }
     render () {
         return (
             <>
                 {this.state.name == undefined ? <h2>Loading</h2> :
                     <Container as='main'>
                         <Form onSubmit={this.handleFormSubmit}>
-                            <h1>Edit Event</h1>
+                            {this.props.location.pathname.includes("edit") ? <h1>Edit Event</h1> :
+                                <h1>Create Event</h1>}
                             <Form.Group>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />

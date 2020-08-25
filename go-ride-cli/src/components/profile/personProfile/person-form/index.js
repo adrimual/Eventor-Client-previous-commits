@@ -86,7 +86,6 @@ class profilePerson extends Component {
                                 <SelectVehicle onChange={this.handleInputChange}></SelectVehicle>
                             </Form.Group>
                         </Form>
-                         <Button variant="dark" type="submit">Create a new event</Button>
                     </Container>
                 };
             </>                   
