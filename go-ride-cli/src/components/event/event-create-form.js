@@ -23,8 +23,8 @@ class EventForm extends Component{
         index === -1 ? stateToChange.push(target.value) : stateToChange.splice(index, 1)
         this.setState({[target.name]: stateToChange})
     }
-        handleInputChange = e => {
-        const { name, value } = e.target
+    handleInputChange = event => {
+        const { name, value } = event.target
         this.setState({ [name]: value })
     }
     handleFormSubmit = event => {
@@ -32,8 +32,9 @@ class EventForm extends Component{
         this.UserService
             .createEvent(this.state)
             .then(() => this.props.history.push('/profile'))
-            .catch(err => console.log(err))
+            .catch(err => this.setErrorMessage(err.response.data.message))
     }
+    setErrorMessage = errorMsg => this.setState({ errorMsg })
     render() {
         return (
             <Container as='main'>
@@ -58,7 +59,7 @@ class EventForm extends Component{
                         <Form.Label>City</Form.Label>
                         <Form.Control onChange={this.handleInputChange} value={this.state.city} name="city" type="text" />
                     </Form.Group>
-
+                    {this.state.errorMsg && <p className="errorMsg">{this.state.errorMsg}</p>}
                     <Button variant="dark" type="submit">Submit</Button>
                 </Form>
             </Container>
