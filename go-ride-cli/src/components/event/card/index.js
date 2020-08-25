@@ -26,7 +26,7 @@ class EventCard extends Component {
                     <Card.Subtitle>City:{this.props.city}</Card.Subtitle>
                     <Card.Text>Date: {this.props.date}</Card.Text>
                     <Card.Text>Description: {this.props.description}</Card.Text>
-                    <Link to={`/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
+                    <Link to={`/user/${this.props.loggedInUser}/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
                     <Button variant="primary" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile'/>  }>Delete</Button>
                 </Card.Body>
             </Card>

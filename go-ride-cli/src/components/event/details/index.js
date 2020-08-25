@@ -24,7 +24,7 @@ class EventDetails extends Component {
             <>
             {this.state.events.length == 0 ? <h4 style={{'color' : 'white', 'padding' : '10%'}}>Nothing here yet</h4> : 
             <> 
-                {this.state.events.map(event => <EventCard updateEvents={this.updateEventList} key={event._id} {...event}/>)}
+                {this.state.events.map(event => <EventCard loggedInUser={this.props.loggedInUser._id} updateEvents={this.updateEventList} key={event._id} {...event}/>)}
             </>
             }
             </>

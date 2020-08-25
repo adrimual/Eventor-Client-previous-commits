@@ -32,7 +32,7 @@ class AuthForm extends Component {
                 //this.props.handleToast(true, 'Sesión inciada')
                 this.props.history.push('/')
             })
-            .catch(err => console.log(err)) // Error handling yay!
+            .catch(error => this.setState({ errorMsg: error.response.data.message })) 
     }
     render() {
         const isSignup = this.props.location.pathname === "/signup"
@@ -61,7 +61,7 @@ class AuthForm extends Component {
                                 <Form.Control onChange={this.handleInputChange} value={this.state.password} name="password" type="password" />
                                 <Form.Text className="text-muted">At least four characters.</Form.Text>
                             </Form.Group>
-
+                            {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
                             <Button variant="dark" type="submit">{isSignup ? "Sign up" : "Log in"}</Button>
                         </Form>
 

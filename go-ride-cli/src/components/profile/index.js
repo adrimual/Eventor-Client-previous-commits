@@ -11,7 +11,7 @@ class ProfilePage extends Component {
         this.UserService = new UserService()
     }
     componentDidMount = () => {
-        const id = this.props.loggedInUser._id;
+        const id = this.props.match.params.userId
         this.UserService
         get.userDetails(id)
             .then((response) => this.setState({ userDetails: response.data }))
@@ -20,14 +20,15 @@ class ProfilePage extends Component {
     render() {
         let detailedProfile
         if (this.state.userDetails) {
-            detailedProfile = <PersonProfile userDetails={this.state.userDetails} loggedInUser={this.props.loggedInUser}/>
+            detailedProfile = <PersonProfile userDetails={this.state.userDetails} loggedInUser={this.state.userDetails}/>
         }
         return (
             <>
-                {!this.props.loggedInUser ? <h1>Loading</h1> :
+                {!this.state.userDetails ? <h1>Loading</h1> :
                     <main>
-                        <h1>Welcome, @{this.props.loggedInUser.username}</h1> 
-                        <span>{this.props.loggedInUser.personDetails}</span>
+                        <h1>Welcome, @{this.state.userDetails.username}</h1> 
+                        <span>{this.state.userDetails.personDetails}</span>
+                        {detailedProfile}
                     </main>
                 }
             </>
