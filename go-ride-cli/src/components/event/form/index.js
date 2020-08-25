@@ -15,6 +15,7 @@ class EditEvent extends Component {
             description: '',
             date: "",
             city: "",
+            participants: [this.props.loggedInUser._id],
             previousLoggedUser: undefined
         }
         this.eventService = new EventService()
