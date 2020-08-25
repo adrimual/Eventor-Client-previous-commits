@@ -55,15 +55,15 @@ class EventCard extends Component {
         if (this.props.owner == this.props.loggedInUser._id) {
             this.state.buttons = 
             <>
-            <Button variant="primary" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile' />}>Delete</Button>
-            <Link to={`/user/${this.props.loggedInUser._id}/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
+                <Button variant="primary" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile' />}>Delete</Button>
+                <Link to={`/user/${this.props.loggedInUser._id}/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
             </>;
         } else if(this.props.loggedUserEvents.map(event => event._id).includes(this.props._id)){
             this.state.buttons = 
             <Button variant="danger" onClick={() => {this.leaveEvent(this.props._id, this.props.loggedInUser._id) && this.props.redirectOrUpdate()}}>Leave Event</Button>
         } else {
             this.state.buttons = 
-            <Button variant="primary" onClick={() => {this.joinEvent(this.props._id, this.props.loggedInUser._id) && this.props.redirectOrUpdate()}}>Join Event</Button>
+                <Button variant="primary" onClick={() => {this.joinEvent(this.props._id, this.props.loggedInUser._id) && this.props.redirectOrUpdate()}}>Join Event</Button>
         }
     }
     render() {

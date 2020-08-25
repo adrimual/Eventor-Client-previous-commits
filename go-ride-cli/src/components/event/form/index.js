@@ -16,7 +16,9 @@ class EditEvent extends Component {
             date: "",
             city: "",
             participants: [this.props.loggedInUser._id],
-            previousLoggedUser: undefined
+            previousLoggedUser: undefined,
+            startTime: "",
+            endTime: ""
         }
         this.eventService = new EventService()
     }
@@ -80,8 +82,7 @@ class EditEvent extends Component {
                 {this.state.name == undefined ? <h2>Loading</h2> :
                     <Container as='main'>
                         <Form onSubmit={this.handleFormSubmit}>
-                            {this.props.location.pathname.includes("edit") ? <h1>Edit Event</h1> :
-                                <h1>Create Event</h1>}
+                            {this.props.location.pathname.includes("edit") ? <h1>Edit Event</h1> :<h1>Create Event</h1>}
                             <Form.Group>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
@@ -96,7 +97,16 @@ class EditEvent extends Component {
                                 <Form.Label>Date</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.date} name="date" type="date" />
                             </Form.Group>
-
+                            <Form.Group>
+                                <Form.Label>Start time</Form.Label>
+                                <input onChange={this.handleInputChange} type="datetime-local" name="startDate" value={this.state.startDate}  />
+                                <Form.Control onChange={this.handleInputChange} value={this.state.startTime} name="startTime" type="time" />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>End time</Form.Label>
+                                <input onChange={this.handleInputChange} type="datetime-local" name="enDate" value={this.state.endDate} min={this.state.startdDate} />
+                                <Form.Control onChange={this.handleInputChange} value={this.state.endTime} name="endTime" type="time" />
+                            </Form.Group>
                             <Form.Group>
                                 <Form.Label>City</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.city} name="city" type="text" />

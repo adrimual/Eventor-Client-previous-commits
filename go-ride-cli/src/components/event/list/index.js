@@ -4,39 +4,30 @@ import EventService from '../../../services/EventService';
 import EventCard from '../card';
 import Container from 'react-bootstrap/esm/Container';
 
-class EventList extends Component {
-    constructor(props) {
-        super(props)
+class  EventList extends Component {
+    constructor (props){
+        super (props)
         this.state = {
             events: undefined,
-            loggedUserEvents: [],
-            ownedEvents: [],
-            participantEvents: []
+            loggedUserEvents: []
         }
         this.eventService = new EventService()
     }
     componentDidMount = () => {
         this.updateEventList()
     }
-    updateEventList = () => this.setEvents(this.props.loggedInUser._id)
-    setEvents = userId => {
-        this.eventService
-            .getOwnedEvents(userId)
-            .then((response) => this.setState({ownedEvents: response.data}))
-            .catch(err => console.log(err))
-        this.eventService
-            .getParticipantEvents(userId)
-            .then((response) => this.setState({participantEvents: response.data}))
-            .catch(err => console.log(err))
+    updateEventList = () => {  
+        this.setLoggedUserEvents(this.props.loggedInUser._id)
         this.eventService
             .getAllEvents()
-            .then(response => this.setState({ events: response.data }))
+            .then(response =>this.setState({events: response.data}))
             .catch(err => console.log(err))
-    
-        let loggedUserEventsCopy = [] //guardo copia y le empujo los datos de la respuesta
+    }
+    setLoggedUserEvents = userId => {
+        let loggedUserEventsCopy = []
         this.eventService
             .getOwnedEvents(userId)
-            .then(response => loggedUserEventsCopy.push(...response.data)) 
+            .then(response => loggedUserEventsCopy.push(...response.data)) //Gestionar que siempre sea un array
             .then(() => this.eventService.getParticipantEvents(userId))
             .then(response => loggedUserEventsCopy.push(...response.data))
             .then(() => this.setState({loggedUserEvents: loggedUserEventsCopy}))
