@@ -41,7 +41,7 @@ class profilePerson extends Component {
                 this.props.setTheUser(response.data);
                 this.props.history.push('/profile');
             })
-            .catch(err => console.log(err));
+            .catch(err => this.setState({ errorMsg: err.response.data.message }))   
     }
     render() {
         return (
@@ -81,6 +81,7 @@ class profilePerson extends Component {
                                 <Form.Label>Female</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} checked={this.state.genre === "Female"} value="Female" name="genre" type="radio" />
                             </Form.Group>
+                            {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
                             <Button variant="dark" type="submit">Submit</Button>
                             <Form.Group>
                                 <SelectVehicle onChange={this.handleInputChange}></SelectVehicle>
