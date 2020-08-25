@@ -10,9 +10,8 @@ class EventDetails extends Component {
         }
         this.eventService = new EventService()
     }
-    componentDidMount = () => {
-        this.updateState(this.props.match.params.eventId, this.props.match.params.userId)
-    }
+    componentDidMount = () => this.updateState(this.props.match.params.eventId, this.props.match.params.userId)
+
     updateState = (eventId, userId) => {
         this.eventService
             .getOneEvent(eventId)
@@ -26,21 +25,22 @@ class EventDetails extends Component {
     render () {
         return (
             <>
-            {!this.state.eventDetails ? <h2>Loading</h2> : 
-            <> 
-                <Container>    
-                   <Row>
-                        <Col>
-                            <h1>{this.state.eventDetails.name}</h1>
-                            <p>Description: {this.state.eventDetails.name}</p>
-                            <p>Date: {this.state.eventDetails.date}</p>
-                            <p>City: {this.state.eventDetails.city}</p>
+                {!this.state.eventDetails ? <h2>Loading</h2> : 
+                    <> 
+                        <Container>    
+                            <Row>
+                                <Col>
+                                    <h1>{this.state.eventDetails.name}</h1>
+                                    <p>Creator: {this.state.owner}</p>
+                                    <p>Description: {this.state.eventDetails.name}</p>
+                                    <p>Date: {this.state.eventDetails.date}</p>
+                                    <p>City: {this.state.eventDetails.city}</p>
                                     <p>Number of participants:{this.state.eventDetails.participants.length} </p>
-                         </Col>              
-                    </Row>
-                </Container>   
-            </>
-            }
+                                </Col>              
+                            </Row>
+                        </Container>   
+                    </>
+                }
             </>
         )
     }

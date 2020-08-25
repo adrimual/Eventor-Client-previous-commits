@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 
-import EventService from '../../../services/EventService'
+import EventService from '../../../../services/EventService'
 
 //Bootstrap
 import {Container, Form, Button} from 'react-bootstrap/'
@@ -65,24 +65,23 @@ class EventForm extends Component {
            const id = this.props.match.params.eventId
            this.props.location.pathname.includes("edit") ? this.editEvent(id, this.state) : this.createEvent()
        }
-        setErrorMessage = errorMsg => this.setState({ errorMsg })
+       setErrorMessage = errorMsg => this.setState({ errorMsg })
        createEvent = () => {
            this.eventService
                .createEvent(this.state)
                 .then(() => {
                     this.props.handleModal ? this.props.handleModal() :
-                    this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
+                    this.props.history.push('/') //Para arreglar
+                    // this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
                 })
                .catch(err => this.setErrorMessage(err.response.data.message))
        }
        editEvent = (id, newEvent) => {
            this.eventService
                 .editEvent(id, newEvent)
-                    .then(response => {
-                        this.updateEventState(response.data)
-                        this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
-                    })
-                    .catch(err => console.log(err))
+                .then(response => this.props.history.push(`/`))// Para arreglar
+                 // this.props.history.push(`/profile/${this.props.loggedInUser._id}`) 
+                .catch(err => console.log(err))
        }
     render () {
         return (

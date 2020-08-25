@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 //MultiSelector for Motorbike or Car
 import SelectVehicle from '../selectVehicle/index';
-import UserService from '../../../../services/UserService';
+import UserService from '../../../../../services/UserService';
 //import Bootstrap
 import { Container, Form, Button } from 'react-bootstrap';
 
@@ -14,7 +14,6 @@ class profilePerson extends Component {
             password: "",
             genre: undefined,
             age: undefined,
-            vehicle: [],
             previousLoggedUser: undefined
         }
         this.userService = new UserService()
@@ -24,7 +23,8 @@ class profilePerson extends Component {
         const id = this.props.loggedInUser._id;
         this.userService
             .getUserDetails(id)
-            .then((res)=> this.setState({age: res.data.personDetails.age, genre: res.data.personDetails.genre, vehicle: [res.data.personDetails.vehicle]}))
+            .then((res) => this.setState({ age: res.data.personDetails.age, genre: res.data.personDetails.genre }))
+            .catch(err=>console.log(err))
     }
     enterUsernameStateValue = user => this.setState({username: user.username})    
 
@@ -63,10 +63,7 @@ class profilePerson extends Component {
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control onChange={this.handleInputChange}
-                                    value={this.state.password}
-                                    name="password"
-                                    type="password" />
+                                <Form.Control onChange={this.handleInputChange} value={this.state.password} name="password" type="password" />
                                 <Form.Text className="text-muted">At least four characters</Form.Text>
                             </Form.Group>
                             <Form.Group>

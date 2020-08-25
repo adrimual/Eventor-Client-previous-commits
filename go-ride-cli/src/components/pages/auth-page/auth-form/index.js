@@ -4,9 +4,6 @@ import AuthService from '../../services/AuthService';
 //import bootstrap elements
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 class AuthForm extends Component {
     constructor(props) {
@@ -34,15 +31,7 @@ class AuthForm extends Component {
             .catch(error => this.setState({ errorMsg: error.response.data.message })) 
     }
     render() {
-        const isSignup = this.props.location.pathname === "/signup"
         return (
-            <Container as="main">
-                <Row>
-                    <Col md={{ offset: 3, span: 6 }}>
-                        <h3>{isSignup ? "Sign up" : "Log in"}</h3>
-
-                        <hr></hr>
-
                         <Form onSubmit={this.handleFormSubmit}>
 
                             <Form.Group>
@@ -60,13 +49,11 @@ class AuthForm extends Component {
                                 <Form.Control onChange={this.handleInputChange} value={this.state.password} name="password" type="password" />
                                 <Form.Text className="text-muted">At least four characters.</Form.Text>
                             </Form.Group>
+                
                             {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
                             <Button variant="dark" type="submit">{isSignup ? "Sign up" : "Log in"}</Button>
                         </Form>
 
-                    </Col>
-                </Row>
-            </Container>
         )
     }
 }

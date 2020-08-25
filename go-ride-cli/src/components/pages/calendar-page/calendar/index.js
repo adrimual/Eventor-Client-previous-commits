@@ -5,11 +5,12 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 //services
-import EventService from '../../../services/EventService'
+import EventService from "../../../../services/EventService"
 //import bootstrap
-import { Modal, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
-import EventForm from "../../event/form";
+import EventForm from "../../../event/form";
+import Modal from "../../ui/Modal"
 class Calendar extends Component {
     constructor() {
         super()
@@ -20,12 +21,13 @@ class Calendar extends Component {
         this.eventService = new EventService()
     }
     componentDidMount = () => this.updateEvents()
-    updateEvents = () => {
-        const id = this.props.match.params.userId
+    updateEvents = () => this.getAllUserEvents(this.props.match.params.userId) 
+    getAllUserEvents = (id) => {
         this.eventService.getAllEventsUser(id)
             .then(response => this.setState({ events: response.data }))
             .catch(err => console.log(err))
     }
+
     handleModal = (status, e) => e ? this.setState({ showModal: status, calendarDate: `${e.dateStr}T00:00` }) : this.setState({showModal: status})
 
     handleEventSubmit = () => {
@@ -45,22 +47,16 @@ class Calendar extends Component {
         const formattedEvents = this.state.events.length > 0 && this.state.events.map(event => { return { title: event.name, start: this.obtainDateInFormat(event.startTime), end: this.obtainDateInFormat(event.endTime)} })
         return (
             <>
-                <Container>
-                    <FullCalendar
-                        plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-                        initialView="dayGridMonth"
-                        selectable={true}
-                        events={formattedEvents}
-                        dateClick={() => this.handleModal(true, e)}
-                        eventClick={() => alert("touching an event")}
-                        headerToolbar={{ start: "dayGridMonth,timeGridWeek" }}
-                    />
-                </Container>
-                <Modal size="lg" show={this.state.showModal} onHide={() => this.handleModal(false)}>
-                    <Modal.Body>
-                        <EventForm calendarDate={this.state.calendarDate} loggedInUser={this.props.loggedInUser} handleModal={this.handleEventSubmit} {...this.props}/>
-                    </Modal.Body>
-                </Modal>
+                <FullCalendar
+                    plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+                    initialView="dayGridMonth"
+                    selectable={true}
+                    events={formattedEvents}
+                    dateClick={() => this.handleModal(true, e)}
+                    eventClick={() => alert("touching an event")}
+                    headerToolbar={{ start: "dayGridMonth,timeGridWeek" }}
+                     />
+                <Modal /> 
             </>
         )
     }

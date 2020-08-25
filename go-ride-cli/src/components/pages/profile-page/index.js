@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import PersonProfile from "./personProfile/";
-import UserService from '../../services/UserService';
+import PersonProfile from "./personProfile";
+import UserService from '../../../services/UserService';
 
+//Impor bootstrap
+import Container from 'react-bootstrap/esm/Container';
 class ProfilePage extends Component {
     constructor(props) {
         super(props)
@@ -17,19 +19,21 @@ class ProfilePage extends Component {
             .then((response) => this.setState({ userDetails: response.data }))
             .catch(err=>console.log(err))
     }
-    render() {
-        let detailedProfile
+    getProfile = () => {
         if (this.state.userDetails) {
-            detailedProfile = <PersonProfile userDetails={this.state.userDetails} {...this.props} loggedInUser={this.props.loggedInUser} paramId={this.props.match.params.userId}/>
+            return  <PersonProfile userDetails={this.state.userDetails} {...this.props} loggedInUser={this.props.loggedInUser} paramId={this.props.match.params.userId} />
         }
+    }
+    render() {
+        const detailedProfile = this.getProfile()
         return (
             <>
                 {!this.state.userDetails ? <h1>Loading</h1> :
-                    <main>
+                    <Container as ="main">
                         <h1>Welcome, @{this.state.userDetails.username}</h1> 
                         <span>{this.state.userDetails.personDetails}</span>
                         {detailedProfile}
-                    </main>
+                    </Container>
                 }
             </>
         )

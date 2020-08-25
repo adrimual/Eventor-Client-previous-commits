@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthService from "../services/AuthService";
 import { Switch, Route, Redirect } from 'react-router-dom';
-import AuthForm from "./auth-form";
+import AuthForm from "./pages/auth-page/auth-form";
 import NavBar from "./ui/NavBar";
-import ProfilePage from "./profile";
-import PersonEdit from "./profile/personProfile/person-form";
-import EventForm from './event/form'
-import EventList from './event/list'
-import EventDetails from './event/details';
-import Calendar from "./profile-calendar/calendar";
+import ProfilePage from "./pages/profile-page";
+import PersonEdit from "./pages/profile-page/personProfile/person-form";
+import EventForm from './pages/event-page/event-form'
+import EventsPage from './pages/events-page'
+import EventDetails from './pages/events-page/event-list';
+// import Calendar from "./profile-calendar/calendar";
 
 class App extends Component {
     constructor() {
@@ -43,7 +43,7 @@ class App extends Component {
 
                     <Route exact path="/user/:id/event/create" render={props => this.state.loggedInUser && this.isUserAllowed(this.state.loggedInUser._id, props.match.params.id)? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
                     <Route exact path="/user/:id/event/edit/:eventId" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
-                    <Route exact path="/events" render={props => <EventList loggedInUser={this.state.loggedInUser} {...props} />} />
+                    <Route exact path="/events" render={props => <EventsPage loggedInUser={this.state.loggedInUser} {...props} />} />
                     <Route exact path="/user/:userId/events/:eventId" render={props => <EventDetails loggedInUser={this.state.loggedInUser} {...props} />} />
                     
                     <Route path="/profile/edit/:id" render={props => this.isTheUserAllowed (props.match.params.id) ? <PersonEdit setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} {...props} /> : <Redirect to='/login' />}></Route>

@@ -1,9 +1,9 @@
-import  React, {Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import  React, {Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 //Import bootstrap
-import { Card, Button, Col } from 'react-bootstrap'
+import { Card, Button, Col } from 'react-bootstrap';
 
-import EventService from '../../../services/EventService'
+import EventService from '../../../../../services/EventService';
 class EventCard extends Component {
     constructor (props){
         super (props)
@@ -14,18 +14,16 @@ class EventCard extends Component {
         }
         this.eventService = new EventService()
     }
-    componentDidMount = () => {
-        this.setOwner(this.props._id)
-    }
+    componentDidMount = () => this.setOwner(this.props._id)
+
     deleteEvent = eventId =>{
         this.eventService
             .deleteEvent(eventId)
             .then(() => this.props.updateEventList())
             .catch(err => console.log(err))
     }
-    isUserTheProfileOwner = () => {
-            return this.props.paramId ? this.props.loggedInUser._id === this.props.paramId : false
-    }
+    isUserTheProfileOwner = () => this.props.paramId ? this.props.loggedInUser._id === this.props.paramId : false
+    
     setOwner = eventId => {
         this.eventService
             .getEventOwner(eventId)
