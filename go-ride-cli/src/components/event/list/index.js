@@ -20,10 +20,7 @@ class EventList extends Component {
         this.setLoggedUserEvents(this.props.loggedInUser._id)
         this.eventService
             .getAllEvents()
-            .then(response => {
-                this.setState({ events: response.data })
-                console.log("EVENTOS: ",this.state.events)
-            })
+            .then(response => this.setState({ events: response.data }))
             .catch(err => console.log(err))
     }
     setLoggedUserEvents = userId => {
