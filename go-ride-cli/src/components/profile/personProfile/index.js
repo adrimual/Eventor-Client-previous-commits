@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Events from '../../event/events-profile';
+import Events from '../../event/list';
 //Boostrap
 import { Container, Button, Card, Row } from 'react-bootstrap';
 

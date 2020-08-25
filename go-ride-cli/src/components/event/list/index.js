@@ -9,21 +9,30 @@ class EventList extends Component {
         super(props)
         this.state = {
             events: undefined,
-            loggedUserEvents: []
+            loggedUserEvents: [],
+            ownedEvents: [],
+            participantEvents: []
         }
         this.eventService = new EventService()
     }
     componentDidMount = () => {
         this.updateEventList()
     }
-    updateEventList = () => {
-        this.setLoggedUserEvents(this.props.loggedInUser._id)
+    updateEventList = () => this.setEvents(this.props.loggedInUser._id)
+    setEvents = userId => {
+        this.eventService
+            .getOwnedEvents(userId)
+            .then((response) => this.setState({ownedEvents: response.data}))
+            .catch(err => console.log(err))
+        this.eventService
+            .getParticipantEvents(userId)
+            .then((response) => this.setState({participantEvents: response.data}))
+            .catch(err => console.log(err))
         this.eventService
             .getAllEvents()
             .then(response => this.setState({ events: response.data }))
             .catch(err => console.log(err))
-    }
-    setLoggedUserEvents = userId => {
+    
         let loggedUserEventsCopy = [] //guardo copia y le empujo los datos de la respuesta
         this.eventService
             .getOwnedEvents(userId)
@@ -36,10 +45,21 @@ class EventList extends Component {
     render() {
         return (
             <>
-                {!this.state.events ? <h2>Loading</h2>: 
+            {this.props.location.pathname.includes('profile') ? 
+                    <Container as='div'>
+                        <h5>Joined events</h5>
+                        {this.state.participantEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.loggedUserEvents} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event}/>)}
+                        <h5>Your events</h5>
+                        {this.state.ownedEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.loggedUserEvents} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event}/>)}
+                    </Container> 
+                    :
+                    null
+            }
+
+            {!this.state.events ? <h1>Loading</h1> : this.props.location.pathname.includes('events') ? 
                     <Container as='div'>
                         {this.state.events.map(event => <EventCard {...this.props} loggedUserEvents={this.state.loggedUserEvents} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event}/>)}
-                    </Container>
+                    </Container> : null
                 }
             </>
         )
