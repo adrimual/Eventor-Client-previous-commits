@@ -81,7 +81,7 @@ class EventCard extends Component {
                         <Card.Text>Date: {this.props.date}</Card.Text>
                         <Card.Text>Description: {this.props.description}</Card.Text>
                         {!this.props.owner ? <h2>Loading</h2> : this.state.buttons}
-                    <Link to={`/user/${this.state.ownerId}//events/${this.props._id}`} ><Button variant="primary">See details</Button></Link>
+                    <Link to={`/user/${this.state.ownerId}/events/${this.props._id}`} ><Button variant="primary">See details</Button></Link>
                     </Card.Body>
                 </Card>
                 </Col>

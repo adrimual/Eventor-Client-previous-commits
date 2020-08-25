@@ -28,7 +28,7 @@ class EventDetails extends Component {
             <>
             {!this.state.eventDetails ? <h1>cargando</h1> : 
             <> 
-                 <Container>    
+                <Container>    
                    <Row>
                         <Col>
                             <h1>{this.state.eventDetails.name}</h1>
