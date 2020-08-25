@@ -11,7 +11,8 @@ class EventDetails extends Component {
         }
         this.userService = new UserService()
     }
-    componentDidMount = () => {
+    componentDidMount = () => this.updateEventList()
+    updateEventList = () => {
         const id = this.props.loggedInUser._id
         this.userService
             .getPersonEvents(id)
@@ -24,7 +25,7 @@ class EventDetails extends Component {
             {this.state.events.length == 0 ? <h1>Cargando</h1>:
             <>
                 <h1>Evento</h1>  
-                {this.state.events.map(event => <EventCard key={event._id} {...event}/>)}
+                {this.state.events.map(event => <EventCard updateEvents={this.updateEventList} key={event._id} {...event}/>)}
             </>
             }
             </>

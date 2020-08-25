@@ -43,10 +43,7 @@ class EditEvent extends Component {
         this.setState({previousLoggedUser: this.props.loggedInUser})
         this.userService
             .editEvent(this.props.match.params.eventId, this.state)
-            .then(response => {
-                this.props.setTheUser(response.data)
-                this.props.history.push("/profile")
-            })
+            .then(() => this.props.history.push("/profile"))
             .catch(err => console.log(err)) 
     }
     render () {
