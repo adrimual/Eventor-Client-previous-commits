@@ -21,10 +21,12 @@ class EditEvent extends Component {
     }
     componentDidMount = () => {
         const id = this.props.match.params.eventId
-        this.eventService
-            .getOneEvent(id)
-            .then(response => this.updateEventState(response.data))
-            .catch(err => console.log(err))
+        if (id) {
+            this.eventService
+                .getOneEvent(id)
+                .then(response => this.updateEventState(response.data))
+                .catch(err => console.log(err))
+        }
     }
     updateEventState = data => {
         const date = new Date(data.date)
