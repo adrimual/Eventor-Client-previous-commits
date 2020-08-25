@@ -16,7 +16,6 @@ class EventForm extends Component {
             date: "",
             city: "",
             participants: [this.props.loggedInUser._id],
-            previousLoggedUser: undefined,
             startTime: "",
             endTime: ""
         }
