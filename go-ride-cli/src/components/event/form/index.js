@@ -31,15 +31,21 @@ class EventForm extends Component {
                 .catch(err => console.log(err))
         }
     }
+    formatDate = date => {
+        const newDate = new Date(date);
+        const hh = String(newDate.getHours()).padStart(2, '0');
+        const min = String(newDate.getMinutes()).padStart(2, '0');
+        let dd = String(newDate.getDate()).padStart(2, '0');
+        let mm = String(newDate.getMonth() + 1).padStart(2, '0');
+        let yyyy = newDate.getFullYear();
+        return `${yyyy}-${mm}-${dd}T${hh}:${min}`
+    }
     updateEventState = data => {
-        const date = new Date(data.startTime)
-        let dd = String(date.getDate()).padStart(2, '0') //para rellenar con 0 la parte previa que esté vacia
-        let mm = String(date.getMonth() + 1).padStart(2, '0')
-        let yyyy = date.getFullYear()
         this.setState({
             name: data.name || "",
             description: data.description || "",
-            date: `${yyyy}-${mm}-${dd}` || "",
+            startTime: this.formatDate(data.startTime) || "",
+            endTime: this.formatDate(data.endTime) || "",
             city: data.city || "",
         })
     }
