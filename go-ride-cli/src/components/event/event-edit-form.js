@@ -41,7 +41,13 @@ class EditEvent extends Component {
     handleFormSubmit = event => {
         event.preventDefault()
         this.setState({previousLoggedUser: this.props.loggedInUser})
-        console.log('test')
+        this.userService
+            .editEvent(this.props.match.params.eventId, this.state)
+            .then(response => {
+                this.props.setTheUser(response.data)
+                this.props.history.push("/profile")
+            })
+            .catch(err => console.log(err)) 
     }
     render () {
         return (
