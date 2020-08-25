@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Events from '../../event/details';
 //Boostrap
-import { Container, Button } from 'react-bootstrap/Container';
+import { Container, Button } from 'react-bootstrap';
 
 class Profile extends Component {
     constructor (props){
