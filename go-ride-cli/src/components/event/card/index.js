@@ -48,9 +48,6 @@ class EventCard extends Component {
 
     setButtons = () => {
         if (!this.props.loggedInUser) return
-        console.log('Checking buttons: ', this.props.loggedUserEvents)
-        console.log('Checking buttons mapped: ', this.props.loggedUserEvents.map(event => event._id))
-        console.log('EventId looked: ', this.props._id)
         if (this.props.owner == this.props.loggedInUser._id) {
             this.state.buttons = 
             <>
@@ -80,13 +77,6 @@ class EventCard extends Component {
                     <Card.Text>Description: {this.props.description}</Card.Text>
                     {!this.props.owner ? <h2>Loading</h2> : this.state.buttons}
 
-                    {/* {this.isUserTheProfileOwner() &&
-                        <>
-                            <Link to={`/user/${this.props.loggedInUser._id}/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
-                            <Button variant="primary" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile' />}>Delete</Button>
-                        </>
-                    }  
-                    }   */}
                 </Card.Body>
             </Card>
             </Col>

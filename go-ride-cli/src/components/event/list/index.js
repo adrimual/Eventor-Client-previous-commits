@@ -33,9 +33,7 @@ class EventList extends Component {
             .then(response => loggedUserEventsCopy.push(...response.data)) 
             .then(() => this.eventService.getParticipantEvents(userId))
             .then(response => loggedUserEventsCopy.push(...response.data))
-            .then(() => this.setState({
-                loggedUserEvents: loggedUserEventsCopy
-            }))
+            .then(() => this.setState({loggedUserEvents: loggedUserEventsCopy}))
             .catch(err => console.log(err))
     }
     render() {
