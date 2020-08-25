@@ -10,7 +10,7 @@ class Profile extends Component {
         this.state = {}
     }
 
-    isUserTheProfileOwner = () => this.props.loggedInUser.id === this.props.params.match.userId
+    isUserTheProfileOwner = () => this.props.loggedInUser._id === this.props.paramId;
     render() {
         return (
             <>
@@ -27,7 +27,7 @@ class Profile extends Component {
                          <hr></hr>
                         <h5>Your events</h5>
                         <Card style={{'background-color': 'blue'}}>
-                            <Row><Events loggedInUser={this.props.loggedInUser}/></Row>
+                            <Row> <Events loggedInUser={this.props.loggedInUser} paramId={this.props.paramId}/></Row>
                         </Card>
                         {this.isUserTheProfileOwner() && 
                             <>

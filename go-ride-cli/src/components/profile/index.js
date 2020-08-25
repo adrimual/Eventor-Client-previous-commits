@@ -20,7 +20,7 @@ class ProfilePage extends Component {
     render() {
         let detailedProfile
         if (this.state.userDetails) {
-            detailedProfile = <PersonProfile userDetails={this.state.userDetails} loggedInUser={this.state.userDetails}/>
+            detailedProfile = <PersonProfile userDetails={this.state.userDetails} loggedInUser={this.props.loggedInUser} paramId={this.props.match.params.userId}/>
         }
         return (
             <>
