@@ -22,9 +22,8 @@ class EventDetails extends Component {
     render () {
         return (
             <>
-            {this.state.events.length == 0 ? <h1>Cargando</h1>:
-            <>
-                <h1>Evento</h1>  
+            {this.state.events.length == 0 ? <h4 style={{'color' : 'white', 'padding' : '10%'}}>Nothing here yet</h4> : 
+            <> 
                 {this.state.events.map(event => <EventCard updateEvents={this.updateEventList} key={event._id} {...event}/>)}
             </>
             }

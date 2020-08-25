@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Events from '../../event/details';
 //Boostrap
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Card, Row } from 'react-bootstrap';
 
 class Profile extends Component {
     constructor (props){
@@ -10,7 +10,6 @@ class Profile extends Component {
         this.state = {}
     }
     render() {
-        console.log("the details", this.props.userDetails.personDetails)
         return (
             <>
                 {!this.props.loggedInUser ? <h2>Loading</h2> :
@@ -25,7 +24,9 @@ class Profile extends Component {
                         {this.props.loggedInUser.personDetails.genre}
                          <hr></hr>
                         <h5>Your events</h5>
-                        <Events loggedInUser={this.props.loggedInUser}/>
+                        <Card style={{'background-color': 'blue'}}>
+                            <Row><Events loggedInUser={this.props.loggedInUser}/></Row>
+                        </Card>
                         <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>ç
                         <Link to ={'/event/create'}><Button variant ="dark" type ="submit">Create a new event!</Button></Link>
                     </Container>
