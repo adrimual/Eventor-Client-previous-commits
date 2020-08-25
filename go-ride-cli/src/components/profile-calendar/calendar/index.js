@@ -26,22 +26,23 @@ class Calendar extends Component {
             .then(response => this.setState({ events: response.data }))
             .catch(err => console.log(err))
     }
-    handleModal = (status, e) => this.setState({ showModal: status, calendarDate: `${e.dateStr}T00:00` })
+    handleModal = (status, e) => e ? this.setState({ showModal: status, calendarDate: `${e.dateStr}T00:00` }) : this.setState({showModal: status})
 
     handleEventSubmit = () => {
         this.handleModal(false)
         this.updateEvents()
     }
     obtainDateInFormat = date => {
-        let newDate = new Date(date)
-        const dd = String(newDate.getDate()).padStart(2, '0')
-        const mm = String(newDate.getMonth() + 1).padStart(2, '0')
-        const yyyy = newDate.getFullYear()
-        newDate = yyyy + '-' + mm + '-' + dd
-        return newDate
+        let newDate = new Date(date);
+        const hh = String(newDate.getHours()).padStart(2, '0');
+        const min = String(newDate.getMinutes()).padStart(2, '0');
+        const dd = String(newDate.getDate()).padStart(2, '0');
+        const mm = String(newDate.getMonth() + 1).padStart(2, '0');
+        const yyyy = newDate.getFullYear();
+        return `${yyyy}-${mm}-${dd}T${hh}:${min}:00`
     }
     render() {
-        const formattedEvents = this.state.events.length > 0 && this.state.events.map(event => { return { title: event.name, date: this.obtainDateInFormat(event.date) } })
+        const formattedEvents = this.state.events.length > 0 && this.state.events.map(event => { return { title: event.name, start: this.obtainDateInFormat(event.startTime), end: this.obtainDateInFormat(event.endTime)} })
         return (
             <>
                 <Container>
