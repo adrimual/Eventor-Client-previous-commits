@@ -26,7 +26,7 @@ class EventDetails extends Component {
     render () {
         return (
             <>
-            {!this.state.eventDetails ? <h1>cargando</h1> : 
+            {!this.state.eventDetails ? <h2>Loading</h2> : 
             <> 
                 <Container>    
                    <Row>

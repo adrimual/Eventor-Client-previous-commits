@@ -46,44 +46,36 @@ class EventCard extends Component {
             .then(() => this.redirectOrUpdate())
             .catch(err => console.log(err))
     }
-    redirectOrUpdate = () => {
-        let path = '/profile/' + this.props.loggedInUser._id
-        return this.props.location.pathname.includes("profile") ? this.props.history.push(path) : this.props.updateEventList()
-    }
-    setButtons = () => {
-        if (!this.props.loggedInUser) return
-        if (this.props.owner == this.props.loggedInUser._id) {
-            this.state.buttons = 
-            <>
-                <Button variant="primary" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile' />}>Delete</Button>
-                <Link to={`/user/${this.props.loggedInUser._id}/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
-            </>;
-        } else if(this.props.loggedUserEvents.map(event => event._id).includes(this.props._id)){
-            this.state.buttons = 
-            <Button variant="danger" onClick={() => {this.leaveEvent(this.props._id, this.props.loggedInUser._id) && this.props.redirectOrUpdate()}}>Leave Event</Button>
-        } else {
-            this.state.buttons = 
-                <Button variant="primary" onClick={() => {this.joinEvent(this.props._id, this.props.loggedInUser._id) && this.props.redirectOrUpdate()}}>Join Event</Button>
-        }
-    }
+    // redirectOrUpdate = () => {
+    //     let path = '/profile/' + this.props.loggedInUser._id
+    //     return this.props.location.pathname.includes("profile") ? this.props.history.push(path) : this.props.updateEventList()
+    // }
+    isParticipating = () => this.props.loggedInUser && this.props.participants.includes(this.props.loggedInUser._id)
     render() {
-        this.setButtons()
         return (
             <>
                 <Col md={4}>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>{this.props.name}</Card.Title>
-                        <Card.Subtitle>Creator: {this.state.owner}</Card.Subtitle>
-                        <Card.Text>Participants:{this.props.participants.length}</Card.Text>
-                        <Card.Text>City:{this.props.city}</Card.Text>
-                        <Card.Text>Date: {this.props.date}</Card.Text>
-                        <Card.Text>Description: {this.props.description}</Card.Text>
-                        {!this.props.owner ? <h2>Loading</h2> : this.state.buttons}
-                    <Link to={`/user/${this.state.ownerId}/events/${this.props._id}`} ><Button variant="primary">See details</Button></Link>
-                    </Card.Body>
-                </Card>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src="holder.js/100px180" />
+                        <Card.Body>
+                            <Card.Title>{this.props.name}</Card.Title>
+                            <Card.Subtitle>Creator: {this.state.owner}</Card.Subtitle>
+                            <Card.Text>Participants:{this.props.participants.length}</Card.Text>
+                            <Card.Text>City:{this.props.city}</Card.Text>
+                            <Card.Text>Date: {this.props.date}</Card.Text>
+                            <Card.Text>Description: {this.props.description}</Card.Text>
+                            {this.props.loggedInUser._id === this.props.owner &&
+                                <>
+                                    <Button variant="primary" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile' />}>Delete</Button>
+                                    <Link to={`/user/${this.props.loggedInUser._id}/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
+                                </>
+                            }
+                            {this.props.loggedInUser._id !== this.props.owner &&
+                                <Button variant={this.isParticipating() ? "danger" : "primary"} onClick={() => { this.isParticipating() ? this.leaveEvent(this.props._id, this.props.loggedInUser._id) : this.joinEvent(this.props._id, this.props.loggedInUser._id)}}>{this.isParticipating() ? "Leave event" : "Join event"} </Button>
+                            }
+                        <Link to={`/user/${this.state.ownerId}/events/${this.props._id}`} ><Button variant="primary">See details</Button></Link>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </>
         )

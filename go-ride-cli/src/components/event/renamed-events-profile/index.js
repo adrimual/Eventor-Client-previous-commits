@@ -8,7 +8,7 @@ class EventsProfile extends Component {
         super (props)
         this.state = {
             ownedEvents: [],
-            participantEvents: [],
+            participantEvents: []
         }
         this.eventService = new EventService()
     }
@@ -16,8 +16,6 @@ class EventsProfile extends Component {
     componentDidMount = () => {
         this.setEvents(this.props.loggedInUser._id)
     }
-
-
     setEvents = userId => {
         this.eventService
             .getOwnedEvents(userId)
@@ -31,16 +29,14 @@ class EventsProfile extends Component {
     }
 
     render() {
-
         return (
             <>
-            <h3>Joined events</h3>
-            {this.state.participantEvents.length == 0 ? <h5 style={{'color' : 'white', 'padding' : '10%'}}>Nothing here yet</h5> :
-            this.state.participantEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.participantEvents} paramId={this.props.paramId} loggedInUser={this.props.loggedInUser}  key={event._id} {...event} />)}
-            <h3>Your events</h3>
-            {this.state.ownedEvents.length == 0 ? <h5 style={{'color' : 'white', 'padding' : '10%'}}>Nothing here yet</h5> : 
-            this.state.ownedEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.ownedEvents} paramId={this.props.paramId} loggedInUser={this.props.loggedInUser} key={event._id} {...event} />)}
-
+                <h3>Joined events</h3>
+                {this.state.participantEvents.length == 0 ? <h5 style={{'color' : 'white', 'padding' : '10%'}}>Nothing here yet</h5> :
+                this.state.participantEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.participantEvents} paramId={this.props.paramId} loggedInUser={this.props.loggedInUser}  key={event._id} {...event} />)}
+                <h3>Your events</h3>
+                {this.state.ownedEvents.length == 0 ? <h5 style={{'color' : 'white', 'padding' : '10%'}}>Nothing here yet</h5> : 
+                this.state.ownedEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.ownedEvents} paramId={this.props.paramId} loggedInUser={this.props.loggedInUser} key={event._id} {...event} />)}
             </>
         )
     }

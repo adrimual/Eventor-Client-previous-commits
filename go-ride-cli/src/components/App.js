@@ -9,7 +9,7 @@ import PersonEdit from "./profile/personProfile/person-form";
 import EventForm from './event/form'
 import EventList from './event/list'
 import EventDetails from './event/details';
-// import Calendar from "./profile-calendar/calendar";
+import Calendar from "./profile-calendar/calendar";
 
 class App extends Component {
     constructor() {

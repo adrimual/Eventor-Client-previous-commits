@@ -8,50 +8,42 @@ class  EventList extends Component {
     constructor (props){
         super (props)
         this.state = {
-            events: undefined,
-            loggedUserEvents: []
+            events: undefined
         }
         this.eventService = new EventService()
     }
-    componentDidMount = () => {
-        this.updateEventList()
-    }
-    updateEventList = () => {  
-        this.setLoggedUserEvents(this.props.loggedInUser._id)
+    componentDidMount = () => this.updateEventList()
+    
+    updateEventList = () => this.props.loggedInUser ? this.setEvents(this.props.loggedInUser._id) : this.setEvents()
+    getAllEvents = () => {  
         this.eventService
             .getAllEvents()
             .then(response =>this.setState({events: response.data}))
             .catch(err => console.log(err))
     }
-    setLoggedUserEvents = userId => {
-        let loggedUserEventsCopy = []
-        this.eventService
-            .getOwnedEvents(userId)
-            .then(response => loggedUserEventsCopy.push(...response.data)) //Gestionar que siempre sea un array
-            .then(() => this.eventService.getParticipantEvents(userId))
-            .then(response => loggedUserEventsCopy.push(...response.data))
-            .then(() => this.setState({loggedUserEvents: loggedUserEventsCopy}))
-            .catch(err => console.log(err))
+    getLoggedUserEvents = userId => {
+        this.eventService.
+            getAllEventsUser(userId)
+            .then(response => this.setState({ events: response.data }))
+            .catch(err => console.log(err)) 
+    }
+        setEvents = userId => this.props.location.pathname === "/events" ? this.getAllEvents() : this.getLoggedUserEvents(userId)
+
+    filterEvents = () => {
+        return this.props.list === "ownedEvents" ?
+                this.state.events.filter(event => event.owner === this.props.loggedInUser._id) :
+                this.props.list === "participantEvents" ?
+                this.state.events.filter(event => event.participants.includes(this.props.loggedInUser._id) && event.owner !== this.props.loggedInUser._id) :
+                this.state.events
     }
     render() {
+        const events = this.state.events && this.filterEvents()
         return (
             <>
-            {this.props.location.pathname.includes('profile') ? 
-                    <Container as='div'>
-                        <h5>Joined events</h5>
-                        {this.state.participantEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.loggedUserEvents} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event}/>)}
-                        <h5>Your events</h5>
-                        {this.state.ownedEvents.map(event => <EventCard {...this.props} loggedUserEvents={this.state.loggedUserEvents} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event}/>)}
-                    </Container> 
-                    :
-                    null
-            }
-
-            {!this.state.events ? <h1>Loading</h1> : this.props.location.pathname.includes('events') ? 
-                    <Container as='div'>
-                        {this.state.events.map(event => <EventCard {...this.props} loggedUserEvents={this.state.loggedUserEvents} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event}/>)}
-                    </Container> : null
-                }
+                {events &&
+                <Container as='div'>
+                    {events.map(event => <EventCard {...this.props} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event} />)}
+                </Container>}
             </>
         )
     }
