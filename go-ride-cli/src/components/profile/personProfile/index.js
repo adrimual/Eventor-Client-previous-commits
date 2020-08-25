@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Events from '../../event/details/event-details';
+import Events from '../../event/details';
 //Boostrap
 import { Container, Button } from 'react-bootstrap/Container';
 

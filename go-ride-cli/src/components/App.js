@@ -6,7 +6,7 @@ import AuthForm from "./auth-form";
 import NavBar from "./ui/NavBar";
 import ProfilePage from "./profile";
 import PersonEdit from "./profile/personProfile/person-form";
-import EventForm from './event/form/event-edit-form'
+import EventForm from './event/form'
 
 
 

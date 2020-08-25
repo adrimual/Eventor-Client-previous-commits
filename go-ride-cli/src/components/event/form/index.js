@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 
-import UserService from '../../../services/UserService'
+import EventService from '../../../services/EventService'
 
 //Bootstrap
 import {Container, Form, Button} from 'react-bootstrap/'
@@ -17,11 +17,11 @@ class EditEvent extends Component {
             city: undefined,
             previousLoggedUser: undefined
         }
-        this.userService = new UserService()
+        this.eventService = new EventService()
     }
     componentDidMount = () => {
         const id = this.props.match.params.eventId
-        this.userService
+        this.eventService
             .getOneEvent(id)
             .then(response => this.updateEventState(response.data))
             .catch(err => console.log(err))
@@ -33,7 +33,6 @@ class EditEvent extends Component {
             date: data.date || "",
             city: data.city || "",
         })
-
     }
     enterUsernameStateValue = user => this.setState({ username: user.username })
 
@@ -53,14 +52,14 @@ class EditEvent extends Component {
        }
 
        createEvent = () => {
-           this.userService
+           this.eventService
                .createEvent(this.state)
                .then(() => this.props.history.push("/profile"))
                .catch(err => console.log(err))
        }
 
        editEvent = (id, newEvent) => {
-           this.userService
+           this.eventService
                .editEvent(id, newEvent)
                .then(() => this.props.history.push("/profile"))
                .catch(err => console.log(err))
@@ -81,7 +80,7 @@ class EditEvent extends Component {
                             <Form.Group>
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.description} name="description" type="text" />
-                                <Form.Text className="text-muted">No mira than 500 characters</Form.Text>
+                                <Form.Text className="text-muted">No more than 500 characters</Form.Text>
                             </Form.Group>
 
                             <Form.Group>

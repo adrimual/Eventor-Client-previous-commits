@@ -3,15 +3,15 @@ import { Link, Redirect } from 'react-router-dom'
 //Import bootstrap
 import { Card, Button, Col } from 'react-bootstrap'
 
-import UserService from '../../../services/UserService'
+import EventService from '../../../services/EventService'
 class EventCard extends Component {
     constructor (props){
         super (props)
         this.state = {}
-        this.userService = new UserService()
+        this.eventService = new EventService()
     }
     deleteEvent = eventId =>{
-        this.userService
+        this.eventService
             .deleteEvent(eventId)
             .then(() => this.props.updateEvents())
             .catch(err => console.log(err))
