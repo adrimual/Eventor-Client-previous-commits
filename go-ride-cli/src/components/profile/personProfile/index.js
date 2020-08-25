@@ -29,7 +29,7 @@ class Profile extends Component {
                         <Card style={{'background-color': 'blue'}}>
                             <Row><Events loggedInUser={this.props.loggedInUser}/></Row>
                         </Card>
-                        {this.isUserTheProfileOwner && 
+                        {this.isUserTheProfileOwner() && 
                             <>
                                 <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>
                                 <Link to={`/user/${this.props.loggedInUser._id}/event/create`} ><Button variant="dark" type="submit">Create a new event!</Button></Link>
