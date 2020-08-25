@@ -26,7 +26,7 @@ class Calendar extends Component {
             .then(response => this.setState({ events: response.data }))
             .catch(err => console.log(err))
     }
-    handleModal = (status, e) => this.setState({ showModal: status, calendarDate: e.dateStr })
+    handleModal = (status, e) => this.setState({ showModal: status, calendarDate: `${e.dateStr}T00:00` })
 
     handleEventSubmit = () => {
         this.handleModal(false)

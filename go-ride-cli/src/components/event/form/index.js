@@ -30,6 +30,7 @@ class EventForm extends Component {
                 .then(response => this.updateEventState(response.data))
                 .catch(err => console.log(err))
         }
+        this.props.calendarDate && this.setState({ startTime: this.props.calendarDate, endTime: this.props.calendarDate})
     }
     formatDate = date => {
         const newDate = new Date(date);
