@@ -9,8 +9,10 @@ export default class UserService {
             withCredentials: true
         })
     }
-
+    //User
     editUserProfile = (id, updatedUser) => this.service.post(`user/profile/edit/${id}`, updatedUser)
     getUserDetails = id => this.service.get(`user/profile/${id}`)
+    //Events
     createEvent = event => this.service.post(`user/event/create`, event)
+    getPersonEvents = personId => this.service.get(`user/create/event/${personId}`)
 }

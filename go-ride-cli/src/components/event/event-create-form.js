@@ -8,7 +8,7 @@ class EventForm extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            owner: this.props.loggedInUser,
+            owner: this.props.personDetails,
             name: "",
             description: "",
             date: undefined,
