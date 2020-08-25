@@ -35,17 +35,20 @@ class EventCard extends Component {
     joinEvent = (eventId, userId) => {
         this.eventService
             .joinEvent(eventId, userId)
-            .then(()=> this.props.updateEventList())
+            .then(()=> this.redirectOrUpdate())
             .catch(err => console.log(err))
     }
 
     leaveEvent = (eventId, userId) => {
         this.eventService
             .leaveEvent(eventId, userId)
-            .then(()=> this.props.updateEventList())
+            .then(() => this.redirectOrUpdate())
             .catch(err => console.log(err))
     }
-
+    redirectOrUpdate = () => {
+        let path = '/profile/' + this.props.loggedInUser._id
+        return this.props.location.pathname.includes("profile") ? this.props.history.push(path) : this.props.updateEventList()
+    }
     setButtons = () => {
         if (!this.props.loggedInUser) return
         if (this.props.owner == this.props.loggedInUser._id) {
@@ -56,30 +59,32 @@ class EventCard extends Component {
             </>;
         } else if(this.props.loggedUserEvents.map(event => event._id).includes(this.props._id)){
             this.state.buttons = 
-            <Button variant="danger" onClick={() => {this.leaveEvent(this.props._id, this.props.loggedInUser._id) && this.props.updateEventList()}}>Leave Event</Button>
+            <Button variant="danger" onClick={() => {this.leaveEvent(this.props._id, this.props.loggedInUser._id) && this.props.redirectOrUpdate()}}>Leave Event</Button>
         } else {
             this.state.buttons = 
-            <Button variant="primary" onClick={() => {this.joinEvent(this.props._id, this.props.loggedInUser._id) && this.props.updateEventList()}}>Join Event</Button>
+            <Button variant="primary" onClick={() => {this.joinEvent(this.props._id, this.props.loggedInUser._id) && this.props.redirectOrUpdate()}}>Join Event</Button>
         }
     }
     render() {
         this.setButtons()
         return (
-            <Col md={4}>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>{this.props.city}</Card.Title>
-                    <Card.Subtitle>Creator: {this.state.owner}</Card.Subtitle>
-                    <Card.Text>Participants:{this.props.participants.length}</Card.Text>
-                    <Card.Text>City:{this.props.city}</Card.Text>
-                    <Card.Text>Date: {this.props.date}</Card.Text>
-                    <Card.Text>Description: {this.props.description}</Card.Text>
-                    {!this.props.owner ? <h2>Loading</h2> : this.state.buttons}
-
-                </Card.Body>
-            </Card>
-            </Col>
+            <>
+                <Col md={4}>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card.Body>
+                        <Card.Title>{this.props.name}</Card.Title>
+                        <Card.Subtitle>Creator: {this.state.owner}</Card.Subtitle>
+                        <Card.Text>Participants:{this.props.participants.length}</Card.Text>
+                        <Card.Text>City:{this.props.city}</Card.Text>
+                        <Card.Text>Date: {this.props.date}</Card.Text>
+                        <Card.Text>Description: {this.props.description}</Card.Text>
+                        {!this.props.owner ? <h2>Loading</h2> : this.state.buttons}
+                    <Link to={`/events/${this.props._id}`} ><Button variant="primary">See details</Button></Link>
+                    </Card.Body>
+                </Card>
+                </Col>
+            </>
         )
     }
 }
