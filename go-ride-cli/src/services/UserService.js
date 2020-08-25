@@ -14,5 +14,7 @@ export default class UserService {
     getUserDetails = id => this.service.get(`user/profile/${id}`)
     //Events
     createEvent = event => this.service.post(`user/event/create`, event)
-    getPersonEvents = personId => this.service.get(`user/create/event/${personId}`)
+    getPersonEvents = id => this.service.get(`user/event/${id}`)
+    getOneEvent = eventId => this.service.get(`user/event/event/${eventId}`)
+    editEvent = (id, newEvent) => this.service.post(`user/event/`, newEvent)
 }

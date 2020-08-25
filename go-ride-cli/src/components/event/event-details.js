@@ -11,17 +11,13 @@ class EventDetails extends Component {
         }
         this.userService = new UserService()
     }
-
     componentDidMount = () => {
-
-        const id = this.props.personDetails
-
+        const id = this.props.loggedInUser._id
         this.userService
             .getPersonEvents(id)
             .then(response => this.setState({events: response.data}))
             .catch(err => console.log(err))
     }
-
     render () {
         return (
             <>
@@ -31,7 +27,6 @@ class EventDetails extends Component {
                 {this.state.events.map(event => <EventCard key={event._id} {...event}/>)}
             </>
             }
-
             </>
         )
     }

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 //MultiSelector for Motorbike or Car
 import SelectVehicle from '../selectVehicle/index';
 import UserService from '../../../../services/UserService';
@@ -87,6 +86,7 @@ class profilePerson extends Component {
                                 <SelectVehicle onChange={this.handleInputChange}></SelectVehicle>
                             </Form.Group>
                         </Form>
+                         <Button variant="dark" type="submit">Create a new event</Button>
                     </Container>
                 };
             </>                   

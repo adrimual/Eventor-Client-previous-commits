@@ -39,7 +39,7 @@ class App extends Component {
                     <Route path="/signup" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route path="/login" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route exact path="/event/create" render={props => this.state.loggedInUser ? <EventCreateForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
-                    <Route path="/event/edit/:personId" render={props => this.state.loggedInUser ? <EventEditForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
+                    <Route exact path="/event/edit/:eventId" render={props => this.state.loggedInUser ? <EventEditForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
                     <Route path="/profile/edit/:userId" render={props => this.state.loggedInUser ? <PersonEdit setTheUser={this.state.loggedInUsert} {...props} />: <Redirect to='/signup' />}></Route>
                     <Route path="/profile" render={() => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} /> : <Redirect to='/login' />} />
                 </Switch>
