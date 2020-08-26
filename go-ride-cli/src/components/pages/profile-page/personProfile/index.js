@@ -2,19 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import EventList from '../../../pages/events-page/event-list';
 import EventService from '../../../../services/UserService';
+import UiModal from "../../../ui/Modal";
+import EventForm from "../../events-page/event-form";
 //Boostrap
-import { Button, Row} from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import "./profile.css"
 class Profile extends Component {
     constructor (props){
         super (props)
         this.state = {
-            events: undefined
+            events: undefined,
+            showModal:false
         }
         this.eventService = new EventService()
     }
     componentDidMount = () => this.updateEventList()
+
     updateEventList = () => this.getProfileUserEvents(this.props.paramId)
+
+    handleFormModal = status => this.setState({ showModal: status })
+    
+    handleEventSubmit = () => {
+        this.handleFormModal(false)
+        this.updateEventList()
+    }
     getProfileUserEvents = userId => {
         this.eventService.
             getAllFutureUserEvents(userId)
@@ -42,20 +53,23 @@ class Profile extends Component {
                                 {this.isUserTheProfileOwner() &&
                                     <>
                                         <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>
-                                        <Link to={`/user/${this.props.loggedInUser._id}/event/create`} ><Button variant="dark" type="submit">Create a new event</Button></Link>
+                                        <Button variant="dark" type="submit" onClick={()=> this.handleFormModal(true)}>Create a new event</Button>
                                         <Link to={`/profile/${this.props.loggedInUser._id}/calendar`} ><Button variant="dark" type="submit">See your calendar</Button></Link>
                                     </>
                                 }
                             </article>
                             <h3> Joined events </h3>
-                            {this.filterEvents("owner").length > 0 ? <EventList loggedInUser={this.props.loggedInUser} updateEventList={this.updateEventList} {...this.props} events={this.filterEvents("participant")} paramId={this.props.paramId} />
-                                : <p style={{ marginBottom: "100px" }}>You haven't joined any future event. <Link className="color-text" to={`/events`} >Find yours</Link>!</p>
+                            {this.filterEvents("participant").length > 0 ? <EventList loggedInUser={this.props.loggedInUser} updateEventList={this.updateEventList} {...this.props} events={this.filterEvents("participant")} paramId={this.props.paramId} />
+                                : <p style={{ marginBottom: "100px" }}>"You haven't joined any future event" <Link className="color-text" to={`/events`} >Find yours</Link>!</p>
                             }
                             <h3> Created events </h3>    
                             {this.filterEvents("owner").length > 0 ? 
                                 <EventList loggedInUser={this.props.loggedInUser} updateEventList={this.updateEventList} {...this.props} events={this.filterEvents("owner")} paramId={this.props.paramId} /> :
                                 <p>You haven't created any events yet, why don't you <Link className="color-text" to={`/user/${this.props.loggedInUser._id}/event/create`} >try</Link>?</p>
                             }
+                        <UiModal handleModal={this.handleFormModal} show={this.state.showModal} >
+                            <EventForm loggedInUser={this.props.loggedInUser} handleToast={this.props.handleToast} handleEventSubmit={this.handleEventSubmit}/>
+                        </UiModal>
                         </article>
                     </section>
                 }

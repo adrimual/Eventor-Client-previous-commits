@@ -28,7 +28,9 @@ class Calendar extends Component {
             })
         }
     handleEventSubmit = () => {
+        debugger
         this.handleFormModal(false)
+        debugger
         this.updateEvents()
     }
     obtainDateInFormat = date => {

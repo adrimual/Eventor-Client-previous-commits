@@ -25,7 +25,7 @@ class EventForm extends Component {
         this.filesService = new FilesService()
     }
     componentDidMount = () => {
-        const id = this.props.match.params.eventId
+        const id = this.props.eventToEdit;
         if (id) {
             this.eventService
                 .getOneEvent(id)
@@ -76,16 +76,17 @@ class EventForm extends Component {
     }
     handleFormSubmit = event => {
            event.preventDefault()
-           const id = this.props.match.params.eventId
-           this.props.location.pathname.includes("edit") ? this.editEvent(id, this.state) : this.createEvent()
+           const id = this.props.eventToEdit
+           this.props.eventToEdit ? this.editEvent(id, this.state) : this.createEvent()
     }
     setErrorMessage = errorMsg => this.setState({ errorMsg })
     createEvent = () => {
         this.eventService
             .createEvent(this.state, this.props.loggedInUser._id)
             .then(() => {
-                this.props.handleEventSubmit ? this.props.handleEventSubmit() :
-                this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
+                debugger
+                this.props.handleEventSubmit()
+                debugger
             })
             .catch(err => err.response && err.response.status === 400 ? this.setState({ errorMsg: err.response.data.message })
                 : this.props.handleToast(true, err.response.data.message)) 
@@ -93,7 +94,7 @@ class EventForm extends Component {
     editEvent = (id, newEvent) => {
         this.eventService
             .editEvent(id, newEvent, this.props.loggedInUser._id)
-            .then(() => this.props.history.push(`/profile/${this.props.loggedInUser._id}`))  
+            .then(() => this.props.handleEventSubmit())
             .catch(err => err.response && err.response.status === 400 ? this.setState({ errorMsg: err.response.data.message })
                 : this.props.handleToast(true, err.response.data.message))
     }
@@ -104,7 +105,7 @@ class EventForm extends Component {
                    <main className="main-bg">
                         <Container>
                             <Form className="white-form" onSubmit={this.handleFormSubmit}>
-                                {this.props.location.pathname.includes("edit") ? <h1>Edit Event</h1> :<h1>Create Event</h1>}
+                                {this.props.eventToEdit  ? <h1>Edit Event</h1> :<h1>Create Event</h1>}
                                 <Form.Group>
                                     <Form.Label className="color-text-black">Name</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />

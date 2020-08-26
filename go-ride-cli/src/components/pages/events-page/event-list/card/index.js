@@ -4,13 +4,16 @@ import { Link, Redirect } from 'react-router-dom';
 import { Card, Button, Col } from 'react-bootstrap';
 
 import EventService from '../../../../../services/EventService';
+import UiModal from "../../../../ui/Modal"
+import EventForm from "../../event-form"
 class EventCard extends Component {
     constructor (props){
         super (props)
         this.state = {
             owner: undefined,
             ownerId: undefined,
-            buttons: undefined
+            buttons: undefined,
+            showModal: false
         }
         this.eventService = new EventService()
     }
@@ -23,6 +26,14 @@ class EventCard extends Component {
             .catch(err => err.response && err.response.status === 400 ? this.setState({ errorMsg: err.response.data.message })
                 : this.props.handleToast(true, err.response.data.message))
     }
+
+    handleFormModal = status => this.setState({ showModal: status })
+
+    handleEventSubmit = () => {
+        this.handleFormModal(false)
+        this.props.updateEventList()
+    }
+
     isUserTheProfileOwner = () => this.props.paramId ? this.props.loggedInUser._id === this.props.paramId : false
     
     setOwner = eventId => {
@@ -76,7 +87,7 @@ class EventCard extends Component {
                             {this.props.loggedInUser && this.props.loggedInUser._id === this.props.owner &&
                                 <>
                                     <Button variant="danger" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile' />}>Delete</Button>
-                                    <Link to={`/user/${this.props.loggedInUser._id}/event/edit/${this.props._id}`} ><Button variant="primary">Edit</Button></Link>
+                                    <Button variant="primary"  onClick={() => this.handleFormModal(true)}>Edit</Button>
                                 </>
                             }
                             {this.props.loggedInUser && this.props.loggedInUser._id !== this.props.owner && this.props.loggedInUser.personDetails &&
@@ -84,7 +95,9 @@ class EventCard extends Component {
                             }
                             
                                 <Link to={`/user/${this.state.ownerId}/events/${this.props._id}`} ><Button variant="primary">More details</Button></Link>
-                        
+                        <UiModal handleModal={this.handleFormModal} show={this.state.showModal} >
+                            <EventForm eventToEdit={this.props._id} loggedInUser={this.props.loggedInUser} handleToast={this.props.handleToast} handleEventSubmit={this.handleEventSubmit} />
+                        </UiModal>
                         </Card.Body>
                     </Card>
                 </Col>
