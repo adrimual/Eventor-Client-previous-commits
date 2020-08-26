@@ -1,14 +1,13 @@
 .home {
     background: url("./background-1.jpg") no-repeat center center fixed;
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: bottom;
     min-height: 100vh;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 h1 {
+    padding-top: 325px;
     font-family: "Lato", sans-serif;
     font-weight: 700;
     color: rgb(224, 214, 214);
