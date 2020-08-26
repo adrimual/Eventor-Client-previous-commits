@@ -1,18 +1,24 @@
 .home {
     background: url("./background-1.jpg") no-repeat center center fixed;
     background-size: cover;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
+    min-height: 83.8vh;
 }
 .title {
-    padding-top: 145px;
+    margin-top: 260px;
+    text-align: center;
     font-family: "Lato", sans-serif;
     font-weight: 700;
     color: rgb(224, 214, 214);
     font-size: 5em;
-    width: 30%;
+    width: 100%;
+}
+.footer-text {
+    color: #fff;
+    margin-bottom: 0;
+    font-weight: 400;
 }
