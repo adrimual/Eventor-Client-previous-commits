@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthService from "../services/AuthService";
 import { Switch, Route, Redirect } from 'react-router-dom';
-import AuthForm from "./pages/auth-page/auth-form";
+import AuthPage from "./pages/auth-page";
 import NavBar from "./ui/NavBar";
 import ProfilePage from "./pages/profile-page";
 import PersonEdit from "./pages/profile-page/personProfile/person-form";
@@ -38,8 +38,8 @@ class App extends Component {
                 <NavBar loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser} />
                 <Switch>
                     
-                    <Route path="/signup" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
-                    <Route path="/login" render={props => <AuthForm setTheUser={this.setTheUser} {...props} />}></Route>
+                    <Route path="/signup" render={props => <AuthPage setTheUser={this.setTheUser} {...props} />}></Route>
+                    <Route path="/login" render={props => <AuthPage setTheUser={this.setTheUser} {...props} />}></Route>
 
                     <Route exact path="/user/:id/event/create" render={props => this.state.loggedInUser && this.isUserAllowed(this.state.loggedInUser._id, props.match.params.id)? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
                     <Route exact path="/user/:id/event/edit/:eventId" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
