@@ -84,20 +84,20 @@ class EventCard extends Component {
                             <Card.Text>Date: {this.formatDate(this.props.startTime)}</Card.Text>
                             <Card.Text> {this.formatDate(this.props.startTime)} from {this.formatHour(this.props.startTime)} to {this.formatHour(this.props.endTime)}</Card.Text>
                             <Card.Text>Description: {this.props.description}</Card.Text>
-                            {this.props.loggedInUser && this.props.loggedInUser._id === this.props.owner &&
+                            {this.props.loggedInUser && this.props.loggedInUser._id === this.props.owner._id &&
                                 <>
                                     <Button variant="danger" onClick={() => this.deleteEvent(this.props._id) && <Redirect to='/profile' />}>Delete</Button>
                                     <Button variant="primary"  onClick={() => this.handleFormModal(true)}>Edit</Button>
                                 </>
                             }
-                            {this.props.loggedInUser && this.props.loggedInUser._id !== this.props.owner && this.props.loggedInUser.personDetails &&
+                            {this.props.loggedInUser && this.props.loggedInUser._id !== this.props.owner._id && this.props.loggedInUser.personDetails &&
                                 <Button variant={this.isParticipating() ? "danger" : "primary"} onClick={() => { this.isParticipating() ? this.leaveEvent(this.props._id, this.props.loggedInUser._id) : this.joinEvent(this.props._id, this.props.loggedInUser._id) }}>{this.isParticipating() ? "Leave event" : "Join event"} </Button>
                             }
                             
-                                <Link to={`/user/${this.state.ownerId}/events/${this.props._id}`} ><Button variant="primary">More details</Button></Link>
-                        <UiModal handleModal={this.handleFormModal} show={this.state.showModal} >
-                            <EventForm eventToEdit={this.props._id} loggedInUser={this.props.loggedInUser} handleToast={this.props.handleToast} handleEventSubmit={this.handleEventSubmit} />
-                        </UiModal>
+                            <Link to={`/user/${this.state.ownerId}/events/${this.props._id}`} ><Button variant="primary">More details</Button></Link>
+                            <UiModal handleModal={this.handleFormModal} show={this.state.showModal} >
+                                <EventForm eventToEdit={this.props._id} loggedInUser={this.props.loggedInUser} handleToast={this.props.handleToast} handleEventSubmit={this.handleEventSubmit} />
+                            </UiModal>
                         </Card.Body>
                     </Card>
                 </Col>
