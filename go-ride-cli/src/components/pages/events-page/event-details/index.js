@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import EventService from '../../../services/EventService'
 import { Col, Row, Container } from 'react-bootstrap';
+import './event-det.css'
+
 class EventDetails extends Component {
     constructor(props) {
         super(props)
@@ -28,16 +30,31 @@ class EventDetails extends Component {
             <>
                 {!this.state.eventDetails ? <h2>Loading</h2> : 
                     <> 
-                        <Container>    
+                        <Container fluid className = 'main-cont' >
                             <Row>
-                                <Col>
-                                    <h1>{this.state.eventDetails.name}</h1>
-                                    <p>Creator: {this.state.owner}</p>
-                                    <p>Description: {this.state.eventDetails.name}</p>
-                                    <p>Date: {this.state.eventDetails.date}</p>
-                                    <p>City: {this.state.eventDetails.city}</p>
-                                    <p>Number of participants:{this.state.eventDetails.participants.length} </p>
-                                </Col>              
+                                <Col md={{ span: 5, offset: 1 }} className='content'>
+                                    <h1 className='color-text'>{this.state.eventDetails.name}</h1>
+
+                                    <span className="color-text-black">Creator: </span> {this.state.owner}
+                                    <br></br>
+                                    <br></br>
+                                    <span className="color-text-black">Start Time: </span> {this.state.eventDetails.startTime}  |   
+                                    <span className="color-text-black">  End Time: </span> {this.state.eventDetails.endTime}
+                                    <br></br>
+                                    <br></br>
+                                    <span className="color-text-black">Description: </span> {this.state.eventDetails.name}
+                                    <br></br>
+                                    <br></br>
+                                    <span className="color-text-black">City: </span> {this.state.eventDetails.city}
+                                    <br></br>
+                                    <br></br>
+                                    <span className="color-text-black">Participants: </span> {this.state.eventDetails.participants.length}
+                                    <br></br>
+                                    <hr></hr>
+                                </Col>
+                                <Col className='img-event' md={{span: 5, offset: 1}}>
+                                    <img src={this.state.eventDetails.avatar} />
+                                </Col>
                             </Row>
                         </Container>   
                     </>
