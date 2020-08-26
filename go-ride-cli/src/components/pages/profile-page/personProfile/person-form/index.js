@@ -80,7 +80,7 @@ class profilePerson extends Component {
                                 <Form.Text className="text-muted">At least four characters</Form.Text>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Avatar (URL)</Form.Label>
+                                <Form.Label>Avatar</Form.Label>
                                 <Form.Control onChange={this.handleFileUpload}  name="avatar" type="file" />
                             </Form.Group>
                             <Form.Group>

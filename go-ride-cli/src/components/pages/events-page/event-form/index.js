@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import "./form.css"
+
 import EventService from '../../../../services/EventService'
+import FilesService from "../../../../services/FilesService"
 
 //Bootstrap
 import {Container, Form, Button} from 'react-bootstrap/'
@@ -20,6 +22,7 @@ class EventForm extends Component {
             endTime: ""
         }
         this.eventService = new EventService()
+        this.filesService = new FilesService()
     }
     componentDidMount = () => {
         const id = this.props.match.params.eventId
@@ -49,6 +52,17 @@ class EventForm extends Component {
             city: data.city || "",
         })
     }
+    handleFileUpload = e => {
+        const uploadData = new FormData()
+        uploadData.append("avatar", e.target.files[0])
+        this.filesService.handleUpload(uploadData)
+            .then(response => {
+                console.log(response.data.secure_url)
+                this.setState({ avatar: response.data.secure_url })
+            })
+            .catch(err => console.log(err))
+    }
+
     enterUsernameStateValue = user => this.setState({ username: user.username })
 
     handleInputChange = event => event.target.type !== "checkbox" ? this.setState({ [event.target.name]: event.target.value })
@@ -97,6 +111,10 @@ class EventForm extends Component {
                                     <Form.Label className="color-text-black">Description</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.description} name="description" type="textarea" />
                                     <Form.Text className="text-muted">No more than 500 characters</Form.Text>
+                                </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Main image</Form.Label>
+                                    <Form.Control onChange={this.handleFileUpload} name="avatar" type="file" />
                                 </Form.Group>
                                 <div className="small-input-container">
                                     <Form.Group>
