@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-
+import "./form.css"
 import EventService from '../../../../services/EventService'
 
 //Bootstrap
@@ -85,54 +85,38 @@ class EventForm extends Component {
         return (
             <>
                 {this.state.name === undefined ? <h2>Loading</h2> :
-                    <Container as='main'>
-                        <Form onSubmit={this.handleFormSubmit}>
-                            {this.props.location.pathname.includes("edit") ? <h1>Edit Event</h1> :<h1>Create Event</h1>}
-                            <Form.Group>
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Description</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.description} name="description" type="textarea" />
-                                <Form.Text className="text-muted">No more than 500 characters</Form.Text>
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Start time</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} type="datetime-local" name="startTime" value={this.state.startTime} />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>End time</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} type="datetime-local" name="endTime" value={this.state.endTime} min={this.state.startTime} />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>City</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.city} name="city" type="text" />
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label><h2>Type of local</h2></Form.Label>
+                   <main className="main-bg">
+                        <Container>
+                            <Form className="white-form" onSubmit={this.handleFormSubmit}>
+                                {this.props.location.pathname.includes("edit") ? <h1>Edit Event</h1> :<h1>Create Event</h1>}
                                 <Form.Group>
-                                    <label>Restaurant</label>
-                                    <input onChange={this.handleInputChange} checked={this.state.typeOfLocal === "restaurant"} value="restaurant" name="typeOfLocal" type="radio" />
+                                    <Form.Label className="color-text-black">Name</Form.Label>
+                                    <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
                                 </Form.Group>
                                 <Form.Group>
-                                    <Form.Label>Gym</Form.Label>
-                                    <input onChange={this.handleInputChange} checked={this.state.typeOfLocal === "gym"} value="gym" name="typeOfLocal" type="radio" />
+                                    <Form.Label className="color-text-black">Description</Form.Label>
+                                    <Form.Control onChange={this.handleInputChange} value={this.state.description} name="description" type="textarea" />
+                                    <Form.Text className="text-muted">No more than 500 characters</Form.Text>
                                 </Form.Group>
-                                <Form.Group>
-                                    <Form.Label>Hotel</Form.Label>
-                                    <input onChange={this.handleInputChange} checked={this.state.typeOfLocal === "hotel"} value="hotel" name="typeOfLocal" type="radio" />
-                                </Form.Group>
-                                <Form.Group>
-                                    <Form.Label>Other</Form.Label>
-                                    <input onChange={this.handleInputChange} checked={this.state.typeOfLocal === "other"} value="other" name="typeOfLocal" type="radio" />
-                                </Form.Group>
-                            </Form.Group>
-                            {this.state.errorMsg && <p className="errorMsg">{this.state.errorMsg}</p>}
-                            <Button variant="dark" type="submit">Submit</Button>
-                        </Form>
-                    </Container>
+                                <div className="small-input-container">
+                                    <Form.Group>
+                                        < Form.Label className = "color-text-black" > Start time </Form.Label>
+                                        <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="startTime" value={this.state.startTime} />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label className="color-text-black">End time</Form.Label>
+                                        <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="endTime" value={this.state.endTime} min={this.state.startTime} />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        < Form.Label className = "small-input"> City </Form.Label>
+                                        <Form.Control className="small-input" onChange={this.handleInputChange} value={this.state.city} name="city" type="text" />
+                                    </Form.Group>
+                                </div>
+                                {this.state.errorMsg && <p className="errorMsg">{this.state.errorMsg}</p>}
+                                <Button variant="dark" type="submit">Submit</Button>
+                            </Form>
+                        </Container>
+                    </main>
                 }
             </>
         )

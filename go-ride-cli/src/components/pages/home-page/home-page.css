@@ -3,11 +3,13 @@
     background-size: cover;
     min-height: 100vh;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
+    text-align: center;
 }
-h1 {
-    padding-top: 325px;
+.title {
+    padding-top: 145px;
     font-family: "Lato", sans-serif;
     font-weight: 700;
     color: rgb(224, 214, 214);

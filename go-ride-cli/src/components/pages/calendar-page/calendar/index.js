@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
+import "./calendar.css"
 import EventService from "../../../../services/EventService"
 import EventForm from '../../events-page/event-form'
 import EventCard from "../../events-page/event-list/card"

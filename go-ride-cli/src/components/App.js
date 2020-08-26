@@ -12,6 +12,7 @@ import EventsPage from './pages/events-page'
 import EventDetails from './pages/events-page/event-list';
 import CalendarPage from "./pages/calendar-page";
 import HomePage from './pages/home-page';
+import Footer from "./ui/Footer"
 class App extends Component {
     constructor() {
         super()
@@ -54,7 +55,7 @@ class App extends Component {
                     <Route exact path="/profile/:userId" render={props => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} {...props} /> : <Redirect to="/login" />} />
 
                 </Switch>
-
+                <Footer />
             </>
         )
     }

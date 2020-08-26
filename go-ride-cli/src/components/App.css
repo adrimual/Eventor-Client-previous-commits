@@ -12,6 +12,27 @@ body {
     transition: all 0.6s;
     color: #49C5B6;
 }
+
+.btn.btn-white {
+    background-color: transparent;
+    border-color: white;
+    border-radius: 18px / 50%;
+    padding: .5rem 2rem;
+    margin: 5px 10px;
+    font-size: 0.9em;
+    transition: all 0.6s;
+    color: white;
+}
+
+.btn.btn-white:hover {
+    color: #49C5B6;
+    border-color: #49C5B6;
+}
+
+.btn.btn-primary.large {
+    padding: .5rem 2rem;
+}
+
 .btn.btn-grey {
     background-color: transparent;
     border-color: rgb(166, 168, 165);
@@ -40,6 +61,9 @@ body {
     background-color: #ad0d1d;
     color: white;
 }
+.errorMsg {
+    color: #dc3545;
+}
 .btn.btn-primary:hover {
     background-color: #49C5B6;
     color: white;
@@ -51,47 +75,50 @@ body {
         }
     }
 
-    .card {
-        max-width: 95%;
-        text-align: center;
-        align-items: center;
-        word-wrap: break-word;
-        border: none;
-    }
-    .color-text {
-        color: #18998a;
-        font-weight: 400;
-    }
-
-    main {
-        padding-top: 100px;
-        min-height: 100vh
-    }
-
-    .main-bg {
-        background-color: #F4F7F6;
-        display: flex;
-        justify-content: center;
-    }
-
-    .big-title {
-        width: 100%;
-        color: black;
-        text-align: center;
-    }
-
-    .btn.btn-dark {
-        background-color: #000;
-        border-radius: 0;
-        margin: 20px 10px;
-        padding: 15px 35px;
-        font-weight: 100;
-        text-transform: uppercase;
-        font-size: 0.9em;
-        transition: all 0.5s;
-    }
-
-    .btn.btn-dark:hover {
-        background-color: #222;
-        font-weight: bold;
-    }
+.card {
+    max-width: 95%;
+    text-align: center;
+    align-items: center;
+    word-wrap: break-word;
+    border: none;
+}
+.color-text {
+    color: #18998a;
+    font-weight: 400;
+}
+main {
+    padding-top: 100px;
+    min-height: 100vh
+}
+.white-form {
+    padding: 50px 50px;
+    background-color: white;
+    margin-bottom: 100px;
+}
+.main-bg {
+    background-color: #F4F7F6;
+    display: flex;
+    justify-content: center;
+}
+.big-title {
+    width: 100%;
+    color: black;
+    text-align: center;
+}
+.btn.btn-dark {
+    background-color: #000;
+    border-radius: 0;
+    margin: 20px 10px;
+    padding: 15px 35px;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    transition: all 0.5s;
+}
+.btn.btn-dark:hover {
+    background-color: #222;
+     font-weight: bold;
+}
+.form-control {
+    border-radius: 0;
+}
