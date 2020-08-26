@@ -5,7 +5,6 @@
 }
 
 
-#map-container div:first-child {
-    position: relative;
-    height: 60vh;
+.map-container {
+    padding: 0px;
 }
