@@ -71,16 +71,14 @@ class EventForm extends Component {
                .createEvent(this.state)
                 .then(() => {
                     this.props.handleModal ? this.props.handleEventSubmit() :
-                    this.props.history.push('/') //Para arreglar
-                    // this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
+                    this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
                 })
                .catch(err => this.setErrorMessage(err.response.data.message))
        }
        editEvent = (id, newEvent) => {
            this.eventService
-                .editEvent(id, newEvent)
-                .then(response => this.props.history.push(`/`))// Para arreglar
-                 // this.props.history.push(`/profile/${this.props.loggedInUser._id}`) 
+               .editEvent(id, newEvent)
+               .then(() => this.props.history.push(`/profile/${this.props.loggedInUser._id}`))  
                 .catch(err => console.log(err))
        }
     render () {
