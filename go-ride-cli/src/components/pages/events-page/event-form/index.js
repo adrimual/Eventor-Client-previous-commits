@@ -68,7 +68,7 @@ class EventForm extends Component {
     setErrorMessage = errorMsg => this.setState({ errorMsg })
     createEvent = () => {
         this.eventService
-            .createEvent(this.state, this.props.match.params._id)
+            .createEvent(this.state, this.props.loggedInUser._id)
             .then(() => {
                 this.props.handleEventSubmit ? this.props.handleEventSubmit() :
                 this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
@@ -77,7 +77,7 @@ class EventForm extends Component {
     }
     editEvent = (id, newEvent) => {
         this.eventService
-            .editEvent(id, newEvent)
+            .editEvent(id, newEvent, this.props.loggedInUser._id)
             .then(() => this.props.history.push(`/profile/${this.props.loggedInUser._id}`))  
             .catch(err => err.response && this.setErrorMessage(err.response.data.message))
     }
