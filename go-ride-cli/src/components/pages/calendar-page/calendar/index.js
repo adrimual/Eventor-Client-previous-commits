@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 import EventService from "../../../../services/EventService"
-
+import EventForm from '../../events-page/event-form'
 import EventCard from "../../events-page/event-list/card"
 import Modal from "../../../ui/Modal"
 

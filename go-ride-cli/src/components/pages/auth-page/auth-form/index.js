@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AuthService from '../../services/AuthService';
+import AuthService from '../../../../services/AuthService';
 
 //import bootstrap elements
 import Button from 'react-bootstrap/Button';
@@ -51,7 +51,7 @@ class AuthForm extends Component {
                             </Form.Group>
                 
                             {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
-                            <Button variant="dark" type="submit">{isSignup ? "Sign up" : "Log in"}</Button>
+                            <Button variant="dark" type="submit">{this.props.isSignup ? "Sign up" : "Log in"}</Button>
                         </Form>
 
         )

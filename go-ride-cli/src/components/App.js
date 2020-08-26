@@ -7,7 +7,7 @@ import AuthPage from "./pages/auth-page";
 import NavBar from "./ui/NavBar";
 import ProfilePage from "./pages/profile-page";
 import PersonEdit from "./pages/profile-page/personProfile/person-form";
-import EventForm from './pages/event-page/event-form'
+import EventForm from './pages/events-page/event-form'
 import EventsPage from './pages/events-page'
 import EventDetails from './pages/events-page/event-list';
 import CalendarPage from "./pages/calendar-page";
