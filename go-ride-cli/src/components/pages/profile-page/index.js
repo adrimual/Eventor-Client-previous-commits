@@ -12,12 +12,12 @@ class ProfilePage extends Component {
         }
         this.UserService = new UserService()
     }
-    componentDidMount = () => {
-        const id = this.props.match.params.userId
+    componentDidMount = () => this.updateUserDetails(this.props.match.params.userId)
+    updateUserDetails = id => {
         this.UserService
-        .getUserDetails(id)
+            .getUserDetails(id)
             .then((response) => this.setState({ userDetails: response.data }))
-            .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message)) 
     }
     getProfile = () => {
         if (this.state.userDetails) {
