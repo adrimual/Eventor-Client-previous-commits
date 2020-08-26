@@ -101,11 +101,11 @@ body {
     }
 
 .card {
-    max-width: 95%;
     text-align: center;
     align-items: center;
     word-wrap: break-word;
     border: none;
+    height:100%;
 }
 .color-text {
     color: #18998a;
@@ -183,4 +183,11 @@ img {
     color: white;
     padding: 4px 8px 8px;
     text-align: center;
+}
+.row-card-container {
+    margin-top: 1.5rem;
+}
+
+.row-login-container {
+    margin: 0px !important;
 }

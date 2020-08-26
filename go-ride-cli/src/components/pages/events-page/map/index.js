@@ -4,7 +4,7 @@ import './map.css'
 import Button from 'react-bootstrap/Button'
 import { Link, Redirect } from 'react-router-dom'
 
-
+import googleMapStyles from "./maps-style"
 export class MapContainer extends Component {
 
     constructor (props){
@@ -33,13 +33,8 @@ export class MapContainer extends Component {
     }
 
     render() {
-        const style = {
-            position: 'relative',  
-            width: '1080px',
-            height: '460px'
-            }
       return (
-        <Map google={this.props.google} zoom={14} style={style} initialCenter={{lat: 40.416775, lng: -3.703790}}>
+        <Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={{lat: 40.416775, lng: -3.703790}}>
             {this.props.events.map(event => 
                 <Marker onClick={this.onMarkerClick}
                     key={event._id}
@@ -60,7 +55,7 @@ export class MapContainer extends Component {
       );
     }
   }
-
+MapContainer.defaultProps = googleMapStyles
 export default GoogleApiWrapper({
   apiKey: "AIzaSyDY0ca9uUtMtAtYBETgl9AYh-slo_gl9eg"
 })(MapContainer)
