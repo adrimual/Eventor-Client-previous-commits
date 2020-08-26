@@ -22,7 +22,7 @@ class CalendarPage extends Component {
             <>
                 { this.state.events.length > 0 &&
                     <Container as="main">
-                    <Calendar events={this.state.events}/>
+                    <Calendar events={this.state.events} {...this.props}/>
                     </Container>
                 }
             </> 

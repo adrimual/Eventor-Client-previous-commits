@@ -5,12 +5,8 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 //services
-import EventService from "../../../../services/EventService"
-//import bootstrap
-import { Container } from "react-bootstrap";
 
-import EventForm from "../../../event/form";
-import Modal from "../../ui/Modal"
+import Modal from "../../../ui/Modal"
 class Calendar extends Component {
     constructor() {
         super()
@@ -56,7 +52,7 @@ class Calendar extends Component {
                     eventClick={() => alert("touching an event")}
                     headerToolbar={{ start: "dayGridMonth,timeGridWeek" }}
                      />
-                <Modal /> 
+                <Modal handleEventSubmit={this.handleEventSubmit} handleModal={this.handleModal} {...this.props} calendarDate={this.state.calendarDate} show={this.state.showModal} loggedInUser={this.props.loggedInUser}/>  
             </>
         )
     }

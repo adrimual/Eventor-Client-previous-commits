@@ -9,7 +9,7 @@ import PersonEdit from "./pages/profile-page/personProfile/person-form";
 import EventForm from './pages/event-page/event-form'
 import EventsPage from './pages/events-page'
 import EventDetails from './pages/events-page/event-list';
-// import Calendar from "./profile-calendar/calendar";
+import CalendarPage from "./pages/calendar-page";
 
 class App extends Component {
     constructor() {
@@ -47,8 +47,8 @@ class App extends Component {
                     <Route exact path="/user/:userId/events/:eventId" render={props => <EventDetails loggedInUser={this.state.loggedInUser} {...props} />} />
                     
                     <Route path="/profile/edit/:id" render={props => this.isTheUserAllowed (props.match.params.id) ? <PersonEdit setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} {...props} /> : <Redirect to='/login' />}></Route>
-                    <Route path="/profile/:userId/calendar" render={props => <Calendar loggedInUser={this.state.loggedInUser} {...props} /> } />
-                    <Route path="/profile/:userId" render={props => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} {...props} /> : <h1>{this.state.loggedInUser}</h1>} />
+                    <Route path="/profile/:userId/calendar" render={props => <CalendarPage  loggedInUser={this.state.loggedInUser} {...props} /> } />
+                    <Route exact path="/profile/:userId" render={props => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} {...props} /> : <Redirect to="/login" />} />
 
                 </Switch>
 

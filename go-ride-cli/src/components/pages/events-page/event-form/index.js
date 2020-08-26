@@ -70,7 +70,7 @@ class EventForm extends Component {
            this.eventService
                .createEvent(this.state)
                 .then(() => {
-                    this.props.handleModal ? this.props.handleModal() :
+                    this.props.handleModal ? this.props.handleEventSubmit() :
                     this.props.history.push('/') //Para arreglar
                     // this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
                 })
