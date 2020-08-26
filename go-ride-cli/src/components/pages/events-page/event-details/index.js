@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
-import EventService from '../../../services/EventService'
-import { Col, Row, Container } from 'react-bootstrap';
-import './event-det.css'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import EventService from '../../../services/EventService';
+import { Col, Row, Container, Button } from 'react-bootstrap';
+import './event-det.css';
 
 class EventDetails extends Component {
     constructor(props) {
