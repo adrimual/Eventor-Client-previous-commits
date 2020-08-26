@@ -33,12 +33,21 @@ export class MapContainer extends Component {
     }
 
     render() {
+    const {google} = this.props
       return (
         <Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={{lat: 40.416775, lng: -3.703790}}>
             {this.props.events.map(event => 
                 <Marker onClick={this.onMarkerClick}
                     key={event._id}
-                    id={event._id} />
+                    id={event._id}
+                    icon={
+                        {
+                        url: "https://res.cloudinary.com/duimkcb6n/image/upload/v1598481769/pin_s3vnej.png",
+                        anchor: new google.maps.Point(32,32),
+                        scaledSize: new google.maps.Size(32,40)
+                        }
+                    }
+                />
             )}
             <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow} onClose={this.onInfoWindowClose}>
                 {this.state.activeEvent.owner ? 
