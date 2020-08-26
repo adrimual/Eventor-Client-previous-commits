@@ -2,9 +2,10 @@
     height: 600px;
     text-align: center;
     margin-top: 4rem;
+    margin-bottom: 6rem;
 }
 .event-page-container {
-    padding-bottom: 3rem;
+    padding-bottom: 6rem;
 }
 .map-container {
     padding: 0px;
