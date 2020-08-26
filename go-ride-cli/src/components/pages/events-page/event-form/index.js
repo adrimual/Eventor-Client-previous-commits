@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import "./form.css"
 
 import EventService from '../../../../services/EventService'
-import FilesService from "../../../../services/FilesService"
+import FilesService from '../../../../services/FIlesService'
 
 //Bootstrap
 import {Container, Form, Button} from 'react-bootstrap/'

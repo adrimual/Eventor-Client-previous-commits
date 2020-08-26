@@ -48,5 +48,5 @@
 }
 
 .nav {
-    max-height: 87px;
+    min-height: 8.3vh;
 }
