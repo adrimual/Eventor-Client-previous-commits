@@ -32,7 +32,7 @@ class EventPage extends Component {
                 {
                     !this.state.events ? <h1>Loading</h1> :
                         <main className="main-bg"  style={{ height: this.state.height }}>
-                            <Container >
+                            <Container className = 'event-page-container' >
                                 {/* {Falta la searchbar aun}  */}
                                 <div>
                                     <Row className="maps">

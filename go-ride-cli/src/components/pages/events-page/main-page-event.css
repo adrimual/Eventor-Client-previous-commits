@@ -3,8 +3,9 @@
     text-align: center;
     margin-top: 4rem;
 }
-
-
+.event-page-container {
+    padding-bottom: 3rem;
+}
 .map-container {
     padding: 0px;
 }
