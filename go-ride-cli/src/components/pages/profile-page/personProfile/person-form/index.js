@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //MultiSelector for Motorbike or Car
 import SelectVehicle from '../selectVehicle/index';
 import UserService from '../../../../../services/UserService';
-import FilesService from '../../../../../services/FilesService'
+import FilesService from '../../../../../services/FIlesService';
 //import Bootstrap
 import { Container, Form, Button } from 'react-bootstrap';
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PersonProfile from "./personProfile";
 import UserService from '../../../services/UserService';
-
+import "./profile.css"
 //Impor bootstrap
 import Container from 'react-bootstrap/esm/Container';
 class ProfilePage extends Component {
@@ -29,11 +29,13 @@ class ProfilePage extends Component {
         return (
             <>
                 {!this.state.userDetails ? <h1>Loading</h1> :
-                    <Container as ="main">
-                        <h1>Welcome, @{this.state.userDetails.username}</h1> 
-                        <span>{this.state.userDetails.personDetails}</span>
-                        {detailedProfile}
-                    </Container>
+                    <main className="main-bg">
+                        <Container className="profile-container">
+                            <h1 className="big-title">@{this.state.userDetails.username} profile </h1>
+                            <small className="subtitle"> "Rider" </small>
+                            {detailedProfile}
+                        </Container>
+                </main>
                 }
             </>
         )

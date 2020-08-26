@@ -84,7 +84,7 @@ class EventForm extends Component {
     render () {
         return (
             <>
-                {this.state.name == undefined ? <h2>Loading</h2> :
+                {this.state.name === undefined ? <h2>Loading</h2> :
                     <Container as='main'>
                         <Form onSubmit={this.handleFormSubmit}>
                             {this.props.location.pathname.includes("edit") ? <h1>Edit Event</h1> :<h1>Create Event</h1>}

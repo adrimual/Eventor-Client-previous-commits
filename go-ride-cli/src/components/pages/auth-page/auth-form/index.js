@@ -28,7 +28,7 @@ class AuthForm extends Component {
                 //this.props.handleToast(true, 'Sesión inciada')
                 this.props.history.push('/')
             })
-            .catch(error => this.setState({ errorMsg: error.response.data.message })) 
+            // .catch(error => this.setState({ errorMsg: error.response.data.message })) 
     }
     render() {
         return (

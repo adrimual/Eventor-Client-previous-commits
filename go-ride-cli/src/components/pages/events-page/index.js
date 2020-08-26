@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import "./main-page-event.css"
 import EventService from '../../../services/EventService'
 import Container from 'react-bootstrap/esm/Container'
 import EventList from "./event-list/"
@@ -28,11 +28,13 @@ class EventPage extends Component {
         return (
             <>
                 {
-                    !this.state.events ? <h2>Loading</h2> :
-                        <Container as="main">
-                            {/* {to do the searchbar}  */}
-                            <EventList events={this.state.events} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser}/>
-                        </Container>
+                    !this.state.events ? <h1>Loading</h1> :
+                        <main className="main-bg">
+                            <Container as="main" >
+                                {/* {Falta la searchbar aun}  */}
+                                <EventList events={this.state.events} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} />
+                            </Container>
+                        </main>
                 }
             </>
 
