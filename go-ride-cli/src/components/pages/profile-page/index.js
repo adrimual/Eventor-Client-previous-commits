@@ -28,7 +28,7 @@ class ProfilePage extends Component {
         const detailedProfile = this.getProfile()
         return (
             <>
-                {!this.state.userDetails ? <h1>Loading</h1> :
+                {!this.state.userDetails ? <h2>Loading</h2> :
                     <main className="main-bg">
                         <Container className="profile-container">
                             <h1 className="big-title">@{this.state.userDetails.username} profile </h1>
