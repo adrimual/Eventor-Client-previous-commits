@@ -64,23 +64,23 @@ class EventForm extends Component {
            event.preventDefault()
            const id = this.props.match.params.eventId
            this.props.location.pathname.includes("edit") ? this.editEvent(id, this.state) : this.createEvent()
-       }
-       setErrorMessage = errorMsg => this.setState({ errorMsg })
-       createEvent = () => {
-           this.eventService
-               .createEvent(this.state)
-                .then(() => {
-                    this.props.handleEventSubmit ? this.props.handleEventSubmit() :
-                    this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
-                })
-               .catch(err => this.setErrorMessage(err.response.data.message))
-       }
-       editEvent = (id, newEvent) => {
-           this.eventService
-               .editEvent(id, newEvent)
-               .then(() => this.props.history.push(`/profile/${this.props.loggedInUser._id}`))  
-                .catch(err => console.log(err))
-       }
+    }
+    setErrorMessage = errorMsg => this.setState({ errorMsg })
+    createEvent = () => {
+        this.eventService
+            .createEvent(this.state, this.props.match.params._id)
+            .then(() => {
+                this.props.handleEventSubmit ? this.props.handleEventSubmit() :
+                this.props.history.push(`/profile/${this.props.loggedInUser._id}`)
+            })
+            .catch(err => err.response && this.setErrorMessage(err.response.data.message))
+    }
+    editEvent = (id, newEvent) => {
+        this.eventService
+            .editEvent(id, newEvent)
+            .then(() => this.props.history.push(`/profile/${this.props.loggedInUser._id}`))  
+            .catch(err => err.response && this.setErrorMessage(err.response.data.message))
+    }
     render () {
         return (
             <>
