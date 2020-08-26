@@ -11,7 +11,7 @@ import EventForm from './pages/events-page/event-form'
 import EventsPage from './pages/events-page'
 import EventDetails from './pages/events-page/event-list';
 import CalendarPage from "./pages/calendar-page";
-
+import HomePage from './pages/home-page';
 class App extends Component {
     constructor() {
         super()
@@ -41,6 +41,8 @@ class App extends Component {
                     
                     <Route path="/signup" render={props => <AuthPage setTheUser={this.setTheUser} {...props} />}></Route>
                     <Route path="/login" render={props => <AuthPage setTheUser={this.setTheUser} {...props} />}></Route>
+
+                    <Route exact path="/" render={() => <HomePage />}/>
 
                     <Route exact path="/user/:id/event/create" render={props => this.state.loggedInUser && this.isUserAllowed(this.state.loggedInUser._id, props.match.params.id)? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />
                     <Route exact path="/user/:id/event/edit/:eventId" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} /> : <Redirect to='/login' />} />

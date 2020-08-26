@@ -1,0 +1,17 @@
+.home {
+    background: url("./background-1.jpg") no-repeat center center fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    min-height: 100vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+h1 {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 5em;
+    width: 30%;
+}
