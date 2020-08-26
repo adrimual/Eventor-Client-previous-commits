@@ -1,7 +1,6 @@
 import React from 'react'
 import './auth-page.css'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import {Row, Col} from 'react-bootstrap'
 
 import AuthForm from './auth-form'
 

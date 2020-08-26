@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
 import "./form.css"
 
 import EventService from '../../../../services/EventService'
@@ -101,7 +100,7 @@ class EventForm extends Component {
     render () {
         return (
             <>
-                {this.state.name === undefined ? <h2>Loading</h2> :
+                {this.state.name === undefined ? null  :
                    <main className="main-bg">
                             <Form className="white-form" onSubmit={this.handleFormSubmit}>
                                 {this.props.eventToEdit  ? <h1>Edit Event</h1> :<h1>Create Event</h1>}
@@ -120,7 +119,7 @@ class EventForm extends Component {
                                 </Form.Group>
                                 <div className="small-input-container">
                                     <Form.Group>
-                                        < Form.Label className = "color-text-black" > Start time </Form.Label>
+                                        <Form.Label className = "color-text-black" > Start time </Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="startTime" value={this.state.startTime} />
                                     </Form.Group>
                                     <Form.Group>

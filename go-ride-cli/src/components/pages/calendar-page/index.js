@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Container from 'react-bootstrap/Container'
 import Calendar from "./calendar"
 import EventService from "../../../services/EventService"
-
+import SpinnerContainer from "../../ui/Spinner"
 class CalendarPage extends Component {
     constructor (props){
         super (props)
@@ -23,10 +23,10 @@ class CalendarPage extends Component {
     render() {
         return (
             <>
-                { this.state.events.length > 0 &&
+                { this.state.events.length > 0 ?
                     <Container as="main">
                         <Calendar events={this.state.events} handleToast={this.props.handleToast} updateEvents={this.updateEvents} {...this.props}/>
-                    </Container>
+                    </Container> : <SpinnerContainer />
                 }
             </> 
         )

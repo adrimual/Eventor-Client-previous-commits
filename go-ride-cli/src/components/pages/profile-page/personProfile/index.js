@@ -4,6 +4,7 @@ import EventList from '../../../pages/events-page/event-list';
 import EventService from '../../../../services/UserService';
 import UiModal from "../../../ui/Modal";
 import EventForm from "../../events-page/event-form";
+import SpinnerContainer from "../../../ui/Spinner";
 //Boostrap
 import Button from 'react-bootstrap/Button';
 import "./profile.css"
@@ -27,8 +28,8 @@ class Profile extends Component {
         this.updateEventList()
     }
     getProfileUserEvents = userId => {
-        this.eventService.
-            getAllFutureUserEvents(userId)
+        this.eventService
+            .getAllFutureUserEvents(userId)
                 .then(response => this.setState({ events: response.data }))
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
@@ -41,7 +42,7 @@ class Profile extends Component {
     render() {
         return (
             <>
-                {!this.props.loggedInUser ? <h2>Loading</h2> :
+                {!this.props.loggedInUser ? <SpinnerContainer/> :
                     <section className="general-info">
                         <div className="age-genre-cont">
                             <p className="profile-data"><span className="color-text">Age: </span>{this.props.userDetails.personDetails.age || "?"}</p>

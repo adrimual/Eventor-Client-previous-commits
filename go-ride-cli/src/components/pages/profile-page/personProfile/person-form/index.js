@@ -4,7 +4,7 @@ import UserService from '../../../../../services/UserService';
 import FilesService from '../../../../../services/FIlesService';
 //import Bootstrap
 import { Container, Form, Button } from 'react-bootstrap';
-
+import SpinnerContainer from "../../../../ui/Spinner"
 class profilePerson extends Component {
     constructor(props) {
         super(props)
@@ -59,7 +59,7 @@ class profilePerson extends Component {
     render() {
         return (
             <>
-                {!this.props.loggedInUser ? <h2>Loading</h2> :
+                {!this.props.loggedInUser ? <SpinnerContainer/> :
                     <Container as='main'>
                         <Form onSubmit={this.handleFormSubmit}>
                             <Form.Group>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import EventService from '../../../services/EventService';
 import { Col, Row, Container, Button } from 'react-bootstrap';
 import './event-det.css';
-
+import SpinnerContainer from "../../../ui/Spinner"
 class EventDetails extends Component {
     constructor(props) {
         super(props)
@@ -29,7 +29,7 @@ class EventDetails extends Component {
     render () {
         return (
             <>
-                {!this.state.eventDetails ? <h2>Loading</h2> : 
+                {!this.state.eventDetails ? <SpinnerContainer /> : 
                     <> 
                         <Container fluid className = 'main-cont' >
                             <Row>

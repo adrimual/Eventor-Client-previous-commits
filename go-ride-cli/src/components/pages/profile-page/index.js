@@ -4,6 +4,7 @@ import UserService from '../../../services/UserService';
 import "./profile.css"
 //Impor bootstrap
 import Container from 'react-bootstrap/esm/Container';
+import SpinnerContainer from "../../ui/Spinner"
 class ProfilePage extends Component {
     constructor(props) {
         super(props)
@@ -28,15 +29,15 @@ class ProfilePage extends Component {
         const detailedProfile = this.getProfile()
         return (
             <>
-                {!this.state.userDetails ? <h2>Loading</h2> :
+                {!this.state.userDetails ? <SpinnerContainer/> :
                     <main className="main-bg">
                         <Container className="profile-container">
                             <h1 className="big-title">@{this.state.userDetails.username} profile </h1>
-                           <div class="sub-profile-container">
+                           <div className="sub-profile-container">
                                 <small className="subtitle">{this.state.userDetails.personDetails ? "Future-Rider" : "Rider"}</small>
                                 <img className="profile-image" alt={this.state.userDetails.username} src={this.state.userDetails.avatar} />
                             </div>
-                            {detailedProfile}
+                            {this.getProfile()}
                         </Container>
                 </main>
                 }

@@ -187,7 +187,13 @@ img {
 .row-card-container {
     margin-top: 1.5rem;
 }
-
 .row-login-container {
     margin: 0px !important;
+}
+.spinner-container {
+    min-height: 100vh;
+    background-color: #F4F7F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
