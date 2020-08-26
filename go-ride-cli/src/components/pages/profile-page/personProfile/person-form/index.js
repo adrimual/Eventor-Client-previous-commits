@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 //MultiSelector for Motorbike or Car
-import SelectVehicle from '../selectVehicle/index';
 import UserService from '../../../../../services/UserService';
 import FilesService from '../../../../../services/FIlesService';
 //import Bootstrap
@@ -98,9 +97,6 @@ class profilePerson extends Component {
                             </Form.Group>
                             {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
                             <Button variant="dark" type="submit">Submit</Button>
-                            <Form.Group>
-                                <SelectVehicle onChange={this.handleInputChange}></SelectVehicle>
-                            </Form.Group>
                         </Form>
                     </Container>
                 };
