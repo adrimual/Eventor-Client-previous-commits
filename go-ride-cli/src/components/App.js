@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'
 import AuthService from "../services/AuthService";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import AuthPage from "./pages/auth-page";
@@ -47,7 +48,7 @@ class App extends Component {
                     <Route exact path="/user/:userId/events/:eventId" render={props => <EventDetails loggedInUser={this.state.loggedInUser} {...props} />} />
                     
                     <Route path="/profile/edit/:id" render={props => this.isTheUserAllowed (props.match.params.id) ? <PersonEdit setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} {...props} /> : <Redirect to='/login' />}></Route>
-                    <Route path="/profile/:userId/calendar" render={props => <CalendarPage  loggedInUser={this.state.loggedInUser} {...props} /> } />
+                    <Route path="/profile/:userId/calendar" render={props =>this.isTheUserAllowed(props.match.params.userId) ? <CalendarPage  loggedInUser={this.state.loggedInUser} {...props} /> :<Redirect to="/login"/>} />
                     <Route exact path="/profile/:userId" render={props => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} {...props} /> : <Redirect to="/login" />} />
 
                 </Switch>

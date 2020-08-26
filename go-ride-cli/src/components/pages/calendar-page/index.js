@@ -15,15 +15,17 @@ class CalendarPage extends Component {
     updateEvents = () => this.getAllUserEvents(this.props.match.params.userId);
     getAllUserEvents = id => {
         this.eventService.getAllEventsUser(id)
-            .then(response => this.setState({ events: response.data }))
-            .catch(err => console.log(err))
+            .then(response => {
+                this.setState({ events: response.data })
+            })
+        .catch(err=>console.log(err))
     }
     render() {
         return (
             <>
                 { this.state.events.length > 0 &&
                     <Container as="main">
-                    <Calendar events={this.state.events} {...this.props}/>
+                        <Calendar events={this.state.events} {...this.props}/>
                     </Container>
                 }
             </> 
