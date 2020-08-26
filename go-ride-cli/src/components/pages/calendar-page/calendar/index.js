@@ -47,7 +47,7 @@ class Calendar extends Component {
                 this.handleEventDetailModal(true)
                 this.setState({ eventDetail: response.data })
             })
-        .catch(err => console.log(err))
+        .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
         }
     getEventsToRender = () =>         this.props.events.length > 0 && this.props.events.map(event => {
             return { title: event.name, start: this.obtainDateInFormat(event.startTime), end: this.obtainDateInFormat(event.endTime) }})

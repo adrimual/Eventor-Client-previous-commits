@@ -20,7 +20,8 @@ class EventCard extends Component {
         this.eventService
             .deleteEvent(eventId, this.props.loggedInUser._id)
             .then(() => this.props.updateEventList())
-            .catch(err => console.log(err))
+            .catch(err => err.response && err.response.status === 400 ? this.setState({ errorMsg: err.response.data.message })
+                : this.props.handleToast(true, err.response.data.message))
     }
     isUserTheProfileOwner = () => this.props.paramId ? this.props.loggedInUser._id === this.props.paramId : false
     
@@ -28,7 +29,7 @@ class EventCard extends Component {
         this.eventService
             .getEventOwner(eventId)
             .then((response) => this.setState({owner: response.data.owner.username, ownerId: response.data._id}))
-            .catch(err => console.log(err))
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
 
     joinEvent = (eventId, userId) => {
@@ -42,7 +43,7 @@ class EventCard extends Component {
         this.eventService
             .leaveEvent(eventId, userId)
             .then(() => this.props.updateEventList())
-            .catch(err => console.log(err))
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
     formatDate = date => {
         const newDate = new Date(date)

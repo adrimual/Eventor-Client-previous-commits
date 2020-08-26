@@ -18,14 +18,14 @@ class CalendarPage extends Component {
             .then(response => {
                 this.setState({ events: response.data })
             })
-        .catch(err=>console.log(err))
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
     render() {
         return (
             <>
                 { this.state.events.length > 0 &&
                     <Container as="main">
-                        <Calendar events={this.state.events} {...this.props}/>
+                        <Calendar events={this.state.events} handleToast={this.props.handleToast} {...this.props}/>
                     </Container>
                 }
             </> 

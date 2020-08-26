@@ -16,11 +16,12 @@ class EventDetails extends Component {
         this.eventService
             .getOneEvent(eventId)
             .then(response => this.setState({eventDetails: response.data}))
-            .catch(error => console.log(error))
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message)) 
+
         this.eventService
             .getEventOwner(userId)
             .then((response) => this.setState({owner: response.data.owner.username}))
-            .catch(err => console.log(err))
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
     render () {
         return (

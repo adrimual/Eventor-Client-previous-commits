@@ -21,9 +21,9 @@ class Navigation extends Component {
             .logout()
             .then(() => {
                 this.props.setTheUser(false)
-                // this.props.handleToast(true, 'Usuario desconectado')
+                this.props.handleToast(true, 'See you soon!')
             })
-            .catch(err => console.log(err))
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
 
     render() {
