@@ -14,8 +14,8 @@ class UiModal extends Component {
         return (
             <Modal size="lg" show={this.props.show} onHide={() => this.handleModal(false)}>
                 <Modal.Body>
+                    <span className="cross-simbol"onClick={() => this.props.handleModal(false)} >&#10006;</span>
                     {this.props.children}
-                    <Button onClick={() => this.props.handleEventDetailModal(false)}>Close</Button>
                 </Modal.Body>
             </Modal>
         )

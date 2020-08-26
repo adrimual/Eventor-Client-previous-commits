@@ -6,7 +6,7 @@ import EventService from '../../../../services/EventService'
 import FilesService from '../../../../services/FIlesService'
 
 //Bootstrap
-import {Container, Form, Button} from 'react-bootstrap/'
+import {Form, Button} from 'react-bootstrap/'
 
 class EventForm extends Component {
     constructor (props){
@@ -103,7 +103,6 @@ class EventForm extends Component {
             <>
                 {this.state.name === undefined ? <h2>Loading</h2> :
                    <main className="main-bg">
-                        <Container>
                             <Form className="white-form" onSubmit={this.handleFormSubmit}>
                                 {this.props.eventToEdit  ? <h1>Edit Event</h1> :<h1>Create Event</h1>}
                                 <Form.Group>
@@ -136,7 +135,6 @@ class EventForm extends Component {
                                 {this.state.errorMsg && <p className="errorMsg">{this.state.errorMsg}</p>}
                                 <Button variant="dark" type="submit">Submit</Button>
                             </Form>
-                        </Container>
                     </main>
                 }
             </>
