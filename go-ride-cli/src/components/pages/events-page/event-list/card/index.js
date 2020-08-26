@@ -63,7 +63,7 @@ class EventCard extends Component {
             <>
                 <Col md={4}>
                     <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={this.props.avatar}  />
+                        <Card.Img variant="top" src={this.props.avatar} alt={this.props.name}  />
                         <Card.Body>
                             <Card.Title className="color-text">{this.props.name}</Card.Title>
                             <Card.Text><span className="color-text-black">Creator:</span>  {this.state.owner}  |   <span className="color-text-black">Participants:</span> {this.props.participants.length}</Card.Text>
