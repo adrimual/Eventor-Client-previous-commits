@@ -159,7 +159,7 @@ img {
 
 .toast {
     border-radius: 0;
-
+     z-index: 1000;
 }
 
 .mr-auto {
@@ -168,9 +168,11 @@ img {
 
 .toast-header p {
     color: black;
-    font-size: 1.3em
+    font-size: 1.3em;
+    z-index: 1000;
 }
 
 .toast-header {
     border-radius: 0;
+    z-index: 1000;
 }
