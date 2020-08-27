@@ -17,16 +17,21 @@ class Calendar extends Component {
         }
         this.eventService = new EventService()
     }
-    handleFormModal = (status, e) => !this.props.events ? null :
-        e ? this.setState({ showModal: status, calendarDate: `${e.dateStr}T00:00` }) :
-        this.setState({ showModal: status })
-
-        handleEventDetailModal = status => {
-            this.setState({
-                showModal: status,
-                calendarDate: undefined
-            })
+    handleFormModal = (status, e) => {
+        if (this.props.events || this.props.offers) {
+            if (e) {
+                this.setState({ showModal: status, calendarDate: `${e.dateStr}T00:00` })
+            } else {
+                this.setState({ showModal: status })
+            }
         }
+    }
+    handleEventDetailModal = status => {
+        this.setState({
+            showModal: status,
+            calendarDate: undefined
+        })
+    }
     handleEventSubmit = () => {
         this.handleFormModal(false)
         this.updateEvents()
