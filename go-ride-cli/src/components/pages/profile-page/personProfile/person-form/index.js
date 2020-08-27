@@ -4,7 +4,8 @@ import UserService from '../../../../../services/UserService';
 import FilesService from '../../../../../services/FIlesService';
 //import Bootstrap
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import SpinnerContainer from "../../../../ui/Spinner"
+import SpinnerContainer from "../../../../ui/Spinner";
+import '../profile.css';
 class profilePerson extends Component {
     constructor(props) {
         super(props)
@@ -99,8 +100,10 @@ class profilePerson extends Component {
                                         <Form.Control onChange={this.handleInputChange} checked={this.state.genre === "Female"} value="Female" name="genre" type="radio" />
                                     </Form.Group>
                                     {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
-                                    <Button variant="dark" type="submit">Submit</Button>
-                                </Form>
+                                    <div className = "button-center">
+                                        <Button variant="dark" type="submit">Submit</Button>
+                                    </div>
+                            </Form>
                         </Col>
                     </Row>
     
