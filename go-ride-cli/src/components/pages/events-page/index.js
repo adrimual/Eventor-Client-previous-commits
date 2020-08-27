@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import "./main-page-event.css"
 import EventService from '../../../services/EventService'
-import Container from 'react-bootstrap/esm/Container'
+import {Container, Row, Col} from 'react-bootstrap'
 import EventList from "./event-list/"
 import Map from './map';
 import SpinnerContainer from "../../ui/Spinner"

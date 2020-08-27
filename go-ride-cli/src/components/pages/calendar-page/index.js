@@ -1,8 +1,10 @@
-import React, {Component} from 'react'
-import Container from 'react-bootstrap/Container'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import {Container, Col, Row, Button} from 'react-bootstrap'
 import Calendar from "./calendar"
 import EventService from "../../../services/EventService"
 import SpinnerContainer from "../../ui/Spinner"
+import "./calendar-page.css"
 class CalendarPage extends Component {
     constructor (props){
         super (props)
@@ -15,7 +17,12 @@ class CalendarPage extends Component {
         window.scrollTo(0, 0)
         this.updateEvents()
     }
-    updateEvents = () => this.getAllUserEvents(this.props.match.params.userId);
+    updateEvents = () => {
+        if(this.props.match.params.userId ){
+            this.getAllUserEvents(this.props.match.params.userId)
+        }
+    }
+
     getAllUserEvents = id => {
         this.eventService.getAllEventsUser(id)
             .then(response => {
@@ -23,12 +30,19 @@ class CalendarPage extends Component {
             })
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
+
+    joinEvent = (eventId, userId) => {
+        this.eventService
+            .joinEvent(eventId, userId)
+            .then(() => this.updateEvents())
+            .catch(err => err.response && this.props.handleToast(true, err.response.data.message)) 
+    }
     render() {
         return (
             <>
                 { this.state.events.length > 0 ?
-                    <Container as="main">
-                        <Calendar events={this.state.events}loggedInUser={this.props.loggedInUser}  handleToast={this.props.handleToast} updateEvents={this.updateEvents} {...this.props}/>
+                    <Container as = "main" className = "calendar-bg" >
+                        <Calendar events={this.state.events} updateCalendarEvents={this.updateEvents} loggedInUser={this.props.loggedInUser}  handleToast={this.props.handleToast} updateEvents={this.updateEvents} {...this.props}/>
                     </Container> : <SpinnerContainer />
                 }
             </> 

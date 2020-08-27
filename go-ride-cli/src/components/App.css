@@ -252,3 +252,21 @@ img {
 .pointer {
     cursor: pointer
 }
+
+.event-calendar {
+    border: 1px solid black
+}
+
+.events-calendar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 90%;
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid #49C5B6;
+}
+.calendar {
+    margin: 3rem
+}

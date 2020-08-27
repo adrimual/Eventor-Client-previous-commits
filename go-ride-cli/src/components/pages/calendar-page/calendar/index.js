@@ -54,13 +54,14 @@ class Calendar extends Component {
             })
         .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
         }
-    getEventsToRender = () =>         this.props.events.length > 0 && this.props.events.map(event => {
-            return { title: event.name, start: this.obtainDateInFormat(event.startTime), end: this.obtainDateInFormat(event.endTime) }})
+    getEventsToRender = () =>
+        this.props.events.length > 0 && this.props.events.map(event => {
+            return { title: event.name, start: this.obtainDateInFormat(event.startTime), end: this.obtainDateInFormat(event.endTime),backgroundColor: this.getEventColor(event), borderColor: this.getEventColor(event) }})
     render() {
         const formattedInfo = this.getEventsToRender()
         return (
             <>
-                <FullCalendar
+                <FullCalendar className="calendar"
                     plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
                     initialView="dayGridMonth"
                     selectable={true}
@@ -71,9 +72,9 @@ class Calendar extends Component {
                      />
                     <Modal handleModal={this.handleFormModal} handleEventDetailModal={this.handleEventDetailModal} show={this.state.showModal} >
                     {this.state.calendarDate ?
-                        <EventForm calendarDate={this.state.calendarDate} {...this.props} loggedInUser={this.props.loggedInUser} handleEventSubmit={this.handleEventSubmit} /> : 
+                        <EventForm updateCalendarEvents={this.props.updateCalendarEvents} calendarDate={this.state.calendarDate} {...this.props} loggedInUser={this.props.loggedInUser} handleEventSubmit={this.handleEventSubmit} /> : 
                         this.state.eventDetail ? 
-                        <EventCard {...this.state.eventDetail} loggedInUser={this.props.loggedInUser}/> : null}       
+                        <EventCard updateCalendarEvents={this.props.updateCalendarEvents} {...this.state.eventDetail} handleToast={this.props.handleToast} handleModal={this.handleFormModal} loggedInUser={this.props.loggedInUser}/> : null}       
                     </Modal>
             </>
         )

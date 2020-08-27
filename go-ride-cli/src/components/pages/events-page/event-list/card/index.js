@@ -1,5 +1,5 @@
 import  React, {Component } from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 //Import bootstrap
 import { Card, Button } from 'react-bootstrap';
 import './card.css'
@@ -22,7 +22,11 @@ class EventCard extends Component {
     deleteEvent = eventId =>{
         this.eventService
             .deleteEvent(eventId, this.props.loggedInUser._id)
-            .then(() => this.props.updateEventList())
+            .then(() => {
+                this.props.updateEventList && this.props.updateEventList()
+                this.props.updateCalendarEvents && this.props.updateCalendarEvents()
+                this.props.handleModal && this.props.handleModal(false)
+            })
             .catch(err => err.response && err.response.status === 400 ? this.setState({ errorMsg: err.response.data.message })
                 : this.props.handleToast(true, err.response.data.message))
     }
@@ -53,7 +57,11 @@ class EventCard extends Component {
     leaveEvent = (eventId, userId) => {
         this.eventService
             .leaveEvent(eventId, userId)
-            .then(() => this.props.updateEventList())
+            .then(() => {
+                this.props.updateEventList && this.props.updateEventList()
+                this.props.updateCalendarEvents && this.props.updateCalendarEvents()
+                this.props.handleModal && this.props.handleModal(false)
+            })
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
     formatDate = date => {
