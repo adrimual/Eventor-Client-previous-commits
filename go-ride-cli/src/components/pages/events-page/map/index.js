@@ -57,7 +57,7 @@ export class MapContainer extends Component {
                     <span className="color-text-black">Creator:</span>  {this.state.activeEvent.owner.username}  |   <span className="color-text-black">Participants:</span>  {this.state.activeEvent.participants.length}<br></br><br></br>
                     <span className="color-text-black">City:</span>  {this.state.activeEvent.city}  |  <span className="color-text-black">Local:</span>  {this.state.activeEvent.acceptedOffer.local.name}
                     {/* <Link to={`/user/${this.state.activeEvent.owner._id}/events/${this.state.activeEvent._id}`} ><Button variant="primary">More</Button></Link> */}
-                </article> : <p>loading</p>
+                </article> : <p>Loading</p>
                 }
             </InfoWindow>
         </Map>
