@@ -33,7 +33,6 @@ class EventPage extends Component {
         eventsCopy = filters.minParticipants ? eventsCopy.filter(event => event.participants.length >= filters.minParticipants) : eventsCopy
         eventsCopy = filters.maxParticipants ? eventsCopy.filter(event => event.participants.length <= filters.maxParticipants) : eventsCopy
         eventsCopy = filters.owner ? eventsCopy.filter(event => event.owner.username.toLowerCase().includes(filters.owner.toLowerCase())) : eventsCopy
-        eventsCopy = filters.acceptedOffer ? eventsCopy.filter(event => event.acceptedOffer) : eventsCopy
         eventsCopy = filters.minDay && filters.maxDay ? eventsCopy.filter(event =>
             this.obtainDateInFormat(event.startTime) >= this.obtainDateInFormat(filters.minDay) &&
             this.obtainDateInFormat(event.startTime) <= this.obtainDateInFormat(filters.maxDay)
@@ -90,8 +89,8 @@ class EventPage extends Component {
                 {
                     !this.state.filteredEvents ? < SpinnerContainer /> :
                         <main className="main-bg"  style={{ height: this.state.height }}>
+                        <SearchBar filterEvents={this.filterEvents} />
                             <Container className = 'event-page-container' >
-                                <SearchBar filterEvents={this.filterEvents} />
                                 <div>
                                 <EventList events={this.state.events} updateEventList={this.updateEventList} loggedInUser={this.props.loggedInUser} handleToast={this.props.handleToast}/>
                                 </div>
