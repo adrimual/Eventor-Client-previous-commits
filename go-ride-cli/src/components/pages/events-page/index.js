@@ -32,6 +32,7 @@ class EventPage extends Component {
         eventsCopy = filters.name ? eventsCopy.filter(event => event.name.toLowerCase().includes(filters.name.toLowerCase())) : eventsCopy
         eventsCopy = filters.minParticipants ? eventsCopy.filter(event => event.participants.length >= filters.minParticipants) : eventsCopy
         eventsCopy = filters.maxParticipants ? eventsCopy.filter(event => event.participants.length <= filters.maxParticipants) : eventsCopy
+        eventsCopy = filters.owner ? eventsCopy.filter(event => event.owner.username.toLowerCase().includes(filters.owner.toLowerCase())) : eventsCopy
         eventsCopy = filters.acceptedOffer ? eventsCopy.filter(event => event.acceptedOffer) : eventsCopy
         eventsCopy = filters.minDay && filters.maxDay ? eventsCopy.filter(event =>
             this.obtainDateInFormat(event.startTime) >= this.obtainDateInFormat(filters.minDay) &&
@@ -98,7 +99,6 @@ class EventPage extends Component {
                                                 <Map markers={this.state.confirmedEvents}/>
                                             </center>
                                         </Col>
-
                                     </Row>
                                 </div>
                                 <div>

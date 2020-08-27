@@ -75,7 +75,11 @@ class SearchBar extends Component {
                 <Form.Group>
                     <Form.Label className="color-text-black">Name</Form.Label>
                     <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
-                </Form.Group>     
+                </Form.Group>  
+                <Form.Group>
+                    <Form.Label className="color-text-black">Creator</Form.Label>
+                    <Form.Control onChange={this.handleInputChange} value={this.state.owner} name="owner" type="text" />
+                </Form.Group>   
                 <Form.Group>
                     <Form.Label className="color-text-black">Max Participants</Form.Label>
                     <Form.Control onChange={this.handleInputChange} value={this.state.maxParticipants} name="maxParticipants" type="number" />
