@@ -35,7 +35,6 @@ class EventDetails extends Component {
                             <Row>
                                 <Col md={{ span: 5, offset: 1 }} className='content'>
                                     <h1 className='color-text'>{this.state.eventDetails.name}</h1>
-
                                     <span className="color-text-black">Creator: </span> {this.state.owner}
                                     <br></br>
                                     <br></br>
@@ -58,12 +57,15 @@ class EventDetails extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={{ span: 5, offset: 1 }} className='participants'>
-                                    {this.state.eventDetails.participants.map(user => 
-                                    <div>
-                                        <img src={user.avatar}></img>
+                                <Col className='container-participants' md={{ span: 5, offset: 1 }}>
+                                    <h4 className='participants-title'>Participants</h4>
+                                    <div className='participants'>
+                                        {this.state.eventDetails.participants.map(user => 
+                                        <div>
+                                            <Link to= {`/profile/${user._id}`}><img src={user.avatar}></img></Link>
+                                        </div>
+                                        )} 
                                     </div>
-                                    )} 
                                 </Col>
                             </Row>
                         </Container>   

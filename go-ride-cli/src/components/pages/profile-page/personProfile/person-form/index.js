@@ -16,7 +16,7 @@ class profilePerson extends Component {
             genre: undefined,
             age: undefined,
             previousLoggedUser: undefined,
-            avatar: ''
+            avatar: null
         }
         this.userService = new UserService()
         this.filesService = new FilesService()
