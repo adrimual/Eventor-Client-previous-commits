@@ -48,6 +48,7 @@ class App extends Component {
   }
     componentDidUpdate = (prevProps, prevState) => {
         if (this.state.loggedInUser !== prevState.loggedInUser) {
+        this.state.loggedInUser.personDetails &&
         this.EventService.getAllFutureUserEvents(this.state.loggedInUser._id)
             .then(response => this.setState({ loggedInUserEvents: response.data }))
             .catch(err => console.log(err))

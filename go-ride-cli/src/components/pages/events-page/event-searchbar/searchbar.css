@@ -109,3 +109,17 @@ form {
     top: 3.4vh;
     cursor: pointer
 }
+.navbar-filters-dimensions {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+.navbar-filters-dimensions .form-group {
+    margin: 0 auto;
+}
+.active {
+    padding: 1rem;
+}
+.input-limit-width-sm {
+    display: inline-block;
+}

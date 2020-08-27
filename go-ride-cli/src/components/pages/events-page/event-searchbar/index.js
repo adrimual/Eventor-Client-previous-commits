@@ -79,38 +79,43 @@ class SearchBar extends Component {
                     <Form.Control className="main-input" placeholder="Search for an Event" onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
                 </Form.Group> 
                 <p className="show-filter-button" onClick={() => this.setState({ showFilters: !this.state.showFilters })}>Show Filters</p>
-                                {this.state.showFilters &&
+                {this.state.showFilters &&
                     <div className="tab-container">
                     <p onClick={e => this.toggleBooleanInputs(e, "acceptedOffer")} className="show-filter-button tab-button inactive">Accepted Offer</p>
                         <Tabs defaultActiveKey="none" transition={false} id="noanim-tab-example">
-                            <Tab eventKey="when" title="When">
-                                <Form.Group>
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "today" && "active"}`} htmlFor="today">Today</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="today" value="today" checked={this.state.startTime === "today"} name="startTime" type="radio" />
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "tomorrow" && "active"}`} htmlFor="tomorrow">Tomorrow</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="tomorrow" value="tomorrow" checked={this.state.startTime === "tomorrow"} name="startTime" type="radio" />
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "weekend" && "active"}`} htmlFor="weekend">This weekend</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="weekend" value="weekend" checked={this.state.startTime === "weekend"} name="startTime" type="radio" />
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "week" && "active"}`} htmlFor="week">This week</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="week" value="week" checked={this.state.startTime === "week"} name="startTime" type="radio" />
+                        <Tab eventKey="when" title="When">
+                                < div className = "navbar-filters-dimensions" >
+                                    <Form.Group>
+                                        <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "today" && "active"}`} htmlFor="today">Today</Form.Label>
+                                        <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="today" value="today" checked={this.state.startTime === "today"} name="startTime" type="radio" />
+                                        <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "tomorrow" && "active"}`} htmlFor="tomorrow">Tomorrow</Form.Label>
+                                        <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="tomorrow" value="tomorrow" checked={this.state.startTime === "tomorrow"} name="startTime" type="radio" />
+                                        <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "weekend" && "active"}`} htmlFor="weekend">This weekend</Form.Label>
+                                        <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="weekend" value="weekend" checked={this.state.startTime === "weekend"} name="startTime" type="radio" />
+                                        <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "week" && "active"}`} htmlFor="week">This week</Form.Label>
+                                        <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="week" value="week" checked={this.state.startTime === "week"} name="startTime" type="radio" />
                                 </Form.Group>
-                            </Tab>
-                            <Tab eventKey="who" title="Who">
-                                <Form.Group>
+                            </div>
+                        </Tab>
+                        <Tab eventKey="who" title="Who">
+                            <div className="navbar-filters-dimensions">
+                                <Form.Group className="col-md-3 input-limit-width-sm">
                                     <Form.Label className="color-text-black">Creator</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.owner} name="owner" type="text" />
                                 </Form.Group>
-                                <Form.Group>
+                                <Form.Group className="col-md-3 input-limit-width-sm">
                                     <Form.Label className="color-text-black">Max participants</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.maxParticipants} name="maxParticipants" type="number" />
                                 </Form.Group>
-                                <Form.Group>
+                                <Form.Group className="col-md-3 input-limit-width-sm">
                                     <Form.Label className="color-text-black">Min participants</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.minParticipants} name="minParticipants" type="number" />
                                 </Form.Group>
-                            </Tab>
-                            <Tab eventKey="Where" title="Where" >
-                                <Form.Group>
+                            </div>
+                        </Tab>
+                        <Tab eventKey="Where" title="Where" >
+                            < div className = "navbar-filters-dimensions" >
+                                <Form.Group className="col-md-6 input-limit-width-sm">
                                     <h5 className='int-title'>Distance from you</h5>
                                     <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "1" && "active"}`} htmlFor="1">1 km</Form.Label>
                                     <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="1" value="1" checked={this.state.distanceFromLocation === "1"} name="distanceFromLocation" type="radio" />
@@ -121,8 +126,9 @@ class SearchBar extends Component {
                                     <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "20" && "active"}`} htmlFor="20">20 km</Form.Label>
                                     <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="20" value="20" checked={this.state.distanceFromLocation === "20"} name="distanceFromLocation" type="radio" />
                                 </Form.Group>
-                            </Tab>
-                        </Tabs>
+                            </div>
+                        </Tab>
+                    </Tabs>
                     </div>
                 }
             </Form>
