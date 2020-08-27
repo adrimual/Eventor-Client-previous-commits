@@ -60,7 +60,7 @@ class EventPage extends Component {
         return d * 1000 //distance in m!
     }
     render() {
-        this.state.confirmedEvents && console.log(`la distancia entre los puntos es de: `, this.getKilometros(40.1, 3.7, 40.100002, 3.695))
+        // this.state.confirmedEvents && console.log(`la distancia entre los puntos es de: `, this.getKilometros(40.1, 3.7, 40.100002, 3.695))
         return (
             <>
                 {
