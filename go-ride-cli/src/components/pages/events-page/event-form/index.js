@@ -118,16 +118,16 @@ class EventForm extends Component {
                                     <Form.Control onChange={this.handleFileUpload} name="avatar" type="file" />
                                 </Form.Group>
                                 <div className="small-input-container">
-                                    <Form.Group className="col-md-12">
+                                    <Form.Group className="col-md-6">
                                         <Form.Label className = "color-text-black" > Start time </Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="startTime" value={this.state.startTime} />
                                     </Form.Group>
-                                    <Form.Group className="col-md-12">
+                                    <Form.Group className="col-md-6">
                                         <Form.Label className="color-text-black">End time</Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="endTime" value={this.state.endTime} min={this.state.startTime} />
                                     </Form.Group>
-                                    <Form.Group className="col-md-12">
-                                        < Form.Label className = "small-input"> City </Form.Label>
+                                    <Form.Group className="col">
+                                        < Form.Label className="color-text-black"> City </Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} value={this.state.city} name="city" type="text" />
                                     </Form.Group>
                                 </div>

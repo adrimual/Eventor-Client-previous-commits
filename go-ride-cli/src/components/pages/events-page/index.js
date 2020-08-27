@@ -4,7 +4,6 @@ import EventService from '../../../services/EventService'
 import Container from 'react-bootstrap/esm/Container'
 import EventList from "./event-list/"
 import Map from './map';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 import SpinnerContainer from "../../ui/Spinner"
 import "./main-page-event.css"
 import SearchBar from "./event-searchbar"
