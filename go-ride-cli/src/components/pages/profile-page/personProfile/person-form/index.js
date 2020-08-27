@@ -60,8 +60,8 @@ class profilePerson extends Component {
         return (
             <>
                 {!this.props.loggedInUser ? <SpinnerContainer/> :
-                   <Row className='person-form-row'>
-                        <Col  className='person-form-col' md={{span: 6, offset: 3}}>
+                   <Row className='profile-form-row'>
+                        <Col  className='profile-form-col' md={{span: 6, offset: 3}}>
                             <h1 className='color-text'>Edit your information</h1>              
                                 <Form onSubmit={this.handleFormSubmit}>
                                     <Form.Group>
