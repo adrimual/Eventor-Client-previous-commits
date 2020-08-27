@@ -1,12 +1,52 @@
  ul {
+     padding: 0;
+     margin-top: 2.1rem;
      width: 100%;
      display: flex;
      align-items: center;
-     background-color: turquoise;
-     color: black
+     color: black;
  }
 
  li {
      display: flex;
+     color: black;
+    height: 60px;
+    width: 60px;
+    border: 1px solid #F4F7F6
+ }
+ .page-item {
+     text-decoration: none;
      color: black
+ }
+ .inactive:hover {
+     color: grey
+ }
+ .active {
+     background-color: black;
+     color: white
+ }
+ .active a:not([href]) {
+     background-color: inherit;
+     border: none;
+     color: white;
+ }
+ a:not([href]) {
+     color: black;
+     padding: 0rem 1rem
+ }
+ .next-prev {
+     background-color: white;
+     width: 150px;
+ }
+ .paginate li {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font: inherit
+ }
+ .paginate {
+     text-align: center;
+ }
+ .next {
+     border: 1px solid #F4F7F6
  }
