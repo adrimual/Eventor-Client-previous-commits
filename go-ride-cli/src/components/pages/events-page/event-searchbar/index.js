@@ -13,7 +13,7 @@ class SearchBar extends Component {
             maxParticipants: null,
             owner: "",
             startTime: undefined,
-            activeTimeLabel: undefined,
+            activeTimeLabel: null,
             distanceFromLocation: null,
             distanceFromLocation: null,
             showFilters: false
@@ -28,6 +28,7 @@ class SearchBar extends Component {
         e.target.value === "tomorrow" && this.sendOneDayValue(e, 1)
         e.target.value === "weekend" && this.sendWeekendValue(e)
         e.target.value === "week" && this.sendWeekValue(e)
+        e.target.value === "all" && this.sendEmptyValue(e)
         this.setState({activeTimeLabel: e.target.value})
     }
     sendOneDayValue = (e, offset) => {
@@ -36,6 +37,7 @@ class SearchBar extends Component {
         this.setState({ startTime: e.target.value })
         this.props.filterEvents({ ...this.state, minDay: day, maxDay: day })
     }
+    sendEmptyValue = e => this.props.filterEvents({ ...this.state, minDay: null, maxDay: null })
     sendWeekendValue = e => {
         let weekendDays = []
         for (let i = 0; i <= 6; i++) {
@@ -94,21 +96,23 @@ class SearchBar extends Component {
                                         <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="weekend" value="weekend" checked={this.state.startTime === "weekend"} name="startTime" type="radio" />
                                         <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "week" && "active"}`} htmlFor="week">This week</Form.Label>
                                         <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="week" value="week" checked={this.state.startTime === "week"} name="startTime" type="radio" />
+                                        <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "all" && "active"}`} htmlFor="all">All</Form.Label>
+                                        <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="all" value="all" checked={this.state.startTime === "all"} name="startTime" type="radio" />
                                 </Form.Group>
                             </div>
                         </Tab>
                         <Tab eventKey="who" title="Who">
                             <div className="navbar-filters-dimensions">
                                 <Form.Group className="col-md-3 input-limit-width-sm">
-                                    <Form.Label className="color-text-black">Creator</Form.Label>
+                                    <Form.Label className="tabs-main-title">Creator</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.owner} name="owner" type="text" />
                                 </Form.Group>
                                 <Form.Group className="col-md-3 input-limit-width-sm">
-                                    <Form.Label className="color-text-black">Max participants</Form.Label>
+                                    <Form.Label className="tabs-main-title">Max participants</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.maxParticipants} name="maxParticipants" type="number" />
                                 </Form.Group>
                                 <Form.Group className="col-md-3 input-limit-width-sm">
-                                    <Form.Label className="color-text-black">Min participants</Form.Label>
+                                    <Form.Label className="tabs-main-title">Min participants</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.minParticipants} name="minParticipants" type="number" />
                                 </Form.Group>
                             </div>
@@ -116,19 +120,23 @@ class SearchBar extends Component {
                         <Tab eventKey="Where" title="Where" >
                             < div className = "navbar-filters-dimensions" >
                                 <Form.Group className="col-md-6 input-limit-width-sm">
-                                    <h5 className='int-title'>Distance from you</h5>
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "1" && "active"}`} htmlFor="1">1 km</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="1" value="1" checked={this.state.distanceFromLocation === "1"} name="distanceFromLocation" type="radio" />
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "5" && "active"}`} htmlFor="5">5 km</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="5" value="5" checked={this.state.distanceFromLocation === "5"} name="distanceFromLocation" type="radio" />
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "10" && "active"}`} htmlFor="10">10 km</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="10" value="10" checked={this.state.distanceFromLocation === "10"} name="distanceFromLocation" type="radio" />
-                                    <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "20" && "active"}`} htmlFor="20">20 km</Form.Label>
-                                    <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="20" value="20" checked={this.state.distanceFromLocation === "20"} name="distanceFromLocation" type="radio" />
+                                    <Form.Label className="tabs-main-title">Distance from you</Form.Label>
+                                        <Form.Group>
+                                            <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "1" && "active"}`} htmlFor="1">1 km</Form.Label>
+                                            <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="1" value="1" checked={this.state.distanceFromLocation === "1"} name="distanceFromLocation" type="radio" />
+                                            <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "5" && "active"}`} htmlFor="5">5 km</Form.Label>
+                                            <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="5" value="5" checked={this.state.distanceFromLocation === "5"} name="distanceFromLocation" type="radio" />
+                                            <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "10" && "active"}`} htmlFor="10">10 km</Form.Label>
+                                            <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="10" value="10" checked={this.state.distanceFromLocation === "10"} name="distanceFromLocation" type="radio" />
+                                            <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "20" && "active"}`} htmlFor="20">20 km</Form.Label>
+                                        <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="20" value="20" checked={this.state.distanceFromLocation === "20"} name="distanceFromLocation" type="radio" />
+                                         <Form.Label className={`btn btn-black btn-primary ${this.state.distanceFromLocation === "allDistance" && "active"}`} htmlFor="allDistance">All</Form.Label>
+                                        <Form.Control className="hidden-radio" onChange={this.handleInputChange} id="allDistance" value="allDistance" checked={this.state.distanceFromLocation === "allDistance"} name="distanceFromLocation" type="radio" />
+                                        </Form.Group>
                                 </Form.Group>
                             </div>
                         </Tab>
-                    </Tabs>
+                        </Tabs>
                     </div>
                 }
             </Form>

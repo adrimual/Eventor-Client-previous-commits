@@ -77,7 +77,7 @@ class Profile extends Component {
                             <h3> Created events </h3>    
                             {this.filterEvents("owner").length > 0 ? 
                                 <EventList loggedInUser={this.props.loggedInUser} updateEventInfo={this.updateEventInfo} {...this.props} events={this.filterEvents("owner")} owner={this.props.userDetails} paramId={this.props.paramId} /> :
-                                <p>You haven't created any events yet, why don't you <Link className="color-text" to={`/user/${this.props.loggedInUser._id}/event/create`} >try</Link>?</p>
+                                <p>You haven't created any events yet, why don't you <span className="color-text pointer" onClick={() => this.handleFormModal(true)}>try</span>?</p>
                             }
                         <UiModal handleModal={this.handleFormModal} show={this.state.showModal} >
                             <EventForm loggedInUser={this.props.loggedInUser} handleToast={this.props.handleToast} handleEventSubmit={this.handleEventSubmit}/>

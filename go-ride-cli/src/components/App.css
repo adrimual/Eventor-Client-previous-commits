@@ -135,17 +135,14 @@ body {
     border: none;
     height: 100%;
 }
-
 .color-text {
     color: #18998a;
     font-weight: 400;
 }
-
 .white-form {
     padding: 50px 50px;
     background-color: white;
 }
-
 .main-bg {
     background-color: #F4F7F6;
     display: flex;
@@ -153,13 +150,11 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 .big-title {
     width: 100%;
     color: black;
     text-align: center;
 }
-
 .btn.btn-dark {
     background-color: #000;
     border-radius: 0;
@@ -170,47 +165,38 @@ body {
     font-size: 0.9em;
     transition: all 0.5s;
 }
-
 .btn.btn-dark:hover {
     background-color: #222;
     font-weight: bold;
 }
-
 .form-control {
     border-radius: 0;
 }
-
 img {
     max-width: 100%;
 }
-
 .sub-profile-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 .toast {
     border-radius: 0;
     z-index: 1000;
 }
-
 .mr-auto {
     padding-top: 10px;
 }
-
 .toast-header p {
     color: black;
     font-size: 1.3em;
     z-index: 1000;
 }
-
 .toast-header {
     border-radius: 0;
     z-index: 1000;
 }
-
 .cross-simbol {
     border: 1px solid #49C5B6;
     background-color: #49C5B6;
@@ -218,7 +204,6 @@ img {
     padding: 4px 8px 8px;
     text-align: center;
 }
-
 .spinner-container {
     min-height: 100vh;
     background-color: #F4F7F6;
@@ -226,54 +211,44 @@ img {
     justify-content: center;
     align-items: center;
 }
-
 .row-card-container {
     margin-top: 1.5rem;
 }
-
 .row-login-container {
     margin: 0px !important;
 }
-
 .profile-form-row {
     background-color: #F4F7F6;
 }
-
 .profile-form-row h1 {
     text-align: center;
 }
-
 .profile-form-col {
     padding: 4rem;
     margin: 6rem auto;
     background-color: white;
 }
-
 .int-title {
     text-align: center;
     margin-top: 2rem
 }
-
 .submit-btn {
     display: block;
-
 }
-
 .profile-container {
     margin-top: 7rem;
     margin-bottom: 7rem
 }
-
 .sub-profile-container {
     margin-top: 2rem
 }
-
 .event-form-container {
     padding: 10%;
     background-color: white;
-
 }
-
 .event-form-container h1 {
     text-align: center;
+}
+.pointer {
+    cursor: pointer
 }

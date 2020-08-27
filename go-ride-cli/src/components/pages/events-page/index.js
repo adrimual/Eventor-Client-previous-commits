@@ -36,8 +36,7 @@ class EventPage extends Component {
             this.obtainDateInFormat(event.startTime) >= this.obtainDateInFormat(filters.minDay) &&
             this.obtainDateInFormat(event.startTime) <= this.obtainDateInFormat(filters.maxDay)
         ) : eventsCopy
-        eventsCopy = filters.theme.length > 0 ? eventsCopy.filter(event => filters.theme.every(filter => event.theme.includes(filter))) : eventsCopy
-        eventsCopy = filters.distanceFromLocation ? eventsCopy.filter(event => event.acceptedOffer && this.getKilometers(
+        eventsCopy = filters.distanceFromLocation && filters.distanceFromLocation !== "allDistance" ? eventsCopy.filter(event => event.acceptedOffer && this.getKilometers(
             this.state.currentLatLng.lat,
             this.state.currentLatLng.lng,
             event.acceptedOffer.local.location.coordinates.lat,
