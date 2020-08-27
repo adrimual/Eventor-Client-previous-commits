@@ -18,10 +18,12 @@ class EventPage extends Component {
             },
             filteredEvents: undefined
         }
+        this.myRef = React.createRef()
         this.eventService = new EventService()
     }
 
     componentDidMount = () => {
+        window.scrollTo(0, 0)
         this.updateEventList()
         this.getGeoLocation()
     }

@@ -20,7 +20,10 @@ class Profile extends Component {
         this.eventService = new EventService()
         this.UserService = new UserService()
     }
-    componentDidMount = () => this.updateEventList()
+    componentDidMount = () => {
+        window.scrollTo(0, 0)
+        this.updateUserDetails(this.props.match.params.userId)
+    }
 
     updateEventInfo = () => {
         this.getProfileUserEvents(this.props.paramId)
@@ -49,43 +52,28 @@ class Profile extends Component {
             .then(response => this.setState({ owner: response.data }))
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
-    render() {
+        render() {
+        const profile = this.state.userDetails && this.getProfile()
         return (
             <>
-                {!this.props.loggedInUser ? <SpinnerContainer/> :
-                    <section className="general-info">
-                        <div className="age-genre-cont">
-                            <p className="profile-data"><span className="color-text">Age: </span>{this.props.userDetails.personDetails.age || "?"}</p>
-                            <p className="profile-data" ><span className="color-text">Genre: </span>{this.props.userDetails.personDetails.genre || "?"}</p>
-                        </div>
-                        <hr></hr>
-                        <article className="event-section">
-                            <article className="main-button-container">
-                                {this.isUserTheProfileOwner() &&
-                                    <>
-                                        <Link to={`/profile/edit/${this.props.loggedInUser._id}`} ><Button variant="dark" type="submit">Edit</Button></Link>
-                                        <Button variant="dark" type="submit" onClick={()=> this.handleFormModal(true)}>Create a new event</Button>
-                                        <Link to={`/profile/${this.props.loggedInUser._id}/calendar`} ><Button variant="dark" type="submit">See your calendar</Button></Link>
-                                    </>
-                                }
-                            </article>
-                            <h3> Joined events </h3>
-                            {this.filterEvents("participant").length > 0 ?
-                                <EventList loggedInUser={this.props.loggedInUser} updateEventList={this.updateEventInfo} {...this.props} events={this.filterEvents("participant")} paramId={this.props.paramId} /> :
-                                <p style={{ marginBottom: "100px" }}>"You haven't joined any future event" <Link className="color-text" to={`/events`} >Find yours</Link>!</p>
-                            }
-                            <h3> Created events </h3>    
-                            {this.filterEvents("owner").length > 0 ? 
-                                <EventList loggedInUser={this.props.loggedInUser} updateEventInfo={this.updateEventInfo} {...this.props} events={this.filterEvents("owner")} owner={this.props.userDetails} paramId={this.props.paramId} /> :
-                                <p>You haven't created any events yet, why don't you <span className="color-text pointer" onClick={() => this.handleFormModal(true)}>try</span>?</p>
-                            }
-                        <UiModal handleModal={this.handleFormModal} show={this.state.showModal} >
-                            <EventForm loggedInUser={this.props.loggedInUser} handleToast={this.props.handleToast} handleEventSubmit={this.handleEventSubmit}/>
-                        </UiModal>
-                        </article>
-                    </section>
-                }
-            </>
+                {this.state.userDetails && profile ?
+                    <main className="main-bg main-profile">
+                        <Container className="profile-container">
+                            <h1 className="big-title">{this.state.userDetails.username} profile</h1>
+                            <div className="sub-profile-container">
+                                <small className="subtitle">{this.state.userDetails.personDetails ? "Event-lover" : "Event-maker"}</small>
+                                <div className="image-container">
+                                    <img className="profile-image" alt={this.state.userDetails.username} src={this.state.userDetails.avatar} />
+                                </div>
+                            </div>
+
+                            {profile}
+                        </Container>
+
+                    </main>
+                : <SpinnerContainer/>
+            }
+            </>     
         )
     }
 }

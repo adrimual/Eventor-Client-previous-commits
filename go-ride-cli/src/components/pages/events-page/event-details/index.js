@@ -13,16 +13,19 @@ class EventDetails extends Component {
         }
         this.eventService = new EventService()
     }
-    componentDidMount = () => this.updateState(this.props.match.params.eventId, this.props.match.params.userId)
+     componentDidMount = () => {
+         window.scrollTo(0, 0)
+         this.updateEvents()
+     }
 
-    updateState = (eventId, userId) => {
+    updateState = () => {
         this.eventService
-            .getOneEvent(eventId)
+            .getOneEvent(this.props.match.params.eventId)
             .then(response => this.setState({eventDetails: response.data}))
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message)) 
 
         this.eventService
-            .getEventOwner(userId)
+            .getEventOwner(this.props.match.params.userId)
             .then((response) => this.setState({owner: response.data.owner.username}))
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
@@ -53,7 +56,7 @@ class EventDetails extends Component {
                                     <hr></hr>
                                 </Col>
                                 <Col className='img-event' md={{span: 5, offset: 1}}>
-                                    <img src={this.state.eventDetails.avatar} />
+                                    <img src={this.state.eventDetails.avatar} alt={this.state.eventDetails.name}/>
                                 </Col>
                             </Row>
                             <Row>
@@ -61,8 +64,8 @@ class EventDetails extends Component {
                                     <h4 className='participants-title'>Participants</h4>
                                     <div className='participants'>
                                         {this.state.eventDetails.participants.map(user => 
-                                        <div>
-                                            <Link to= {`/profile/${user._id}`}><img src={user.avatar}></img></Link>
+                                        <div key={user._id}>
+                                                <Link to={`/profile/${user._id}`}><img src={user.avatar} alt={user.username}></img></Link>
                                         </div>
                                         )} 
                                     </div>

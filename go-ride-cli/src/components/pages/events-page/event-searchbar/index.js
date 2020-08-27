@@ -77,7 +77,7 @@ class SearchBar extends Component {
         return (
             <Form>
                 <Form.Group className="main-search-bar" >
-                    <span>test</span>
+                <span span role = "img" aria-label = "magnifying glass" > & #128269;</span>
                     <Form.Control className="main-input" placeholder="Search for an Event" onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
                 </Form.Group> 
                 <p className="show-filter-button" onClick={() => this.setState({ showFilters: !this.state.showFilters })}>Show Filters</p>

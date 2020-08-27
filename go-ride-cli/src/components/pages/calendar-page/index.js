@@ -11,7 +11,10 @@ class CalendarPage extends Component {
         }
         this.eventService = new EventService()
     }
-    componentDidMount = () => this.updateEvents()
+    componentDidMount = () => {
+        window.scrollTo(0, 0)
+        this.updateEvents()
+    }
     updateEvents = () => this.getAllUserEvents(this.props.match.params.userId);
     getAllUserEvents = id => {
         this.eventService.getAllEventsUser(id)
