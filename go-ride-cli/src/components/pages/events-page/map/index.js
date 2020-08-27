@@ -31,9 +31,10 @@ export class MapContainer extends Component {
     }
 
     render() {
-    const {google} = this.props
+        const { google } = this.props
+        const centerLocation = this.props.currentLocation.lat ? this.props.currentLocation : {lat: 41.38879, lng: 2.15899}
       return (
-        <Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={{lat: 40.416775, lng: -3.703790}}>
+        <Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={centerLocation}>
             {this.props.markers.map(marker => 
                 <Marker onClick={this.onMarkerClick}
                     key={marker._id}
