@@ -69,7 +69,7 @@ class Calendar extends Component {
                         <EventForm calendarDate={this.state.calendarDate} {...this.props} loggedInUser={this.props.loggedInUser} handleEventSubmit={this.handleEventSubmit} /> : 
                         this.state.eventDetail ? 
                         <EventCard {...this.state.eventDetail} loggedInUser={this.props.loggedInUser}/> : null}       
-                </Modal>
+                    </Modal>
             </>
         )
     }
