@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import AuthService from "../services/AuthService";
 import { Switch, Route, Redirect } from 'react-router-dom';
+import EventService from "../services/EventService"
 import CustomToast from './ui/Toast'
 import AuthPage from "./pages/auth-page";
 import NavBar from "./ui/NavBar";
@@ -22,9 +23,11 @@ class App extends Component {
             toast: {
                 visible: false,
                 text: ''
-            }
+            },
+            loggedInUserEvents: null
         }
-        this.AuthService = new AuthService()
+        this.AuthService = new AuthService();
+        this.EventService = new EventService();
     }
     setTheUser = user => {
         this.setState({ loggedInUser: user }, () => this.state)
@@ -43,6 +46,14 @@ class App extends Component {
         toastCopy = { visible, text }
         this.setState({ toast: toastCopy })
   }
+    componentDidUpdate = (prevProps, prevState) => {
+        if (this.state.loggedInUser !== prevState.loggedInUser) {
+        this.EventService.getAllFutureUserEvents(this.state.loggedInUser._id)
+            .then(response => this.setState({ loggedInUserEvents: response.data }))
+            .catch(err => console.log(err))
+        }
+        this.state.loggedInUserEvents !== prevState.loggedInUserEvents && this.render()
+  }
     render() {
         this.fetchUser()
         return (
@@ -52,9 +63,7 @@ class App extends Component {
                     
                     <Route path="/signup" render={props => <AuthPage setTheUser={this.setTheUser} {...props} handleToast={this.handleToast}/>}></Route>
                     <Route path="/login" render={props => <AuthPage setTheUser={this.setTheUser} {...props} handleToast={this.handleToast}/>}></Route>
-
                     <Route exact path="/" render={() => <HomePage />}/>
-
                     <Route exact path="/user/:id/event/create" render={props => this.state.loggedInUser && this.isUserAllowed(this.state.loggedInUser._id, props.match.params.id)? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} handleToast={this.handleToast}/> : <Redirect to='/login' />} />
                     <Route exact path="/user/:id/event/edit/:eventId" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} handleToast={this.handleToast}/> : <Redirect to='/login' />} />
                     <Route exact path="/events" render={props => <EventsPage loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast} />} />
@@ -65,6 +74,7 @@ class App extends Component {
                     <Route exact path="/profile/:userId" render={props => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast}/> : <Redirect to="/login" />} />
 
                 </Switch>
+                <CustomToast {...this.state.toast} handleToast={this.handleToast} />
                 <Footer />
             </>
         )
