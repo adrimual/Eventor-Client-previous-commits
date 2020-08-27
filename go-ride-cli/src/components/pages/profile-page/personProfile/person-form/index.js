@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import UserService from '../../../../../services/UserService';
 import FilesService from '../../../../../services/FIlesService';
 //import Bootstrap
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import SpinnerContainer from "../../../../ui/Spinner"
 class profilePerson extends Component {
     constructor(props) {

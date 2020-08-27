@@ -4,6 +4,7 @@ import EventService from '../../../services/EventService'
 import Container from 'react-bootstrap/esm/Container'
 import EventList from "./event-list/"
 import Map from './map';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 import SpinnerContainer from "../../ui/Spinner"
 import "./main-page-event.css"
 class EventPage extends Component {
@@ -11,12 +12,19 @@ class EventPage extends Component {
         super(props)
         this.state = {
             events: undefined,
-            confirmedEvents: undefined
+            confirmedEvents: undefined,
+            currentLatLng: {
+                lat: undefined,
+                lng: undefined
+            },
         }
         this.eventService = new EventService()
     }
 
-    componentDidMount = () => this.updateEventList()
+    componentDidMount = () => {
+        this.updateEventList()
+        this.getGeoLocation()
+    }
 
     updateEventList = () => this.getAllFutureEvents()
 
@@ -27,6 +35,19 @@ class EventPage extends Component {
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
 
+    getGeoLocation = () => {
+        navigator.geolocation.getCurrentPosition(
+                position => {
+                    this.setState(prevState => ({
+                        currentLatLng: {
+                            ...prevState.currentLatLng,
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        }
+                    }))
+                }
+            )
+    }
     render() {
         return (
             <>
