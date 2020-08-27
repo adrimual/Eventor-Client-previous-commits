@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import './map.css'
-import Button from 'react-bootstrap/Button'
-import { Link, Redirect } from 'react-router-dom'
-
+import SpinnerContainer from '../../../ui/Spinner'
 import googleMapStyles from "./maps-style"
 export class MapContainer extends Component {
 
@@ -56,7 +54,7 @@ export class MapContainer extends Component {
                     <h4>{this.state.activeEvent.name}</h4>
                     <span className="color-text-black">Creator:</span>  {this.state.activeEvent.owner.username}  |   <span className="color-text-black">Participants:</span>  {this.state.activeEvent.participants.length}<br></br><br></br>
                     <span className="color-text-black">City:</span>  {this.state.activeEvent.city}  |  <span className="color-text-black">Local:</span>  {this.state.activeEvent.acceptedOffer.local.name}
-                </article> : <p>Loading</p>
+                </article> : <SpinnerContainer />
                 }
             </InfoWindow>
         </Map>
@@ -65,6 +63,6 @@ export class MapContainer extends Component {
   }
 MapContainer.defaultProps = googleMapStyles
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyDY0ca9uUtMtAtYBETgl9AYh-slo_gl9eg"
+  apiKey: "AIzaSyD2tftgnTUYdhrwjq72BaT5tM0DiKo7Hn4"
 })(MapContainer)
 

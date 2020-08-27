@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {Form, Button, Tabs, Tab} from 'react-bootstrap'
+import {Form, Tabs, Tab} from 'react-bootstrap'
 
 import "./searchbar.css"
 
