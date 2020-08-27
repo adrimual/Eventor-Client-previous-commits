@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react';
 
-import EventService from '../../../../services/EventService'
-import EventCard from './card'
+import EventService from '../../../../services/EventService';
+import EventCard from './card';
 
-import Row from 'react-bootstrap/esm/Row'
+import { Row, Col } from 'react-bootstrap/';
 
 class  EventList extends Component {
     constructor (props){
@@ -18,7 +18,7 @@ class  EventList extends Component {
 
         return (
             <Row as="section"  className="row-card-container">
-                    {this.props.events.map(event => <EventCard {...this.props} updateEventList={this.props.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event} />)}
+                    {this.props.events.map(event => <Col md={4}><EventCard {...this.props} updateEventList={this.props.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event} /></Col>)}
             </Row>
         )
     }

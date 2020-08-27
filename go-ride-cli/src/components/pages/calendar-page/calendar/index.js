@@ -28,9 +28,7 @@ class Calendar extends Component {
             })
         }
     handleEventSubmit = () => {
-        debugger
         this.handleFormModal(false)
-        debugger
         this.updateEvents()
     }
     obtainDateInFormat = date => {
@@ -70,7 +68,7 @@ class Calendar extends Component {
                     {this.state.calendarDate ?
                         <EventForm calendarDate={this.state.calendarDate} {...this.props} loggedInUser={this.props.loggedInUser} handleEventSubmit={this.handleEventSubmit} /> : 
                         this.state.eventDetail ? 
-                        <EventCard {...this.state.eventDetail} /> : null}       
+                        <EventCard {...this.state.eventDetail} loggedInUser={this.props.loggedInUser}/> : null}       
                 </Modal>
             </>
         )

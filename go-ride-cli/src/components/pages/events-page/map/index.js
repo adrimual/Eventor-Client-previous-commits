@@ -36,15 +36,15 @@ export class MapContainer extends Component {
     const {google} = this.props
       return (
         <Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={{lat: 40.416775, lng: -3.703790}}>
-            {this.props.events.map(event => 
+            {this.props.markers.map(marker => 
                 <Marker onClick={this.onMarkerClick}
-                    key={event._id}
-                    id={event._id}
+                    key={marker._id}
+                    id={marker._id}
                     icon={
                         {
-                        url: "https://res.cloudinary.com/duimkcb6n/image/upload/v1598481769/pin_s3vnej.png",
-                        anchor: new google.maps.Point(32,32),
-                        scaledSize: new google.maps.Size(32,40)
+                            url: "https://res.cloudinary.com/duimkcb6n/image/upload/v1598481769/pin_s3vnej.png",
+                            anchor: new google.maps.Point(32, 32),
+                            scaledSize: new google.maps.Size(40, 46)
                         }
                     }
                 />
@@ -56,7 +56,6 @@ export class MapContainer extends Component {
                     <h4>{this.state.activeEvent.name}</h4>
                     <span className="color-text-black">Creator:</span>  {this.state.activeEvent.owner.username}  |   <span className="color-text-black">Participants:</span>  {this.state.activeEvent.participants.length}<br></br><br></br>
                     <span className="color-text-black">City:</span>  {this.state.activeEvent.city}  |  <span className="color-text-black">Local:</span>  {this.state.activeEvent.acceptedOffer.local.name}
-                    {/* <Link to={`/user/${this.state.activeEvent.owner._id}/events/${this.state.activeEvent._id}`} ><Button variant="primary">More</Button></Link> */}
                 </article> : <p>Loading</p>
                 }
             </InfoWindow>

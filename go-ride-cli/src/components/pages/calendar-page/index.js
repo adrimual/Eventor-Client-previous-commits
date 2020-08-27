@@ -25,7 +25,7 @@ class CalendarPage extends Component {
             <>
                 { this.state.events.length > 0 ?
                     <Container as="main">
-                        <Calendar events={this.state.events} handleToast={this.props.handleToast} updateEvents={this.updateEvents} {...this.props}/>
+                        <Calendar events={this.state.events}loggedInUser={this.props.loggedInUser}  handleToast={this.props.handleToast} updateEvents={this.updateEvents} {...this.props}/>
                     </Container> : <SpinnerContainer />
                 }
             </> 

@@ -12,3 +12,18 @@
 h1 {
     margin-bottom: 25px;
 }
+.image-container {
+    margin-top: 10px;
+    display: inline-block;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+
+}
+
+.image-container img {
+    height: 100%;
+    object-fit: cover
+}

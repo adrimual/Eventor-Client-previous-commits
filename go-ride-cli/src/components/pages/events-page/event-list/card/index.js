@@ -1,7 +1,7 @@
 import  React, {Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 //Import bootstrap
-import { Card, Button, Col } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 import EventService from '../../../../../services/EventService';
 import UiModal from "../../../../ui/Modal"
@@ -73,7 +73,6 @@ class EventCard extends Component {
     render() {
         return (
             <>
-                <Col md={4}>
                     <Card style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={this.props.avatar} alt={this.props.name}  />
                         <Card.Body>
@@ -100,7 +99,6 @@ class EventCard extends Component {
                             </UiModal>
                         </Card.Body>
                     </Card>
-                </Col>
             </>
         )
     }
