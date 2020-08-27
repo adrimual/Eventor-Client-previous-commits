@@ -2,7 +2,7 @@ import  React, {Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 //Import bootstrap
 import { Card, Button } from 'react-bootstrap';
-
+import './card.css'
 import EventService from '../../../../../services/EventService';
 import UiModal from "../../../../ui/Modal"
 import EventForm from "../../event-form"
@@ -74,7 +74,7 @@ class EventCard extends Component {
         return (
             <>
                     <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={this.props.avatar} alt={this.props.name}  />
+                        <Card.Img  className='event-card-img' variant="top" src={this.props.avatar} alt={this.props.name}  />
                         <Card.Body>
                             <Card.Title className="color-text">{this.props.name}</Card.Title>
                             <Card.Text><span className="color-text-black">Creator:</span>  {this.state.owner}  |   <span className="color-text-black">Participants:</span> {this.props.participants.length}</Card.Text>
