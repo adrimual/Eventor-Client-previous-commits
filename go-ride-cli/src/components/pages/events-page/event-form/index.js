@@ -102,37 +102,39 @@ class EventForm extends Component {
             <>
                 {this.state.name === undefined ? null  :
                    <main className="main-bg">
-                            <Form className="event-form-container" onSubmit={this.handleFormSubmit}>
+                            <Form className="event-form-container-new-event" onSubmit={this.handleFormSubmit}>
                                 {this.props.eventToEdit  ? <h1 className='color-text'>Edit Event</h1> :<h1 className='color-text'>Create Event</h1>}
-                                <Form.Group>
+                                <Form.Group className="col-md-12">
                                     <Form.Label className="color-text-black">Name</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
                                 </Form.Group>
-                                <Form.Group>
+                                <Form.Group className="col-md-12">
                                     <Form.Label className="color-text-black">Description</Form.Label>
                                     <Form.Control onChange={this.handleInputChange} value={this.state.description} name="description" type="textarea" />
                                     <Form.Text className="text-muted">No more than 500 characters</Form.Text>
                                 </Form.Group>
-                                <Form.Group>
+                                <Form.Group className="col-md-12">
                                     <Form.Label>Main image</Form.Label>
                                     <Form.Control onChange={this.handleFileUpload} name="avatar" type="file" />
                                 </Form.Group>
                                 <div className="small-input-container">
-                                    <Form.Group>
+                                    <Form.Group className="col-md-12">
                                         <Form.Label className = "color-text-black" > Start time </Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="startTime" value={this.state.startTime} />
                                     </Form.Group>
-                                    <Form.Group>
+                                    <Form.Group className="col-md-12">
                                         <Form.Label className="color-text-black">End time</Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="endTime" value={this.state.endTime} min={this.state.startTime} />
                                     </Form.Group>
-                                    <Form.Group>
+                                    <Form.Group className="col-md-12">
                                         < Form.Label className = "small-input"> City </Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} value={this.state.city} name="city" type="text" />
                                     </Form.Group>
                                 </div>
                                 {this.state.errorMsg && <p className="errorMsg">{this.state.errorMsg}</p>}
-                                <Button variant="dark" type="submit">Submit</Button>
+                                <div className="button-center">
+                                    <Button variant="dark" type="submit">Submit</Button>
+                                </div> 
                             </Form>
                     </main>
                 }

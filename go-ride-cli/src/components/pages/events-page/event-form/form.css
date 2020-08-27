@@ -3,7 +3,9 @@
     justify-content: space-between;
     width: 100%;
 }
-
 .form-group {
     margin-bottom: 2.5rem;
+}
+.button-center  {
+    text-align: center;
 }

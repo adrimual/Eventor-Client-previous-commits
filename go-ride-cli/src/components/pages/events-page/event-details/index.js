@@ -57,6 +57,15 @@ class EventDetails extends Component {
                                     <img src={this.state.eventDetails.avatar} />
                                 </Col>
                             </Row>
+                            <Row>
+                                <Col md={{ span: 5, offset: 1 }} className='participants'>
+                                    {this.state.eventDetails.participants.map(user => 
+                                    <div>
+                                        <img src={user.avatar}></img>
+                                    </div>
+                                    )} 
+                                </Col>
+                            </Row>
                         </Container>   
                     </>
                 }
