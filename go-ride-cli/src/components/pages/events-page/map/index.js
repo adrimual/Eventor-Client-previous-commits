@@ -10,7 +10,8 @@ export class MapContainer extends Component {
         this.state = {
             showingInfoWindow: false,
             activeMarker: {},
-            activeEvent: {}
+            activeEvent: {},
+            defaultLocation: {lat: 41.38879, lng: 2.15899}
         }
     }
 
@@ -32,7 +33,7 @@ export class MapContainer extends Component {
 
     render() {
         const { google } = this.props
-        const centerLocation = this.props.currentLocation.lat ? this.props.currentLocation : {lat: 41.38879, lng: 2.15899}
+        const centerLocation = this.props.currentLocation.lat ? this.props.currentLocation : this.state.defaultLocation
       return (
         <Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={centerLocation}>
             {this.props.markers.map(marker => 
