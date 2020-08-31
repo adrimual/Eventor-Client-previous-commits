@@ -1,4 +1,4 @@
- ul {
+ .paginate-1 {
      padding: 0;
      margin-top: 2.1rem;
      width: 100%;
@@ -7,46 +7,61 @@
      color: black;
  }
 
- li {
+.paginate-1 li {
      display: flex;
      color: black;
     height: 60px;
     width: 60px;
     border: 1px solid #F4F7F6
  }
- .page-item {
+ .page-item-1 {
      text-decoration: none;
-     color: black
+     color: black!important;
  }
  .inactive:hover {
      color: grey
  }
- .active {
+ .paginate1 .active-1 {
      background-color: black;
-     color: white
+     color: black;
  }
- .active a:not([href]) {
+ .active-1 a:not([href]) {
      background-color: inherit;
      border: none;
      color: white;
  }
- a:not([href]) {
+.page-link-1 a {
      color: black;
      padding: 0rem 1rem
  }
- .next-prev {
+ .next-prev-1 {
      background-color: white;
-     width: 150px;
+     width: 150px !important;
+     color: black !important;
  }
- .paginate li {
+ .page-link-1 {
+     background-color: white;
+     color: black
+ }
+.paginate-1 li {
      display: flex;
      align-items: center;
      justify-content: center;
      font: inherit
  }
- .paginate {
+ .paginate-1{
      text-align: center;
  }
- .next {
+ .paginate-1 .next {
      border: 1px solid #F4F7F6
+ }
+
+ .active-1 .page-link-1 {
+     color: white
+ }
+
+ .active-1 {
+     color: white;
+     border: none;
+     background-color: inherit
  }
