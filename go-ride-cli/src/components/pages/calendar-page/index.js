@@ -9,7 +9,7 @@ class CalendarPage extends Component {
     constructor (props){
         super (props)
         this.state = {
-            events: []
+            events: undefined
         }
         this.eventService = new EventService()
     }
@@ -17,6 +17,13 @@ class CalendarPage extends Component {
         window.scrollTo(0, 0)
         this.updateEvents()
     }
+    
+    componentDidUpdate = (prevState) => {
+        if (this.state.events !== prevState.events) {
+            this.render()
+        }
+    }
+
     updateEvents = () => {
         if(this.props.match.params.userId ){
             this.getAllUserEvents(this.props.match.params.userId)
