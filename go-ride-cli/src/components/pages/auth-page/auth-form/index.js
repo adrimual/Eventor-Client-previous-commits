@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import AuthService from '../../../../services/AuthService';
 import '../auth-page.css'
 //import bootstrap elements
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import {Button, Form} from 'react-bootstrap';
+
 
 class AuthForm extends Component {
     constructor(props) {
@@ -24,6 +24,8 @@ class AuthForm extends Component {
         event.preventDefault()
         this.authService[authMethod](this.state)
             .then(response => {
+                const message = this.props.location.pathname === "/signup" && response.data ? `Thanks for joining Go-Ride, ${response.data.username}!` :
+                    `Greetings, ${response.data.username}!`
                 this.props.setTheUser(response.data)
                 response.data && this.props.handleToast(true, message)
                 this.props.history.push('/')
