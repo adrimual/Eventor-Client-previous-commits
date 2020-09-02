@@ -21,7 +21,7 @@ const Navigation = (props) => {
         return (
             <Navbar className='nav' bg="light" variant="light" expand="lg" sticky="top" >
                 <Navbar.Brand>
-                    <Link to="/">Fainder</Link>
+                    <Link to="/">Go-Ride</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

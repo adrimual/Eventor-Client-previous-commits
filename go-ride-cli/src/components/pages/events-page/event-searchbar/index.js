@@ -15,7 +15,6 @@ class SearchBar extends Component {
             startTime: undefined,
             activeTimeLabel: null,
             distanceFromLocation: null,
-            distanceFromLocation: null,
             showFilters: false
         }
     }

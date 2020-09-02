@@ -11,7 +11,6 @@ class profilePerson extends Component {
         super(props)
         this.state = {
             username: "",
-            email: "",
             password: "",
             genre: undefined,
             age: undefined,
@@ -69,14 +68,6 @@ class profilePerson extends Component {
                                     <Form.Group>
                                         <Form.Label>Username</Form.Label>
                                         <Form.Control readOnly={true} onChange={this.handleInputChange} value={this.state.username} name="username" type="text" />
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control onCharge={this.handleInputChange}
-                                            value={this.setState.state.email}
-                                            name="email"
-                                            type="email">
-                                        </Form.Control>
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Label>Password</Form.Label>

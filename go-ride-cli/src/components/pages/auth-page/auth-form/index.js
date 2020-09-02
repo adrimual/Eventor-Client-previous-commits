@@ -10,7 +10,6 @@ class AuthForm extends Component {
         super(props)
         this.state = {
             username: '',
-            email:'',
             password: ''
         }
         this.authService = new AuthService()
@@ -42,11 +41,6 @@ class AuthForm extends Component {
                             <Form.Group>
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control onChange={this.handleInputChange} value={this.state.username} name="username" type="text" />
-                            </Form.Group>
-
-                            <Form.Group>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control onChange={this.handleInputChange} value={this.state.email} name="email" type="email" />
                             </Form.Group>
 
                             <Form.Group>
