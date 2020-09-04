@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
-import EventService from '../../../../services/UserService';
+import EventService from '../../../../services/EventService';
 import UserService from "../../../../services/UserService";
 
 import UiModal from "../../../ui/Modal";
@@ -60,12 +60,9 @@ class Profile extends Component {
                 {!this.state.events ? <SpinnerContainer /> :
                     <section className="general-info">
                         <div className="age-genre-cont">
-                            <p className="profile-data"><span className="color-text">Age: </span>{this.props.userDetails.personDetails.age || "?"}</p>
-                            <p className="profile-data" ><span className="color-text">Genre: </span>{this.props.userDetails.personDetails.genre || "?"}</p>
+                            <p className="profile-data"><span className="color-text">Age: </span>{this.props.userDetails.age || "?"}</p>
+                            <p className="profile-data" ><span className="color-text">Genre: </span>{this.props.userDetails.genre || "?"}</p>
                         </div>
-                        <hr></hr>
-                        <p className="color-text">Interests: </p>
-                        {this.props.userDetails.personDetails.interests.length > 0 ? this.props.userDetails.personDetails.interests.map((hobbie, i) => <h6 className="btn btn-grey" key={i}>{hobbie}</h6>) : "No interests declared"}
                         <hr></hr>
                         <article className="event-section">
                             <article className="main-button-container">
@@ -80,7 +77,7 @@ class Profile extends Component {
                             <h3>Created events</h3>
                             {this.filterEvents("owner").length > 0 ?
                                 <EventList loggedInUser={this.props.loggedInUser} updateEventList={this.updateEventInfo} {...this.props} events={this.filterEvents("owner")} owner={this.props.userDetails} paramId={this.props.paramId} /> :
-                                <p>You haven't created any events yet, why don't you <span className="color-text pointer" onClick={() => this.handleFormModal(true)}>try</span>?</p>
+                                <p>You haven't created any events yet, why don't you <span className="color-text pointer" onClick={() => this.handleFormModal(true)}>start now</span>?</p>
                             }
                             <h3>Joined events</h3>
                             {this.filterEvents("participant").length > 0 ?

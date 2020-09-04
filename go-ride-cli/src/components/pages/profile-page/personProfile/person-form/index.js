@@ -4,8 +4,8 @@ import UserService from '../../../../../services/UserService';
 import FilesService from '../../../../../services/FIlesService';
 //import Bootstrap
 import { Form, Button, Row, Col } from 'react-bootstrap';
-import SpinnerContainer from "../../../../ui/Spinner";
 import '../profile.css';
+
 class profilePerson extends Component {
     constructor(props) {
         super(props)
@@ -15,23 +15,30 @@ class profilePerson extends Component {
             genre: undefined,
             age: undefined,
             previousLoggedUser: undefined,
-            avatar: null
+            avatar: ""
         }
         this.userService = new UserService()
         this.filesService = new FilesService()
     }
     componentDidMount = () => {
         this.enterUsernameStateValue(this.props.loggedInUser)
-        const id = this.props.loggedInUser._id;
+        const id = this.props.loggedInUser._id
         this.userService
             .getUserDetails(id)
-            .then((res) => this.setState({ age: res.data.personDetails.age, genre: res.data.personDetails.genre }))
+            .then((response) => this.setState({age: response.data.age, genre: response.data.genre }))
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
     enterUsernameStateValue = user => this.setState({username: user.username})    
 
     handleInputChange = event => {
-        const { name, value } = event.target;
+        let { name, value, type, id, checked } = event.target;
+        console.log("llega", event.target)
+        if (type === "radio" && id === "male" && checked) {
+            value = "Male"
+        }
+        if (type === "radio" && id === "female" && checked) {
+            value = "Female";
+        }
         this.setState({[name]:value})
     }
     handleFormSubmit = event => {
@@ -53,14 +60,13 @@ class profilePerson extends Component {
 
         this.filesService.handleUpload(uploadData)
             .then(response => {
-                this.setState({ avatar: response.data.secure_url })
+                this.setState({ avatar: response.secure_url })
             })
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
     render() {
         return (
             <>
-                {!this.props.loggedInUser ? <SpinnerContainer/> :
                    <Row className='profile-form-row'>
                         <Col  className='profile-form-col' md={{span: 6, offset: 3}}>
                             <h1 className='color-text'>Edit your information</h1>              
@@ -82,23 +88,23 @@ class profilePerson extends Component {
                                         <Form.Label>Age</Form.Label>
                                         <Form.Control onChange={this.handleInputChange} value={this.state.age} name="age" type="number" />
                                     </Form.Group>
-                                    <Form.Group>
-                                        <Form.label>Male</Form.label>
-                                        <Form.Control onChange={this.handleInputChange} checked={this.state.genre === "Male"} value="Male" name="genre" type="radio" />
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Female</Form.Label>
-                                        <Form.Control onChange={this.handleInputChange} checked={this.state.genre === "Female"} value="Female" name="genre" type="radio" />
-                                    </Form.Group>
+                                    <div className= "check">
+                                        <div>
+                                            <label>Male</label>
+                                            <input id="male" className="genre-radio" onChange={this.handleInputChange} /*checked={this.state.genre === "Male"}*/ value={this.state.genre} name="genre" type="radio" />
+                                        </div>
+                                        <div>
+                                            <label>Female</label>
+                                            <input id="female" className="genre-radio" onChange={this.handleInputChange} /*checked={this.state.genre === "Female"}*/ value={this.state.genre} name="genre" type="radio" />
+                                        </div>
+                                    </div>
                                     {this.state.errorMsg && <p>{this.state.errorMsg}</p>}
                                     <div className = "button-center">
-                                        <Button variant="dark" type="submit">Submit</Button>
+                                        <Button className ="genre-radio" variant="dark" type="submit">Submit</Button>
                                     </div>
                             </Form>
                         </Col>
                     </Row>
-    
-                };
             </>                   
         );
     };

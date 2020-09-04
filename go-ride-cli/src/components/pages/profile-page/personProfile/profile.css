@@ -19,3 +19,10 @@
 .main-button-container {
     margin: 70px 0;
 }
+.check {
+    display: flex;
+    justify-content: space-around;
+}
+.genre-radio {
+    margin-left: 1rem
+}

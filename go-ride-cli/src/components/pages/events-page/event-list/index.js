@@ -22,6 +22,8 @@ class  EventList extends Component {
           this.setEvents()
       }
 
+    componentDidUpdate = prevProps => this.props.events !== prevProps.events && this.setEvents()
+    
     setEvents = () => {
         this.setState({pageCount: Math.ceil(this.props.events.length/this.state.perPage)}, ()=>this.setElementsForCurrentPage())
     }
@@ -33,7 +35,6 @@ class  EventList extends Component {
             )
         this.setState({elements: elements})
     }
-    componentDidUpdate = prevProps => this.props.events !== prevProps.events && this.setEvents()
     handlePageClick = events => {
         const selectedPage = events.selected;
         const offset = selectedPage * this.state.perPage;

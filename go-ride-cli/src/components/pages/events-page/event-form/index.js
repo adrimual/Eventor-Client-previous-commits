@@ -130,11 +130,11 @@ class EventForm extends Component {
                                         <Form.Label className="color-text-black">End time</Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="endTime" value={this.state.endTime} min={this.state.startTime} />
                                     </Form.Group>
+                                </div>
                                     <Form.Group className="col">
                                         < Form.Label className="color-text-black"> City </Form.Label>
                                         <Form.Control className="small-input" onChange={this.handleInputChange} value={this.state.city} name="city" type="text" />
                                     </Form.Group>
-                                </div>
                                 {this.state.errorMsg && <p className="errorMsg">{this.state.errorMsg}</p>}
                                 <div className="button-center">
                                     <Button variant="dark" type="submit">Submit</Button>

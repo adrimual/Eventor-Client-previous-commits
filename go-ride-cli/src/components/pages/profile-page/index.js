@@ -37,7 +37,7 @@ class ProfilePage extends Component {
                         <Container className="profile-container">
                             <h1 className="big-title">@{this.state.userDetails.username} profile </h1>
                            <div className="sub-profile-container">
-                                <small className="subtitle">{this.state.userDetails.personDetails ? "Future-Rider" : "Rider"}</small>
+                                <small className="subtitle"> "Rider" </small>
                                 <div className="image-container">
                                     <img className="profile-image" alt={this.state.userDetails.username} src={this.state.userDetails.avatar} />
                                 </div>

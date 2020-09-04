@@ -2,19 +2,24 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import AuthService from "../services/AuthService";
-import { Switch, Route, Redirect } from 'react-router-dom';
 import EventService from "../services/EventService"
+
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 import CustomToast from './ui/Toast'
-import AuthPage from "./pages/auth-page";
+import Footer from "./ui/Footer"
 import NavBar from "./ui/NavBar";
+
+import AuthPage from "./pages/auth-page";
 import ProfilePage from "./pages/profile-page";
-import PersonEdit from "./pages/profile-page/personProfile/person-form";
-import EventForm from './pages/events-page/event-form'
 import EventsPage from './pages/events-page'
-import EventDetails from './pages/events-page/event-list';
 import CalendarPage from "./pages/calendar-page";
 import HomePage from './pages/home-page';
-import Footer from "./ui/Footer"
+
+import EventDetails from './pages/events-page/event-list';
+
+import PersonForm from "./pages/profile-page/personProfile/person-form";
+import EventForm from './pages/events-page/event-form'
 class App extends Component {
     constructor() {
         super()
@@ -48,7 +53,7 @@ class App extends Component {
   }
     componentDidUpdate = (prevProps, prevState) => {
         if (this.state.loggedInUser !== prevState.loggedInUser) {
-        this.state.loggedInUser.personDetails &&
+        this.state.loggedInUser &&
         this.EventService.getAllFutureUserEvents(this.state.loggedInUser._id)
             .then(response => this.setState({ loggedInUserEvents: response.data }))
             .catch(err => console.log(err))
@@ -65,17 +70,18 @@ class App extends Component {
                     <Route path="/signup" render={props => <AuthPage setTheUser={this.setTheUser} {...props} handleToast={this.handleToast}/>}></Route>
                     <Route path="/login" render={props => <AuthPage setTheUser={this.setTheUser} {...props} handleToast={this.handleToast}/>}></Route>
                     <Route exact path="/" render={() => <HomePage />}/>
-                    <Route exact path="/user/:id/event/create" render={props => this.state.loggedInUser && this.isUserAllowed(this.state.loggedInUser._id, props.match.params.id)? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} handleToast={this.handleToast}/> : <Redirect to='/login' />} />
-                    <Route exact path="/user/:id/event/edit/:eventId" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser.personDetails} handleToast={this.handleToast}/> : <Redirect to='/login' />} />
-                    <Route exact path="/events" render={props => <EventsPage loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast} />} />
+                    <Route exact path="/user/:id/event/create" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser} handleToast={this.handleToast}/> : <Redirect to='/login' />} />
+                    <Route exact path="/user/:id/event/edit/:eventId" render={props => this.state.loggedInUser ? <EventForm loggedInUser={this.state.loggedInUser} {...props} personDetails={this.state.loggedInUser} handleToast={this.handleToast}/> : <Redirect to='/login' />} />
+                    <Route exact path="/events" render={props => <EventsPage loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast}/>} />
                     <Route exact path="/user/:userId/events/:eventId" render={props => <EventDetails loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast}/>} />
                     
-                    <Route path="/profile/edit/:id" render={props => this.isTheUserAllowed (props.match.params.id) ? <PersonEdit setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast}/> : <Redirect to='/login' />}></Route>
+                    <Route path="/profile/edit/:id" render={props => this.isTheUserAllowed (props.match.params.id) ? <PersonForm setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast}/> : <Redirect to='/login' />}></Route>
                     <Route path="/profile/:userId/calendar" render={props =>this.isTheUserAllowed(props.match.params.userId) ? <CalendarPage  loggedInUser={this.state.loggedInUser} {...props}handleToast={this.handleToast} /> :<Redirect to="/login"/>} />
                     <Route exact path="/profile/:userId" render={props => this.state.loggedInUser ? <ProfilePage loggedInUser={this.state.loggedInUser} {...props} handleToast={this.handleToast}/> : <Redirect to="/login" />} />
 
                 </Switch>
                 <CustomToast {...this.state.toast} handleToast={this.handleToast} />
+                {this.state.loggedInUser && this.state.loggedInUser && this.state.loggedInUserEvents}
                 <Footer />
             </>
         )
