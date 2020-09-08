@@ -79,6 +79,7 @@ class EventCard extends Component {
     }
     isParticipating = () => this.props.loggedInUser && this.props.participants.includes(this.props.loggedInUser._id)
     render() {
+        console.log('props', this.props)
         const ownerId = this.props.owner && this.props.owner._id ? this.props.owner._id : this.props.owner
         return (
             <>
@@ -87,22 +88,19 @@ class EventCard extends Component {
                         <Card.Body>
                             <Card.Title className="color-text">{this.props.name}</Card.Title>
                             <Card.Text><span className="color-text-black">Creator:</span>  {this.state.owner}  |   <span className="color-text-black">Participants:</span> {this.props.participants.length}</Card.Text>
-                            <Card.Text>Participants: <span className="color-text"> {this.props.participants.length}</span></Card.Text>
                             <Card.Text><span className="color-text-black">City:</span> {this.props.city} </Card.Text>
-                            <Card.Text>Date: {this.formatDate(this.props.startTime)}</Card.Text>
                             <Card.Text> {this.formatDate(this.props.startTime)} from {this.formatHour(this.props.startTime)} to {this.formatHour(this.props.endTime)}</Card.Text>
-                            <Card.Text>Description: {this.props.description}</Card.Text>
                             {this.props.loggedInUser && this.props.loggedInUser._id === ownerId &&
                                 <>
                                     <Button variant="danger" onClick={() => this.deleteEvent(this.props._id)}>Delete</Button>
                                     <Button variant="primary"  onClick={() => this.handleFormModal(true)}>Edit</Button>
                                 </>
                             }
-                            {this.props.loggedInUser && this.props.loggedInUser._id !== ownerId &&
-                                <Button variant={this.isParticipating() ? "danger" : "primary"} onClick={() => { this.isParticipating() ? this.leaveEvent(this.props._id, this.props.loggedInUser._id) : this.joinEvent(this.props._id, this.props.loggedInUser._id) }}>{this.isParticipating() ? "Leave event" : "Join event"} </Button>
+                            {this.props.loggedInUser && this.props.loggedInUser._id !== ownerId && this.props.loggedInUser.personDetails &&
+                            <Button variant={this.isParticipating() ? "danger" : "primary"} onClick={() => { this.isParticipating() ? this.leaveEvent(this.props._id, this.props.loggedInUser._id) : this.joinEvent(this.props._id, this.props.loggedInUser._id) }}>{this.isParticipating() ? "Leave event" : "Join event"} </Button>
                             }
-                            
                             <Link to={`/user/${this.state.ownerId}/events/${this.props._id}`} ><Button variant="primary">More details</Button></Link>
+                        
                             <UiModal handleModal={this.handleFormModal} show={this.state.showModal} >
                             if (this.props.loggedInUser){
                                 <EventForm eventToEdit={this.props._id} loggedInUser={this.props.loggedInUser}

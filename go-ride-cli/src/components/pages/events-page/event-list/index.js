@@ -11,7 +11,7 @@ class  EventList extends Component {
         super (props)
         this.state = {
             offset: 0,
-            elements: undefined,
+            elements: [],
             perPage: 9,
             currentPage: 0
         }
@@ -23,22 +23,27 @@ class  EventList extends Component {
       }
 
     componentDidUpdate = prevProps => this.props.events !== prevProps.events && this.setEvents()
-    
+
     setEvents = () => {
         this.setState({pageCount: Math.ceil(this.props.events.length/this.state.perPage)}, ()=>this.setElementsForCurrentPage())
     }
 
     setElementsForCurrentPage = () => {
-        let elements = this.props.events.slice(this.state.offset, this.state.offset + this.state.perPage).map((event, i) => {
+        
+        let elements = this.props.events.slice(this.state.offset, this.state.offset + this.state.perPage)
+            elements = elements.map((event, i) => {
             return (
                 <Col md={4} key={i}><EventCard key={i} {...this.props} updateEventList={this.props.updateEventList} loggedInUser={this.props.loggedInUser} key={event._id} {...event} /></Col>)}
             )
-        this.setState({elements: elements})
+        
+        this.setState({ elements: elements })
+        console.log('elements', this.state.elements)
     }
     handlePageClick = events => {
         const selectedPage = events.selected;
         const offset = selectedPage * this.state.perPage;
         this.setState({ currentPage: selectedPage, offset: offset }, () => this.setElementsForCurrentPage())
+
     }
 
     render() {

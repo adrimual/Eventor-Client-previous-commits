@@ -17,8 +17,8 @@ class EventForm extends Component {
             date: "",
             city: "",
             participants: [this.props.loggedInUser._id],
-            startTime: "",
-            endTime: ""
+            startTime: new Date(),
+            endTime: new Date()
         }
         this.eventService = new EventService()
         this.filesService = new FilesService()
@@ -83,7 +83,7 @@ class EventForm extends Component {
         this.eventService
             .createEvent(this.state, this.props.loggedInUser._id)
             .then(() => {
-                this.props.handleEventSubmit()
+                this.props.history.push("/events")
                 this.props.updateCalendarEvents && this.props.updateCalendarEvents()
             })
             .catch(err => !err.response ? null :
@@ -106,7 +106,7 @@ class EventForm extends Component {
             <>
                 {this.state.name === undefined ? null  :
                    <main className="main-bg">
-                            <Form className="event-form-container-new-event" onSubmit={this.handleFormSubmit}>
+                            <Form className="event-form-col-new-event" onSubmit={this.handleFormSubmit}>
                                 {this.props.eventToEdit  ? <h1 className='color-text'>Edit Event</h1> :<h1 className='color-text'>Create Event</h1>}
                                 <Form.Group className="col-md-12">
                                     <Form.Label className="color-text-black">Name</Form.Label>
@@ -124,11 +124,11 @@ class EventForm extends Component {
                                 <div className="small-input-container">
                                     <Form.Group className="col-md-6">
                                         <Form.Label className = "color-text-black" > Start time </Form.Label>
-                                        <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="startTime" value={this.state.startTime} />
+                                        <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="startTime" />
                                     </Form.Group>
                                     <Form.Group className="col-md-6">
                                         <Form.Label className="color-text-black">End time</Form.Label>
-                                        <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="endTime" value={this.state.endTime} min={this.state.startTime} />
+                                        <Form.Control className="small-input" onChange={this.handleInputChange} type="datetime-local" name="endTime"/>
                                     </Form.Group>
                                 </div>
                                     <Form.Group className="col">

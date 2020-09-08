@@ -58,16 +58,10 @@ class SearchBar extends Component {
         this.setState({ startTime: e.target.value })
         this.props.filterEvents({ ...this.state, minDay: weekDays[0], maxDay: weekDays[weekDays.length - 1] })
     }
-    toggleBooleanInputs = (e,name) => {
-        this.setState({ [name]: !this.state[name] })
-        e.target.classList.toggle("inactive")
-        this.props.filterEvents({ ...this.state, [name]: !this.state[name] })
-    }
+
     handleTags = e => {
         const stateToChange = [...this.state[e.target.name]]
-        console.log(stateToChange)
         const index = stateToChange.indexOf(e.target.value)
-        console.log(index, e.target.value)
         index === -1 ? stateToChange.push(e.target.value) : stateToChange.splice(index, 1)
         this.setState({ [e.target.name]: stateToChange })     
         this.props.filterEvents({ ...this.state, [e.target.name]: stateToChange })
@@ -76,16 +70,16 @@ class SearchBar extends Component {
         return (
             <Form>
                 <Form.Group className="main-search-bar" >
-                <span span role = "img" aria-label = "magnifying glass" > & #128269;</span>
-                    <Form.Control className="main-input" placeholder="Search for an Event" onChange={this.handleInputChange} value={this.state.name} name="name" type="text" />
+                <span role = "img" aria-label = "magnifying glass" > 🔍</span>
+                    <Form.Control placeholder="Enter the name of an event" onChange={this.handleInputChange} value={this.state.name} name="name" type="text" className="main-input" />
+                    <p className="show-filter-button" onClick={() => this.setState({ showFilters: !this.state.showFilters })}>Show Filters</p>
                 </Form.Group> 
-                <p className="show-filter-button" onClick={() => this.setState({ showFilters: !this.state.showFilters })}>Show Filters</p>
                 {this.state.showFilters &&
                     <div className="tab-container">
-                    <p onClick={e => this.toggleBooleanInputs(e, "acceptedOffer")} className="show-filter-button tab-button inactive">Accepted Offer</p>
                         <Tabs defaultActiveKey="none" transition={false} id="noanim-tab-example">
                         <Tab eventKey="when" title="When">
-                                < div className = "navbar-filters-dimensions" >
+                            < div className = "navbar-filters-dimensions" >
+                                <Form.Label className="tabs-main-title">Date</Form.Label>
                                     <Form.Group>
                                         <Form.Label className={`btn btn-black btn-primary ${this.state.activeTimeLabel === "today" && "active"}`} htmlFor="today">Today</Form.Label>
                                         <Form.Control className="hidden-radio" onChange={this.handleDateInputsChange} id="today" value="today" checked={this.state.startTime === "today"} name="startTime" type="radio" />

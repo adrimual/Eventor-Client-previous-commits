@@ -34,8 +34,9 @@ export class MapContainer extends Component {
     render() {
         const { google } = this.props
         const centerLocation = this.props.currentLocation.lat ? this.props.currentLocation : this.state.defaultLocation
-      return (
-        <Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={centerLocation}>
+        return (
+          <div></div>
+        /*<Map google={this.props.google} zoom={14} styles={this.props.mapStyle} initialCenter={centerLocation}>
             {this.props.markers.map(marker => 
                 <Marker onClick={this.onMarkerClick}
                     key={marker._id}
@@ -59,7 +60,7 @@ export class MapContainer extends Component {
                 </article> : <SpinnerContainer />
                 }
             </InfoWindow>
-        </Map>
+        </Map>*/
       );
     }
   }

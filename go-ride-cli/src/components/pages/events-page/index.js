@@ -38,11 +38,9 @@ class EventPage extends Component {
             this.obtainDateInFormat(event.startTime) >= this.obtainDateInFormat(filters.minDay) &&
             this.obtainDateInFormat(event.startTime) <= this.obtainDateInFormat(filters.maxDay)
         ) : eventsCopy
-        eventsCopy = filters.distanceFromLocation && filters.distanceFromLocation !== "allDistance" ? eventsCopy.filter(event => event.acceptedOffer && this.getKilometers(
+        eventsCopy = filters.distanceFromLocation && filters.distanceFromLocation !== "allDistance" ? eventsCopy.filter(event => this.getKilometers(
             this.state.currentLatLng.lat,
             this.state.currentLatLng.lng,
-            event.acceptedOffer.local.location.coordinates.lat,
-            event.acceptedOffer.local.location.coordinates.lng
         ) <= parseInt(filters.distanceFromLocation)) : eventsCopy
         this.setState({ filteredEvents: eventsCopy })
     }
@@ -59,7 +57,7 @@ class EventPage extends Component {
     getAllFutureEvents = () => {
         this.eventService
             .getAllFutureEvents()
-            .then(response => this.setState({ events: response.data}))
+            .then(response => this.setState({ events : response.data, filteredEvents : response.data}))
             .catch(err => err.response && this.props.handleToast(true, err.response.data.message))
     }
 
@@ -87,7 +85,7 @@ class EventPage extends Component {
         return d //distance in km
     }
     render() {
-        // this.state.confirmedEvents && console.log(`la distancia entre los puntos es de: `, this.getKilometros(40.1, 3.7, 40.100002, 3.695))
+        console.log('response', this.state.filteredEvents)
         return (
             <>
                 {

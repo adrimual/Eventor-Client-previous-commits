@@ -51,15 +51,15 @@ class App extends Component {
         toastCopy = { visible, text }
         this.setState({ toast: toastCopy })
   }
-    componentDidUpdate = (prevProps, prevState) => {
-        if (this.state.loggedInUser !== prevState.loggedInUser) {
-        this.state.loggedInUser &&
-        this.EventService.getAllFutureUserEvents(this.state.loggedInUser._id)
-            .then(response => this.setState({ loggedInUserEvents: response.data }))
-            .catch(err => console.log(err))
-        }
-        this.state.loggedInUserEvents !== prevState.loggedInUserEvents && this.render()
-  }
+//     componentDidUpdate = (prevProps, prevState) => {
+//         if (this.state.loggedInUser !== prevState.loggedInUser) {
+//         this.state.loggedInUser &&
+//         this.EventService.getAllFutureUserEvents(this.state.loggedInUser._id)
+//             .then(response => this.setState({ loggedInUserEvents: response.data }))
+//             .catch(err => console.log(err))
+//         }
+//         this.state.loggedInUserEvents !== prevState.loggedInUserEvents && this.render()
+//   }
     render() {
         this.fetchUser()
         return (

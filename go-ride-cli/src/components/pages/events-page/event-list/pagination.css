@@ -1,6 +1,6 @@
  .paginate-1 {
      padding: 0;
-     margin-top: 2.1rem;
+     margin-top: 2rem;
      width: 100%;
      display: flex;
      align-items: center;
@@ -30,10 +30,19 @@
      border: none;
      color: white;
  }
+ .page-link-1 a:not([href]) {
+     background-color: inherit;
+     border: none;
+     color: black;
+ }
 .page-link-1 a {
      color: black;
      padding: 0rem 1rem
  }
+  .active-1.page-link-1 a:not([href]) {
+      color: white;
+      padding: 0rem 1rem
+  }
  .next-prev-1 {
      background-color: white;
      width: 150px !important;
